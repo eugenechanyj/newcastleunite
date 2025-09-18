@@ -4,9 +4,48 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NewcastleUnite — Coming Soon</title>
+  <meta name="description" content="NewcastleUnite is the fan-first hub for all things NUFC. Minute Magpie daily recaps. Coming soon." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="favicon.ico" />
 </head>
-<body>
-  <h1>NewcastleUnite</h1>
-  <p>We’re building the Toon Army’s home. Work in progress — check back soon!</p>
+<body class="min-h-screen bg-neutral-50 text-neutral-900 flex items-center justify-center">
+  <main class="mx-auto max-w-xl px-6 py-16 text-center">
+    <!-- Logo -->
+    <div class="flex justify-center mb-6">
+      <div class="h-16 w-16 bg-black rounded-full flex items-center justify-center text-white font-bold text-2xl">
+        NU
+      </div>
+    </div>
+
+    <!-- Heading -->
+    <h1 class="text-4xl font-extrabold tracking-tight mb-4">NewcastleUnite</h1>
+    <h2 class="text-xl font-semibold text-neutral-700 mb-6">
+      The Toon Army’s Digital Home — Coming Soon
+    </h2>
+
+    <!-- Description -->
+    <p class="text-neutral-600 mb-8">
+      News, fan videos, podcasts, fixtures, supporter clubs — plus the
+      <span class="font-semibold">Minute Magpie</span> 60-second daily recap.
+      We’re polishing the site now. Sign up to get our launch update.
+    </p>
+
+    <!-- Newsletter form (replace action with your Substack/beehiiv link later) -->
+    <form action="#" method="post" class="flex flex-col sm:flex-row gap-2 justify-center">
+      <input type="email" name="email" required placeholder="you@email.com"
+             class="flex-1 rounded-xl ring-1 ring-neutral-300 px-4 py-2 focus:outline-none" />
+      <button class="rounded-xl px-4 py-2 bg-black text-white hover:bg-neutral-800">
+        Notify me
+      </button>
+    </form>
+
+    <!-- Footer -->
+    <p class="mt-8 text-sm text-neutral-500">
+      Independent fan project. Not affiliated with Newcastle United FC.
+    </p>
+    <p class="mt-2 text-xs text-neutral-400">
+      Status: Work in progress | URL: www.newcastleunite.com
+    </p>
+  </main>
 </body>
 </html>
