@@ -7,9 +7,20 @@
   <meta name="description" content="A global digital home for Newcastle United fans. Coming soon." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="favicon.ico" />
+  <style>
+    body {
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/07/St_James%27_Park_panorama.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(100%);
+    }
+    .overlay {
+      background: rgba(255,255,255,0.85); /* white tint so text is legible */
+    }
+  </style>
 </head>
-<body class="min-h-screen bg-neutral-50 text-neutral-900 flex items-center justify-center">
-  <main class="mx-auto max-w-xl px-6 py-16 text-center">
+<body class="min-h-screen text-neutral-900 flex items-center justify-center">
+  <main class="overlay mx-auto max-w-xl px-6 py-16 text-center rounded-xl shadow-lg">
 
     <!-- Magpie Logo -->
     <div class="flex justify-center mb-6">
@@ -27,22 +38,13 @@
     </h2>
 
     <!-- Description -->
-    <p class="text-neutral-600 mb-8">
+    <p class="text-neutral-700 mb-8">
       A global digital home for Newcastle United fans — news, videos, podcasts, fixtures, supporter clubs, and more. 
-      We’re building something special for the Toon Army. Stay tuned and sign up for updates.
+      We’re building something special for the Toon Army. Stay tuned for the launch.
     </p>
 
-    <!-- Newsletter form (replace action later with Substack/Beehiiv/Mailchimp link) -->
-    <form action="#" method="post" class="flex flex-col sm:flex-row gap-2 justify-center">
-      <input type="email" name="email" required placeholder="you@email.com"
-             class="flex-1 rounded-xl ring-1 ring-neutral-300 px-4 py-2 focus:outline-none" />
-      <button class="rounded-xl px-4 py-2 bg-black text-white hover:bg-neutral-800">
-        Notify me
-      </button>
-    </form>
-
     <!-- Footer -->
-    <p class="mt-8 text-sm text-neutral-500">
+    <p class="mt-8 text-sm text-neutral-600">
       Independent fan project. Not affiliated with Newcastle United FC.
     </p>
     <p class="mt-2 text-xs text-neutral-400">
