@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NewcastleUnite — One Toon. One Tune.</title>
+  <meta name="description" content="NewcastleUnite is a global Newcastle United fan hub — Minute Magpie 60s updates, creators, polls, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #111111;
+      --muted: #f7f7f7;
+      --accent: #007BFF; /* Magpie Blue */
+      --positive: #00B67A; /* Emerald */
+      --card: #ffffff;
+      --border: #e9e9e9;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0b0b;
+        --fg: #f4f4f4;
+        --muted: #151515;
+        --accent: #4da3ff;
+        --positive: #2cd39a;
+        --card: #101010;
+        --border: #222222;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--fg);
+      font-family: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 16px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: grid; place-items: center; background: var(--fg);
+    }
+    .logo svg { width: 28px; height: 28px; }
+    .title {
+      font-family: Montserrat, system-ui, sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: 0.2px;
+    }
+    .tagline { color: #666; margin-top: 2px; font-weight: 600; }
+    nav { margin-top: 8px; display: flex; gap: 14px; flex-wrap: wrap; }
+    nav a { font-weight: 600; }
+
+    .hero { background: var(--muted); border-bottom: 1px solid var(--border); }
+    .hero .wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items: center; }
+    @media (max-width: 880px) { .hero .wrap { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .mm-hat { font-size: 0.9rem; color: #777; margin-bottom: 6px; }
+    .mm-title { font-family: Montserrat, system-ui, sans-serif; font-weight: 800; font-size: 1.4rem; margin: 0 0 6px; }
+    .mm-meta { font-size: 0.9rem; color: #777; margin-bottom: 12px; }
+    .mm-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+      border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; font-weight: 700;
+      background: var(--bg);
+    }
+    .btn.primary { background: var(--accent); color: white; border-color: transparent; }
+    .btn.positive { background: var(--positive); color: white; border-color: transparent; }
+    .btn:hover { filter: brightness(0.97); }
+
+    .source-credits { margin-top: 12px; font-size: 0.92rem; color: #777; }
+    .source-credits a { color: inherit; text-decoration: underline; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+
+    .creator { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); }
+    .creator img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; background: #ddd; }
+    .creator h4 { margin: 0; font-size: 1rem; font-weight: 700; }
+    .creator p { margin: 0; color: #777; font-size: 0.9rem; }
+
+    footer { margin-top: 32px; border-top: 1px solid var(--border); }
+    .small { font-size: 0.92rem; color: #777; }
+    .notice { background: var(--muted); border: 1px dashed var(--border); padding: 12px; border-radius: 8px; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo" aria-hidden="true" title="Magpie eye">
+          <!-- Simple magpie eye placeholder (SVG) -->
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="32" cy="32" r="30" fill="#ffffff"/>
+            <circle cx="32" cy="32" r="22" fill="#000000"/>
+            <circle cx="38" cy="26" r="6" fill="#ffffff"/>
+          </svg>
+        </div>
+        <div>
+          <div class="title">NewcastleUnite</div>
+          <div class="tagline">One Toon. One Tune.</div>
+          <nav>
+            <a href="#minute-magpie">Minute Magpie</a>
+            <a href="#creators">Creators</a>
+            <a href="#polls">Polls</a>
+            <a href="#about">About</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="minute-magpie">
+    <div class="wrap" style="padding: 24px 16px;">
+      <div class="card">
+        <div class="mm-hat">Hat: Flat cap 🧢 • Tone: Calm update</div>
+        <h2 class="mm-title">Minute Magpie — Today’s 60‑Second Toon Brief</h2>
+        <div class="mm-meta" id="mm-meta">Published: <span id="mm-time">—</span> (SGT)</div>
+        <div id="mm-script">
+          <p>Howay! Minute Magpie here — your one‑minute Toon brief. This is placeholder copy. Replace this with today’s top 3–4 bullets once your JSON feed is wired up.</p>
+          <ul>
+            <li><strong>Squad note:</strong> Training update for key players ahead of the weekend.</li>
+            <li><strong>Tactics talk:</strong> What creators spotted about the next opponent.</li>
+            <li><strong>Fan watch:</strong> Flags & fan plans for matchday.</li>
+          </ul>
+          <p>Keep it friendly, keep it black‑and‑white — links below. Away the lads!</p>
+        </div>
+        <div class="mm-actions">
+          <button class="btn primary" id="btn-play" aria-label="Play 60 second brief">▶ Play 60s</button>
+          <a class="btn" href="#creators">See source links</a>
+          <a class="btn positive" href="#newsletter">Subscribe</a>
+        </div>
+        <div class="source-credits" id="mm-credits">Credits: Adam Pearson, The Magpie Channel TV, António Mango, True Faith, NUFC Matters, Keith Downie.</div>
+      </div>
+      <div>
+        <div class="notice small">
+          <strong>What’s this?</strong> Minute Magpie is a light, positive daily recap built from NUFC creator updates.
+          This MVP reads from <code>/data/minute.json</code> if present; otherwise you’ll see the placeholder above.
+        </div>
+        <div class="notice small" style="margin-top:12px;">
+          <strong>Quick start:</strong>
+          <ol style="margin:8px 0 0 18px;">
+            <li>Create a <code>/data</code> folder.</li>
+            <li>Add <code>minute.json</code> and <code>creators.json</code> using the schema below.</li>
+            <li>Commit to GitHub Pages — the site will auto-render the content.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="wrap" style="padding-top: 24px;">
+    <section id="creators" style="margin-top: 16px;">
+      <h3 style="font-family: Montserrat; font-weight:800; margin: 0 0 10px;">Featured Creators</h3>
+      <div class="grid" id="creator-grid"></div>
+      <p class="small" style="margin-top:10px;">We link out and attribute everything — discover great NUFC voices and watch on their channels.</p>
+    </section>
+
+    <section id="polls" style="margin-top: 28px;">
+      <h3 style="font-family: Montserrat; font-weight:800; margin: 0 0 10px;">Polls</h3>
+      <div class="card">
+        <p class="small">Embed a Google Form or Typeform here (e.g., score prediction, MOTM). For now this is a placeholder.</p>
+      </div>
+    </section>
+
+    <section id="newsletter" style="margin-top: 28px;">
+      <h3 style="font-family: Montserrat; font-weight:800; margin: 0 0 10px;">Subscribe to the Minute Magpie</h3>
+      <div class="card">
+        <p>Get the 60‑second brief in your inbox. (Plug in Buttondown, Mailchimp, etc.)</p>
+        <a class="btn primary" href="#">Subscribe</a>
+      </div>
+    </section>
+
+    <section id="about" style="margin-top: 28px;">
+      <h3 style="font-family: Montserrat; font-weight:800; margin: 0 0 10px;">About</h3>
+      <div class="card">
+        <p><strong>NewcastleUnite</strong> is a global fan hub for Newcastle United supporters — playful, positive, and uniting. We aggregate public updates via official embeds and links, always crediting creators. The <em>Minute Magpie</em> gives you a friendly 60‑second daily brief.</p>
+        <div class="notice small"><strong>Creators Partnership & Attribution (placeholder):</strong> NewcastleUnite aggregates public embeds and links with full credit. We do not rehost third‑party content. Creators can opt‑out or collaborate — contact: <a href="mailto:hello@newcastleunite.com">hello@newcastleunite.com</a>.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap" style="padding: 16px;">
+      <div class="small">© <span id="year"></span> NewcastleUnite • One Toon. One Tune.</div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Simple speech synthesis for the 60s brief ---
+    const playBtn = document.getElementById('btn-play');
+    playBtn?.addEventListener('click', () => {
+      const text = document.getElementById('mm-script')?.innerText || '';
+      if (!('speechSynthesis' in window)) { alert('Speech not supported on this browser.'); return; }
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.rate = 1.08; // a touch brisk
+      u.pitch = 1.0;
+      // Try to prefer an English voice if available
+      const v = speechSynthesis.getVoices().find(v => /en-|English/i.test(v.lang || v.name))
+      if (v) u.voice = v;
+      speechSynthesis.speak(u);
+    });
+
+    // --- Render current year ---
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // --- Data fetching helpers ---
+    async function loadJSON(path) {
+      try {
+        const res = await fetch(path, { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return await res.json();
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // --- Load minute.json if present ---
+    (async function initMinute() {
+      const data = await loadJSON('/data/minute.json');
+      if (!data) {
+        // Keep placeholder
+        document.getElementById('mm-time').textContent = new Date().toLocaleString('en-SG');
+        return;
+      }
+      document.getElementById('mm-time').textContent = (data.published_sgt || new Date().toLocaleString('en-SG'));
+      const scriptEl = document.getElementById('mm-script');
+      scriptEl.innerHTML = '';
+      if (data.hook) {
+        const p = document.createElement('p'); p.textContent = data.hook; scriptEl.appendChild(p);
+      }
+      if (Array.isArray(data.bullets)) {
+        const ul = document.createElement('ul');
+        data.bullets.forEach(b => { const li = document.createElement('li'); li.innerHTML = b; ul.appendChild(li); });
+        scriptEl.appendChild(ul);
+      }
+      if (data.signoff) {
+        const p = document.createElement('p'); p.textContent = data.signoff; scriptEl.appendChild(p);
+      }
+      const credits = document.getElementById('mm-credits');
+      credits.innerHTML = 'Credits: ' + (data.credits?.map(c => `<a href="${c.url}" target="_blank" rel="noopener">${c.name}</a>`).join(', ') || '—');
+    })();
+
+    // --- Load creators.json if present ---
+    (async function initCreators() {
+      const grid = document.getElementById('creator-grid');
+      const data = await loadJSON('/data/creators.json');
+      const fallback = [
+        { name: 'Adam Pearson', url: '#', avatar: '', blurb: 'NUFC analysis & match previews.' },
+        { name: 'The Magpie Channel TV', url: '#', avatar: '', blurb: 'Fan channel • vlogs & interviews.' },
+        { name: 'António Mango', url: '#', avatar: '', blurb: 'Commentary & tactics chat.' },
+        { name: 'True Faith', url: '#', avatar: '', blurb: 'Podcast & fan media.' },
+        { name: 'NUFC Matters', url: '#', avatar: '', blurb: 'Daily fan show.' },
+        { name: 'Keith Downie', url: '#', avatar: '', blurb: 'NE football reporter (links to X).' }
+      ];
+      const creators = data?.creators?.length ? data.creators : fallback;
+      creators.forEach(c => {
+        const a = document.createElement('a'); a.href = c.url || '#'; a.target = '_blank'; a.rel = 'noopener'; a.className = 'creator';
+        const img = document.createElement('img'); img.alt = (c.name || 'Creator') + ' avatar'; img.src = c.avatar || 'https://via.placeholder.com/88';
+        const box = document.createElement('div');
+        const h4 = document.createElement('h4'); h4.textContent = c.name || 'Creator';
+        const p = document.createElement('p'); p.textContent = c.blurb || '';
+        box.appendChild(h4); box.appendChild(p);
+        a.appendChild(img); a.appendChild(box);
+        grid.appendChild(a);
+      });
+    })();
+  </script>
+
+  <!--
+  ==============================
+  DATA SCHEMAS (drop these into /data)
+  ==============================
+
+  /data/minute.json
+  {
+    "published_sgt": "2025-09-21 19:30",
+    "hat": "Flat cap",
+    "tone": "Calm update",
+    "hook": "Howay! Minute Magpie here — your one‑minute Toon brief.",
+    "bullets": [
+      "<strong>Squad note:</strong> Eddie Howe confirms light training for [player]; status <em>TBC</em> for [fixture].",
+      "<strong>Tactics talk:</strong> [Creator] spots patterns that could unlock [opponent]’s press.",
+      "<strong>Fan watch:</strong> Wor Flags teasing a big tifo for the weekend."
+    ],
+    "signoff": "Keep it friendly, keep it black‑and‑white — links below. Away the lads!",
+    "credits": [
+      { "name": "Adam Pearson", "url": "https://www.youtube.com/@AdamPearsonNUFC" },
+      { "name": "The Magpie Channel TV", "url": "https://www.youtube.com/@TheMagpieChannelTV" }
+    ]
+  }
+
+  /data/creators.json
+  {
+    "creators": [
+      {
+        "name": "Adam Pearson",
+        "url": "https://www.youtube.com/@AdamPearsonNUFC",
+        "avatar": "https://yt3.googleusercontent.com/...",
+        "blurb": "NUFC analysis & match previews."
+      },
+      {
+        "name": "The Magpie Channel TV",
+        "url": "https://www.youtube.com/@TheMagpieChannelTV",
+        "avatar": "https://yt3.googleusercontent.com/...",
+        "blurb": "Fan channel • vlogs & interviews."
+      }
+    ]
+  }
+  -->
+</body>
+</html>
