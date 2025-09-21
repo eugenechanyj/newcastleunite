@@ -3,37 +3,37 @@
     {
       "name": "Adam Pearson",
       "url": "https://www.youtube.com/@AdamPearsonNUFC",
-      "avatar": "/mvp-test/assets/creators/adam-pearson.jpg",
+      "avatar": "assets/creators/adam-pearson.jpg",
       "blurb": "NUFC analysis & match previews."
     },
     {
       "name": "The Magpie Channel TV",
       "url": "https://www.youtube.com/@TheMagpieChannelTV",
-      "avatar": "/mvp-test/assets/creators/magpie-channel.jpg",
+      "avatar": "assets/creators/magpie-channel.jpg",
       "blurb": "Fan channel • vlogs & interviews."
     },
     {
       "name": "António Mango",
       "url": "https://www.youtube.com/@AntonioMango",
-      "avatar": "/mvp-test/assets/creators/antonio-mango.jpg",
+      "avatar": "assets/creators/antonio-mango.jpg",
       "blurb": "Commentary & tactics chat."
     },
     {
       "name": "Keith Downie",
       "url": "https://twitter.com/KeithDownieSSN",
-      "avatar": "/mvp-test/assets/creators/keith-downie.jpg",
+      "avatar": "assets/creators/keith-downie.jpg",
       "blurb": "NE football reporter (links to X)."
     },
     {
       "name": "Geordie Josh",
       "url": "https://www.youtube.com/results?search_query=geordie+josh",
-      "avatar": "/mvp-test/assets/creators/geordie-josh.jpg",
+      "avatar": "assets/creators/geordie-josh.jpg",
       "blurb": "Fan takes & NUFC news."
     },
     {
       "name": "The Kick-Off",
       "url": "https://www.youtube.com/@TheKickOff",
-      "avatar": "/mvp-test/assets/creators/thekickoff.jpg",
+      "avatar": "assets/creators/thekickoff.jpg",
       "blurb": "Football talk show & NUFC discussions."
     }
   ]
