@@ -268,7 +268,7 @@
       const creators = data?.creators?.length ? data.creators : fallback;
       creators.forEach(c => {
         const a = document.createElement('a'); a.href = c.url || '#'; a.target = '_blank'; a.rel = 'noopener'; a.className = 'creator';
-        const img = document.createElement('img'); img.alt = (c.name || 'Creator') + ' avatar'; img.src = c.avatar || 'https://via.placeholder.com/88';
+        const img = document.createElement('img'); img.alt = (c.name || 'Creator') + ' avatar'; const initials = (c.name||'').split(/\s+/).map(s=>s[0]).slice(0,2).join('').toUpperCase() || 'NU'; img.src = c.avatar || `https://placehold.co/88x88?text=${initials}`; img.onerror = () => { img.src = `https://placehold.co/88x88?text=${initials}`; };
         const box = document.createElement('div');
         const h4 = document.createElement('h4'); h4.textContent = c.name || 'Creator';
         const p = document.createElement('p'); p.textContent = c.blurb || '';
