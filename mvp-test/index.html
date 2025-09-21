@@ -229,7 +229,7 @@
 
     // --- Load minute.json if present ---
     (async function initMinute() {
-      const data = await loadJSON('/data/minute.json');
+      const data = await loadJSON('data/minute.json');
       if (!data) {
         // Keep placeholder
         document.getElementById('mm-time').textContent = new Date().toLocaleString('en-SG');
@@ -256,7 +256,7 @@
     // --- Load creators.json if present ---
     (async function initCreators() {
       const grid = document.getElementById('creator-grid');
-      const data = await loadJSON('/data/creators.json');
+      const data = await loadJSON('data/creators.json');
       const fallback = [
         { name: 'Adam Pearson', url: '#', avatar: '', blurb: 'NUFC analysis & match previews.' },
         { name: 'The Magpie Channel TV', url: '#', avatar: '', blurb: 'Fan channel • vlogs & interviews.' },
