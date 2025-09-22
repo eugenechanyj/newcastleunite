@@ -86,7 +86,11 @@
     @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
 
     .creator { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); }
-    .creator img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; background: #ddd; }
+    .creator img {
+      width: 44px; height: 44px; border-radius: 50%;
+      object-fit: cover; background: #ddd;
+      box-shadow: 0 0 0 3px #fff, 0 1px 8px rgba(0,0,0,0.12);
+    }
     .creator h4 { margin: 0; font-size: 1rem; font-weight: 700; }
     .creator p { margin: 0; color: #777; font-size: 0.9rem; }
 
