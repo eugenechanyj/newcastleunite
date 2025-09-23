@@ -191,6 +191,43 @@
     max-height: 160px;
   }
 }    
+
+/* --- Fan Gear grid --- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 columns on desktop */
+  gap: 14px;
+}
+@media (max-width: 640px) {
+  .product-grid { grid-template-columns: 1fr; }
+}
+
+.product-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  text-decoration: none;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.product-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0,0,0,0.12);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+}
+.product-card h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  font-family: Montserrat, system-ui, sans-serif;
+}
+.product-card p.small { margin: 2px 0 0; }
+.product-cta { font-weight: 700; opacity: .9; }
+
     
   </style>
 </head>
