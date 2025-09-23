@@ -106,6 +106,63 @@
       border-color: rgba(0,0,0,0.12);
       box-shadow: 0 10px 24px rgba(0,0,0,0.08);
     }
+    /* --- Top banner --- */
+.hero-banner {
+  margin: 8px 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, #0a0a0a 0%, #0a0a0a 60%, rgba(10,10,10,0)) ,
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.08) 0 2px, rgba(255,255,255,0) 2px 6px);
+  color: #fff;
+}
+@media (prefers-color-scheme: light) {
+  .hero-banner {
+    background:
+      linear-gradient(90deg, #111 0%, #111 60%, rgba(17,17,17,0)) ,
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.10) 0 2px, rgba(255,255,255,0) 2px 6px);
+  }
+}
+.banner-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+.banner-copy { min-width: 0; }
+.banner-kicker {
+  font: 700 0.85rem/1 Open Sans, system-ui, sans-serif;
+  letter-spacing: .3px;
+  opacity: .9;
+}
+.banner-title {
+  font-family: Montserrat, system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  margin-top: 4px;
+}
+.banner-sub {
+  font: 600 0.95rem/1.4 Open Sans, system-ui, sans-serif;
+  opacity: .95;
+  margin-top: 6px;
+}
+.banner-mascot {
+  width: 88px; height: 88px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.25));
+}
+@media (max-width: 640px) {
+  .banner-inner {
+    grid-template-columns: 1fr auto;
+    padding: 14px;
+  }
+  .banner-title { font-size: 1.35rem; }
+  .banner-mascot { width: 72px; height: 72px; }
+}
+
   </style>
 </head>
 <body>
@@ -136,6 +193,22 @@
 
   <section class="hero" id="minute-magpie">
     <div class="wrap" style="padding: 24px 16px;">
+      <div class="hero-banner">
+        <div class="banner-inner">
+          <div class="banner-copy">
+          <div class="banner-kicker">Minute Magpie</div>
+          <div class="banner-title">One Toon. One Tune.</div>
+          <div class="banner-sub">Playful, positive NUFC fan hub.</div>
+         </div>
+         <img
+           class="banner-mascot"
+           src="assets/mascot/minutemagpiecap.png"
+           alt="Minute Magpie mascot"
+           style="transform: scaleX(-1);"
+        />
+      </div>
+     </div>
+  
       <div class="card">
         <h2 class="mm-title">Minute Magpie — Today’s 60‑Second Toon Brief</h2>
         <div class="mm-meta" id="mm-meta">Published: <span id="mm-time">—</span> (SGT)</div>
