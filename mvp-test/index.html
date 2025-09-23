@@ -257,7 +257,48 @@
 .info-card h4 { margin: 0; font-size: 1rem; font-weight: 800; font-family: Montserrat, system-ui, sans-serif; }
 .info-card p.small { margin: 2px 0 0; }
 .info-cta { font-weight: 700; opacity: .9; }
-   
+
+/* --- Featured Creators: section panel + card polish --- */
+#creators {
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 28px;
+}
+
+/* Tighten the header spacing inside the panel */
+#creators > h3 { margin-top: 0; }
+
+/* Creator card polish */
+.creator {
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.creator:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0,0,0,0.12);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
+
+/* Avatar ring + crisper look */
+.creator img {
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+/* Subtle arrow affordance on hover */
+.creator::after {
+  content: '→';
+  margin-left: auto;
+  font-weight: 800;
+  opacity: 0;
+  transition: opacity .12s ease, transform .12s ease;
+}
+.creator:hover::after {
+  opacity: .85;
+  transform: translateX(2px);
+}
+    
   </style>
 </head>
 <body>
