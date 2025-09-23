@@ -179,6 +179,19 @@
   object-fit: cover;
 }
 
+/* Make banner shorter on tablets and mobile */
+@media (max-width: 880px) {
+  .top-banner img.banner-img {
+    max-height: 220px;
+  }
+}
+
+@media (max-width: 500px) {
+  .top-banner img.banner-img {
+    max-height: 160px;
+  }
+}    
+    
   </style>
 </head>
 <body>
