@@ -486,7 +486,11 @@
       <h3 style="font-family: Montserrat; font-weight:800; margin: 0 0 10px;">Subscribe to the Minute Magpie</h3>
       <div class="card">
         <p>Get the 60‑second brief in your inbox. (Plug in Buttondown, Mailchimp, etc.)</p>
-        <a class="btn primary" href="#">Subscribe</a>
+        <a class="btn primary" href="#newsletter"
+           onclick="gtag('event','subscribe_click',{section:'newsletter',location:'hero'});">
+          Subscribe
+        </a>
+        
       </div>
     </section>
 
