@@ -384,7 +384,8 @@
 
 /* Smooth scroll + anchor offset so sticky bar doesn’t cover titles */
 html{scroll-behavior:smooth}
-[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
+/* Global anchor landing; per-section gap adjustable via --anchor-gap (default 14px) */
+[id]{scroll-margin-top:calc(var(--topbar-h) + var(--anchor-gap, 14px))}
 
 /* unify brand line typography */
 .brandline__kicker { display: none !important; } /* belt-and-braces, in case it still exists */
@@ -399,6 +400,13 @@ html{scroll-behavior:smooth}
 
 /* extra cushion for About on wide screens */
 #about { scroll-margin-top: calc(var(--topbar-h) + 28px); }  
+
+/* Desktop-only: reduce anchor gap for Fan Gear & Behind the Club */
+@media (min-width: 861px){
+  #fan-gear,
+  #behind-the-club { --anchor-gap: 6px; }  /* try 6px first */
+}
+
 </style>
 <!-- === END: TOPBAR CSS === -->
   
