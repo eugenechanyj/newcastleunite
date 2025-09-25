@@ -384,8 +384,8 @@
 
 /* Smooth scroll + anchor offset so sticky bar doesn’t cover titles */
 html{scroll-behavior:smooth}
-/* Global anchor landing; per-section gap adjustable via --anchor-gap (default 14px) */
-[id]{scroll-margin-top:calc(var(--topbar-h) + var(--anchor-gap, 14px))}
+/* Global anchor landing (baseline) */
+[id]{scroll-margin-top:calc(var(--topbar-h, 64px) + 24px)}
 
 /* unify brand line typography */
 .brandline__kicker { display: none !important; } /* belt-and-braces, in case it still exists */
@@ -399,13 +399,8 @@ html{scroll-behavior:smooth}
 }
 
 /* extra cushion for About on wide screens */
-#about { scroll-margin-top: calc(var(--topbar-h) + 28px); }  
 
 /* Desktop-only: reduce anchor gap for Fan Gear & Behind the Club */
-@media (min-width: 861px){
-  #fan-gear,
-  #behind-the-club { --anchor-gap: 4px; }  /* try 6px first */
-}
 
 </style>
 <!-- === END: TOPBAR CSS === -->
@@ -838,6 +833,26 @@ a.addEventListener('click', (ev) => {
   });
 })();
 </script>
+
+<!-- === BEGIN: TOPBAR HEIGHT VAR === -->
+<script>
+(function(){
+  const header = document.querySelector('.site-topbar');
+  function setTopbarVar(){
+    if (!header) return;
+    const h = header.offsetHeight;            // measure sticky bar height
+    document.documentElement.style.setProperty('--topbar-h', h + 'px');
+  }
+  setTopbarVar();
+  // update on resize and after fonts load
+  window.addEventListener('resize', setTopbarVar, {passive:true});
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(setTopbarVar).catch(()=>{});
+  }
+})();
+</script>
+<!-- === END: TOPBAR HEIGHT VAR === -->
+  
 <!-- === END: TOPBAR JS === -->
   
 </body>
