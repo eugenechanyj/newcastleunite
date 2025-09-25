@@ -437,7 +437,21 @@
   </a>
 
     <!-- Card: Adidas Football -->
-    <a class="product-card" href="https://www.adidas.com/football" target="_blank" rel="noopener nofollow sponsored">
+    <a class="product-card"
+       href="https://www.adidas.com/football"
+       rel="noopener nofollow sponsored"
+       onclick="event.preventDefault();
+                console.log('affiliate_click firing for Adidas_Football');
+                const url=this.href;
+                let done=false;
+                const go=()=>{ if(!done){ done=true; location.href=url; } };
+                const timer=setTimeout(go,800);
+                gtag('event','affiliate_click',{
+                  item:'Adidas_Football',
+                  section:'fan_gear',
+                  event_callback:()=>{ clearTimeout(timer); go(); }
+                });">
+ 
       <div class="product-info">
         <h4>Adidas Football</h4>
        <p class="small">Boots & gear. NUFC collab range.</p>
