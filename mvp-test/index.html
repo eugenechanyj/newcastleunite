@@ -390,6 +390,37 @@ html{scroll-behavior:smooth}
   
 </head>
 <body>
+
+<!-- === BEGIN: TOPBAR HTML === -->
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-topbar" role="banner">
+  <div class="site-topbar__inner container">
+    <!-- Rally line -->
+    <div class="brandline" aria-label="Site statement">
+      <strong class="brandline__kicker">Toons of the world unite</strong>
+      <span class="brandline__title">— One Toon, One Tune</span>
+    </div>
+
+    <!-- Mobile toggle -->
+    <button class="topnav__toggle" aria-controls="topnav-menu" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span> ☰
+    </button>
+
+    <!-- Primary nav -->
+    <nav class="topnav" aria-label="Primary">
+      <ul id="topnav-menu" class="topnav__menu">
+        <li><a data-ga="nav_click" data-nav="minute_magpie" href="#minute-magpie">Minute Magpie</a></li>
+        <li><a data-ga="nav_click" data-nav="creators" href="#creators">Creators</a></li>
+        <li><a data-ga="nav_click" data-nav="polls" href="#polls">Polls</a></li>
+        <li><a data-ga="nav_click" data-nav="about" href="#about">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- === END: TOPBAR HTML === -->
+
+  <!-- OLD HEADER START
   <header>
     <div class="wrap">
       <div class="brand">
@@ -414,7 +445,8 @@ html{scroll-behavior:smooth}
       </div>
     </div>
   </header>
-
+  OLD HEADER END -->
+  
   <section class="hero" id="minute-magpie">
     <!-- Top banner image -->
     <div class="top-banner">
