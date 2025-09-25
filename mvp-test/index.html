@@ -50,11 +50,7 @@
     }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    header {
-      position: sticky; top: 0; z-index: 50;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-    }
+   
     .wrap { max-width: 1100px; margin: 0 auto; padding: 16px; }
     .brand { display: flex; align-items: center; gap: 12px; }
     .logo {
@@ -69,9 +65,24 @@
     nav { margin-top: 8px; display: flex; gap: 14px; flex-wrap: wrap; }
     nav a { font-weight: 600; }
 
-    .hero { background: var(--muted); border-bottom: 1px solid var(--border); }
-    grid-template-columns: 1fr; gap: 24px; align-items: center; }
-    @media (max-width: 880px) { .hero .wrap { grid-template-columns: 1fr; } }
+/* Hero section container */
+.hero {
+  background: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Make the inner wrapper a grid */
+.hero .wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+/* Responsive tweak (kept from your original intent) */
+@media (max-width: 880px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+}
 
     .card {
       background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px;
@@ -311,7 +322,72 @@
   transform: translateX(2px);
 }
     
-  </style>
+</style>
+
+<!-- === BEGIN: TOPBAR CSS === -->
+<style>
+:root{
+  --topbar-h: 64px;
+  --container-max: 1200px;
+  --section-pad-x: clamp(16px, 4vw, 32px);
+}
+
+/* helper container (separate from your .wrap; both can co-exist) */
+.container{max-width:var(--container-max);margin-inline:auto;padding-inline:var(--section-pad-x);}
+
+/* Skip link (for keyboard users) */
+.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;}
+.skip-link:focus{position:fixed;left:16px;top:12px;width:auto;height:auto;padding:8px 12px;background:#fff;color:#000;border-radius:8px;z-index:10000;}
+
+/* Top bar shell */
+.site-topbar{
+  position:sticky;top:0;z-index:1000;
+  background:#0b0e11;color:#fff;min-height:var(--topbar-h);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.site-topbar.is-scrolled{box-shadow:0 6px 20px rgba(0,0,0,.25);}
+
+.site-topbar__inner{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding-block:10px;
+}
+
+/* Brand line */
+.brandline{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.brandline__kicker{text-transform:uppercase;letter-spacing:.08em;font-weight:800;font-size:.82rem}
+.brandline__title{font-weight:800;font-size:clamp(1rem,2.4vw,1.25rem);opacity:.95}
+
+/* Nav */
+.topnav__toggle{
+  appearance:none;border:1px solid rgba(255,255,255,.25);
+  background:transparent;color:#fff;padding:6px 10px;border-radius:10px;
+  display:none;
+}
+.topnav__menu{display:flex;align-items:center;gap:10px;list-style:none;margin:0;padding:0}
+.topnav__menu a{
+  display:inline-block;padding:8px 12px;border-radius:10px;text-decoration:none;
+  color:#fff;font-weight:700;letter-spacing:.01em;
+  outline:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);
+}
+.topnav__menu a:hover,.topnav__menu a:focus{background:rgba(255,255,255,.10)}
+
+/* Mobile */
+@media (max-width: 860px){
+  .topnav__toggle{display:block}
+  .topnav__menu{
+    position:absolute;right:16px;left:16px;top:calc(100% + 8px);
+    background:#0b0e11;border:1px solid rgba(255,255,255,.12);border-radius:12px;
+    padding:10px;display:none;flex-direction:column;gap:8px;
+  }
+  .topnav__menu.is-open{display:flex}
+}
+
+/* Smooth scroll + anchor offset so sticky bar doesn’t cover titles */
+html{scroll-behavior:smooth}
+[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
+</style>
+<!-- === END: TOPBAR CSS === -->
+  
 </head>
 <body>
   <header>
