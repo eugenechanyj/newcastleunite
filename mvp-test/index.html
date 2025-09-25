@@ -415,7 +415,20 @@
 
   <div class="product-grid">
     <!-- Card: Official NUFC Shop -->
-    <a class="product-card" href="https://shop.nufc.co.uk/" target="_blank" rel="noopener nofollow sponsored">
+    <a class="product-card"
+      href="https://shop.nufc.co.uk/"
+      target="_blank" rel="noopener nofollow sponsored"
+      onclick="event.preventDefault();
+               const url=this.href;
+               let done=false;
+               const go=()=>{ if(!done){ done=true; location.href=url; } };
+               const timer=setTimeout(go,800);
+               gtag('event','affiliate_click',{
+                 item:'Official_NUFC_Shop',
+                 section:'fan_gear',
+                 event_callback:()=>{ clearTimeout(timer); go(); }
+               });">
+
       <div class="product-info">
         <h4>Official NUFC Shop</h4>
       <p class="small">Official kits, scarves & gifts — support the club.</p>
