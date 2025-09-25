@@ -799,5 +799,42 @@ a.addEventListener('click', (ev) => {
     ]
   }
   -->
+
+<!-- === BEGIN: TOPBAR JS === -->
+<script>
+(function(){
+  const header = document.querySelector('.site-topbar');
+  const btn = document.querySelector('.topnav__toggle');
+  const menu = document.getElementById('topnav-menu');
+
+  // Mobile toggle (hamburger)
+  btn?.addEventListener('click', () => {
+    const open = menu.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+
+  // Close menu after clicking a link (mobile)
+  menu?.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') {
+      menu.classList.remove('is-open');
+      btn?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Add a soft shadow when you scroll
+  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 6);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // GA: top nav usage (safe if GA not loaded)
+  document.querySelectorAll('[data-ga="nav_click"]').forEach(a => {
+    a.addEventListener('click', () => {
+      try { gtag('event', 'nav_click', { link: a.dataset.nav }); } catch {}
+    });
+  });
+})();
+</script>
+<!-- === END: TOPBAR JS === -->
+  
 </body>
 </html>
