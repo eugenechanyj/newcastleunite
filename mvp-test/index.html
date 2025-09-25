@@ -607,6 +607,34 @@
       const creators = data?.creators?.length ? data.creators : fallback;
       creators.forEach(c => {
         const a = document.createElement('a'); a.href = c.url || '#'; a.target = '_blank'; a.rel = 'noopener'; a.className = 'creator';
+
+// Track creator clicks with GA and then navigate
+a.addEventListener('click', (ev) => {
+  ev.preventDefault();
+
+  const url = a.href;
+  const creatorName = (c.name || 'Unknown').replace(/\s+/g, '_');
+
+  // Open a blank tab immediately (so popup blockers don't kill it),
+  // then navigate it after GA confirms (with a fallback timer).
+  const w = window.open('about:blank');
+
+  const t = setTimeout(() => {
+    if (w) { w.location = url; } else { location.href = url; }
+  }, 800);
+
+  console.log('creator_view firing for', creatorName);
+
+  gtag('event', 'creator_view', {
+    creator: creatorName,
+    section: 'creators',
+    event_callback: () => {
+      clearTimeout(t);
+      if (w) { w.location = url; } else { location.href = url; }
+    }
+  });
+});
+   
         const img = document.createElement('img'); img.alt = (c.name || 'Creator') + ' avatar'; const initials = (c.name||'').split(/\s+/).map(s=>s[0]).slice(0,2).join('').toUpperCase() || 'NU'; img.src = c.avatar || `https://placehold.co/88x88?text=${initials}`; img.onerror = () => { img.src = `https://placehold.co/88x88?text=${initials}`; };
         const box = document.createElement('div');
         const h4 = document.createElement('h4'); h4.textContent = c.name || 'Creator';
@@ -615,6 +643,10 @@
         a.appendChild(img); a.appendChild(box);
         grid.appendChild(a);
       });
+
+// After you have created all your creator cards and appended them to #creator-grid,
+// add a single click listener for the whole grid:
+      
     })();
   </script>
 
