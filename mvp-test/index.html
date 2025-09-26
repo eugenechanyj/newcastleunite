@@ -430,7 +430,7 @@ html{scroll-behavior:smooth}
         <li><a data-ga="nav_click" data-nav="featured_creators"  href="#creators">Featured Creators</a></li>
         <li><a data-ga="nav_click" data-nav="fan_gear"           href="#fan-gear">Fan Gear</a></li>
         <li><a data-ga="nav_click" data-nav="behind_the_club"    href="#behind-the-club">Behind the Club</a></li>
-        <li><a data-ga="nav_click" data-nav=""              href="#"></a></li>
+        <li><a data-ga="nav_click" data-nav="polls"              href="#polls"></a></li>
         <li><a data-ga="nav_click" data-nav="about"              href="#about">About</a></li>
       </ul>
 
@@ -443,7 +443,7 @@ html{scroll-behavior:smooth}
 <!-- MAIN START -->
 <main id="main">
   
-  <section class="hero" id="minute-magpie">
+  <section class="hero">
     <!-- Top banner image -->
     <div class="top-banner">
       <img
@@ -489,9 +489,7 @@ html{scroll-behavior:smooth}
     </div>
   </section>
 
-  </section>
-
-  <main class="wrap" style="padding-top: 24px;">
+  <div class="wrap" style="padding-top: 24px;">
     <section id="creators" style="margin-top: 16px;">
       <h3 style="display:flex; align-items:center; gap:8px; font-family: Montserrat; font-weight:800; margin: 0 0 10px;">
       <img
@@ -500,13 +498,14 @@ html{scroll-behavior:smooth}
         style="width:22px; height:22px; border-radius:50%; object-fit:contain;"
       />
         
-<h3 id="creators" class="section__title">Featured Creators</h3>
-<div class="grid" id="creator-grid"></div>
-<p class="small" style="margin-top:10px;">We link out and attribute everything — discover great NUFC voices and watch on their channels.</p>
+<section style="margin-top: 16px;">
+  <h3 id="creators" class="section__title" style="display:flex;align-items:center;gap:8px;font-family:Montserrat;font-weight:800;margin:0 0 10px;">
+    <img src="assets/mascot/minutemagpiecaptransparent.png" alt="" style="width:22px;height:22px;border-radius:50%;object-fit:contain;">
+    Featured Creators
+  </h3>
+  <div class="grid" id="creator-grid"></div>
+  <p class="small" style="margin-top:10px;">We link out and attribute everything — discover great NUFC voices and watch on their channels.</p>
 </section>
-      <div class="grid" id="creator-grid"></div>
-      <p class="small" style="margin-top:10px;">We link out and attribute everything — discover great NUFC voices and watch on their channels.</p>
-    </section>
 
 <!-- Fan Gear (affiliate-friendly) -->
 <section id="shop" style="margin-top: 28px;">
@@ -607,13 +606,6 @@ html{scroll-behavior:smooth}
   </p>
 </section>
 
-  <section style="margin-top: 28px;">
-    <h3 id="about" style="font-family: Montserrat; font-weight:800; margin: 0 0 10px;">About</h3>
-    <div class="card">
-      ...
-    </div>
-  </section>
-
 <!-- === Polls section (restored) === -->
 <section style="margin-top: 28px;">
   <h3 id="polls" style="font-family: Montserrat; font-weight:800; margin: 0 0 10px;">Polls</h3>
@@ -635,14 +627,14 @@ html{scroll-behavior:smooth}
       </div>
     </section>
 
-    <section id="about" style="margin-top: 28px;">
+    <section style="margin-top: 28px;">
       <h3 id="about" style="font-family: Montserrat; font-weight:800; margin: 0 0 10px;">About</h3>
       <div class="card">
         <p><strong>NewcastleUnite</strong> is a global fan hub for Newcastle United supporters — playful, positive, and uniting. We aggregate public updates via official embeds and links, always crediting creators. The <em>Minute Magpie</em> gives you a friendly 60‑second daily brief.</p>
         <div class="notice small"><strong>Creators Partnership & Attribution (placeholder):</strong> NewcastleUnite aggregates public embeds and links with full credit. We do not rehost third‑party content. Creators can opt‑out or collaborate — contact: <a href="mailto:hello@newcastleunite.com">hello@newcastleunite.com</a>.</div>
       </div>
     </section>
-  </main>
+  </div>
 
   <footer>
     <div class="wrap" style="padding: 16px;">
