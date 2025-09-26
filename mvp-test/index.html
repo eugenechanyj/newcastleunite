@@ -321,6 +321,50 @@
   opacity: .85;
   transform: translateX(2px);
 }
+
+/* === Black canvas overrides (safe, reversible) === */
+body.canvas--black{
+  /* Dark page background that matches the header */
+  --bg: #0b0e11;      /* page background */
+  --fg: #e8e8e8;      /* text */
+  --muted: #0d1115;   /* muted section bg */
+  --card: #101317;    /* cards on dark */
+  --border: #1b2026;  /* subtle borders on dark */
+  --accent: #79a9ff;  /* link/brand blue on dark */
+  color: var(--fg);
+  background: var(--bg);
+}
+
+/* Make cards feel modern on black */
+body.canvas--black .card{
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: 0 10px 28px rgba(0,0,0,.35);
+}
+
+/* Softer dividers on dark */
+body.canvas--black .notice{
+  background: var(--muted);
+  border-color: var(--border);
+}
+
+/* Let the hero/top banner bleed (no visible box on black) */
+body.canvas--black .top-banner{
+  border: 0;
+  border-radius: 0;
+  margin: 0 0 16px 0;
+}
+body.canvas--black .hero{
+  background: transparent;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+/* Links tweak on dark */
+body.canvas--black a{ color: var(--accent); }
+body.canvas--black a:hover{ text-decoration: underline; }
+
+/* Optional: nudge small text a hair brighter for readability */
+body.canvas--black .small{ color: #c9d2dc; }
     
 </style>
 
@@ -424,15 +468,6 @@ html{scroll-behavior:smooth}
   }
 }
   
-</style>
-<!-- === END: TOPBAR CSS === -->
-  
-</head>
-<body>
-
-<!-- === BEGIN: TOPBAR HTML === -->
-<a class="skip-link" href="#main">Skip to content</a>
-
 <header class="site-topbar" role="banner">
   <div class="site-topbar__inner container">
     <!-- Rally line -->
@@ -448,14 +483,13 @@ html{scroll-behavior:smooth}
     <!-- Primary nav -->
     <nav class="topnav" aria-label="Primary">
       <ul id="topnav-menu" class="topnav__menu">
-<li><a data-ga="nav_click" data-nav="minute_magpie"      href="#minute-magpie">Minute Magpie</a></li>
-<li><a data-ga="nav_click" data-nav="featured_creators"  href="#creators">Featured Creators</a></li>
-<li><a data-ga="nav_click" data-nav="fan_gear"           href="#fan-gear">Fan Gear</a></li>
-<li><a data-ga="nav_click" data-nav="behind_the_club"    href="#behind-the-club">Behind the Club</a></li>
-<li><a data-ga="nav_click" data-nav="polls"              href="#polls-section">Polls</a></li>
-<li><a data-ga="nav_click" data-nav="about"              href="#about-section">About</a></li>
+        <li><a data-ga="nav_click" data-nav="minute_magpie"      href="#minute-magpie">Minute Magpie</a></li>
+        <li><a data-ga="nav_click" data-nav="featured_creators"  href="#creators">Featured Creators</a></li>
+        <li><a data-ga="nav_click" data-nav="fan_gear"           href="#fan-gear">Fan Gear</a></li>
+        <li><a data-ga="nav_click" data-nav="behind_the_club"    href="#behind-the-club">Behind the Club</a></li>
+        <li><a data-ga="nav_click" data-nav="polls"              href="#polls-section">Polls</a></li>
+        <li><a data-ga="nav_click" data-nav="about"              href="#about-section">About</a></li>
       </ul>
-
     </nav>
   </div>
 </header>
