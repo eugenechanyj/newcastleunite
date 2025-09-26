@@ -363,12 +363,21 @@
   background:transparent;color:#fff;padding:6px 10px;border-radius:10px;
   display:none;
 }
-.topnav__menu{display:flex;align-items:center;gap:10px;list-style:none;margin:0;padding:0}
+.topnav__menu{display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0}
 .topnav__menu a{
-  display:inline-block;padding:8px 12px;border-radius:10px;text-decoration:none;
-  color:#fff;font-weight:700;letter-spacing:.01em;
-  outline:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);
+  display:inline-block;
+  padding:5px 9px;                 /* was 8px 12px */
+  border-radius:10px;
+  text-decoration:none;
+  color:#fff;
+  font-weight:700;
+  letter-spacing:.005em;           /* was .01em */
+  outline:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);
+  font-size: clamp(.80rem, 1.4vw, .90rem);  /* smaller text */
+  white-space: nowrap;             /* keep on one line on wide screens */
 }
+
 .topnav__menu a:hover,.topnav__menu a:focus{background:rgba(255,255,255,.10)}
 
 /* Mobile */
@@ -380,6 +389,7 @@
     padding:10px;display:none;flex-direction:column;gap:8px;
   }
   .topnav__menu.is-open{display:flex}
+  .topnav__menu a{ white-space: normal; }
 }
 
 /* Smooth scroll + anchor offset so sticky bar doesn’t cover titles */
@@ -405,6 +415,14 @@ html{scroll-behavior:smooth}
 html{scroll-behavior:smooth}
 /* Global anchor landing (baseline) */
 [id]{scroll-margin-top:calc(var(--topbar-h, 64px) + 24px)}
+
+/* Desktop-only: ensure Polls & About headings clear the sticky bar */
+@media (min-width: 861px){
+  #polls,
+  #about {
+    scroll-margin-top: calc(var(--topbar-h, 64px) + 36px); /* try +36px first */
+  }
+}
   
 </style>
 <!-- === END: TOPBAR CSS === -->
