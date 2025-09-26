@@ -402,6 +402,10 @@ html{scroll-behavior:smooth}
 
 /* Desktop-only: reduce anchor gap for Fan Gear & Behind the Club */
 
+html{scroll-behavior:smooth}
+/* Global anchor landing (baseline) */
+[id]{scroll-margin-top:calc(var(--topbar-h, 64px) + 24px)}
+  
 </style>
 <!-- === END: TOPBAR CSS === -->
   
@@ -430,7 +434,7 @@ html{scroll-behavior:smooth}
         <li><a data-ga="nav_click" data-nav="featured_creators"  href="#creators">Featured Creators</a></li>
         <li><a data-ga="nav_click" data-nav="fan_gear"           href="#fan-gear">Fan Gear</a></li>
         <li><a data-ga="nav_click" data-nav="behind_the_club"    href="#behind-the-club">Behind the Club</a></li>
-        <li><a data-ga="nav_click" data-nav="polls"              href="#polls"></a></li>
+       <li><a data-ga="nav_click" data-nav="polls"               href="#polls">Polls</a></li>
         <li><a data-ga="nav_click" data-nav="about"              href="#about">About</a></li>
       </ul>
 
@@ -491,16 +495,14 @@ html{scroll-behavior:smooth}
 
   <div class="wrap" style="padding-top: 24px;">
     <section id="creators" style="margin-top: 16px;">
-      <h3 style="display:flex; align-items:center; gap:8px; font-family: Montserrat; font-weight:800; margin: 0 0 10px;">
-      <img
-        src="assets/mascot/minutemagpiecaptransparent.png"
-        alt=""
-        style="width:22px; height:22px; border-radius:50%; object-fit:contain;"
-      />
+     <main class="wrap" style="padding-top: 24px;">
         
 <section style="margin-top: 16px;">
-  <h3 id="creators" class="section__title" style="display:flex;align-items:center;gap:8px;font-family:Montserrat;font-weight:800;margin:0 0 10px;">
-    <img src="assets/mascot/minutemagpiecaptransparent.png" alt="" style="width:22px;height:22px;border-radius:50%;object-fit:contain;">
+  <h3 id="creators" class="section__title" 
+      style="display:flex;align-items:center;gap:8px;font-family:Montserrat;font-weight:800;margin:0 0 10px;">
+    <img src="assets/mascot/minutemagpiecaptransparent.png" alt="" 
+         style="width:22px;height:22px;border-radius:50%;object-fit:contain;"
+    />
     Featured Creators
   </h3>
   <div class="grid" id="creator-grid"></div>
