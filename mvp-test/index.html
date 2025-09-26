@@ -513,6 +513,70 @@ html{scroll-behavior:smooth}
     scroll-margin-top: calc(var(--topbar-h, 64px) + 40px);
   }
 }
+
+/* === White cards + white section panels on black canvas === */
+
+/* Make the hero info banner (with mascot + copy) white */
+body.canvas--black .hero-banner{
+  background: #ffffff !important;      /* remove the dark gradient */
+  background-image: none !important;
+  color: #0a0a0a !important;
+  border: 1px solid #e6e6e6 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,.20);
+}
+body.canvas--black .banner-kicker,
+body.canvas--black .banner-title,
+body.canvas--black .banner-sub{
+  color: #0a0a0a !important;
+}
+
+/* White panels behind whole sections */
+body.canvas--black #creators,               /* Featured Creators panel */
+body.canvas--black #shop,                   /* Fan Gear section wrapper */
+body.canvas--black #behind-the-club,        /* Behind the Club section wrapper */
+body.canvas--black #newsletter,             /* Newsletter section wrapper */
+body.canvas--black section:has(> h3#polls-section),   /* Polls (targets the section with that H3) */
+body.canvas--black section:has(> h3#about-section)    /* About (targets the section with that H3) */
+{
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+  border: 1px solid #e6e6e6 !important;
+  border-radius: 16px !important;
+  padding: 16px !important;                /* gives the “panel” look */
+}
+
+/* Keep all the smaller “cards” inside those sections white with dark text */
+body.canvas--black .card,
+body.canvas--black .product-card,
+body.canvas--black .info-card,
+body.canvas--black .creator{
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+  border-color: #e6e6e6 !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.16);
+}
+body.canvas--black .card h1,
+body.canvas--black .card h2,
+body.canvas--black .card h3,
+body.canvas--black .card h4,
+body.canvas--black .card p,
+body.canvas--black .card .small,
+body.canvas--black .product-card h4,
+body.canvas--black .product-card p,
+body.canvas--black .info-card h4,
+body.canvas--black .info-card p,
+body.canvas--black .creator h4,
+body.canvas--black .creator p{
+  color: #0a0a0a !important;
+}
+
+/* Light notice inside white panels */
+body.canvas--black .notice{
+  background: #f5f5f5 !important;
+  border-color: #e6e6e6 !important;
+  color: #0a0a0a !important;
+}
   
 </style>
 <!-- === END: TOPBAR CSS === -->
