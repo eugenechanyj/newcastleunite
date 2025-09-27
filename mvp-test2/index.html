@@ -1,1 +1,1162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>NewcastleUnite — One Toon. One Tune. · v1</title>
+  <meta name="description" content="NewcastleUnite is a global Newcastle United fan hub — Minute Magpie 60s updates, creators, polls, and more." />
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F807E15XG5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F807E15XG5');
+</script>
+<!-- End Google tag -->
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    :root {
+       --bg: #ffffff;
+       --fg: #0a0a0a;
+       --muted: #f5f5f5;
+       --accent: #1f6fff; /* brighter magpie blue */
+       --positive: #0fb27a; /* emerald */
+       --card: #ffffff;
+       --border: #e6e6e6;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a0a0a;
+        --fg: #f6f6f6;
+        --muted: #121212;
+        --accent: #79a9ff; /* bright blue for dark mode */
+        --positive: #2cd39a; /* emerald */
+        --card: #111111;
+        --border: #1f1f1f;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--fg);
+      font-family: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+   
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 16px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: grid; place-items: center; background: transparent;
+    }
+    .logo svg { width: 28px; height: 28px; }
+    .title {
+      font-family: Montserrat, system-ui, sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: 0.2px;
+    }
+    .tagline { color: #666; margin-top: 2px; font-weight: 600; }
+    nav { margin-top: 8px; display: flex; gap: 14px; flex-wrap: wrap; }
+    nav a { font-weight: 600; }
+
+/* Hero section container */
+.hero {
+  background: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Make the inner wrapper a grid */
+.hero .wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+/* Responsive tweak (kept from your original intent) */
+@media (max-width: 880px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+}
+
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .mm-hat { font-size: 0.9rem; color: #777; margin-bottom: 6px; }
+    .mm-title { font-family: Montserrat, system-ui, sans-serif; font-weight: 800; font-size: 1.4rem; margin: 0 0 6px; }
+    .mm-meta { font-size: 0.9rem; color: #777; margin-bottom: 12px; }
+    .mm-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+      border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; font-weight: 700;
+      background: var(--bg);
+    }
+    .btn.primary { background: var(--accent); color: white; border-color: transparent; }
+    .btn.positive { background: var(--positive); color: white; border-color: transparent; }
+    .btn:hover { filter: brightness(0.97); }
+
+    .source-credits { margin-top: 12px; font-size: 0.92rem; color: #777; }
+    .source-credits a { color: inherit; text-decoration: underline; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+
+    .creator { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); }
+    .creator img {
+      width: 44px; height: 44px; border-radius: 50%;
+      object-fit: cover; background: #ddd;
+      box-shadow: 0 0 0 3px #fff, 0 1px 8px rgba(0,0,0,0.12);
+    }
+    .creator h4 { margin: 0; font-size: 1rem; font-weight: 700; }
+    .creator p { margin: 0; color: #777; font-size: 0.9rem; }
+
+    footer { margin-top: 32px; border-top: 1px solid var(--border); }
+    .small { font-size: 0.92rem; color: #777; }
+    .notice { background: var(--muted); border: 1px dashed var(--border); padding: 12px; border-radius: 8px; margin-top: 12px; }
+
+    .creator {
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+    .creator:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0,0,0,0.12);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    }
+    /* --- Top banner --- */
+.hero-banner {
+  margin: 8px 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, #0a0a0a 0%, #0a0a0a 60%, rgba(10,10,10,0)) ,
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.08) 0 2px, rgba(255,255,255,0) 2px 6px);
+  color: #fff;
+}
+@media (prefers-color-scheme: light) {
+  .hero-banner {
+    background:
+      linear-gradient(90deg, #111 0%, #111 60%, rgba(17,17,17,0)) ,
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.10) 0 2px, rgba(255,255,255,0) 2px 6px);
+  }
+}
+.banner-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+.banner-copy { min-width: 0; }
+.banner-kicker {
+  font: 700 0.85rem/1 Open Sans, system-ui, sans-serif;
+  letter-spacing: .3px;
+  opacity: .9;
+}
+.banner-title {
+  font-family: Montserrat, system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  margin-top: 4px;
+}
+.banner-sub {
+  font: 600 0.95rem/1.4 Open Sans, system-ui, sans-serif;
+  opacity: .95;
+  margin-top: 6px;
+}
+.banner-mascot {
+  width: 88px; height: 88px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.25));
+}
+@media (max-width: 640px) {
+  .banner-inner {
+    grid-template-columns: 1fr auto;
+    padding: 14px;
+  }
+  .banner-title { font-size: 1.35rem; }
+  .banner-mascot { width: 72px; height: 72px; }
+}
+/* --- Full-width banner image --- */
+.top-banner {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  margin: 8px 0 16px;
+  border: 1px solid var(--border);
+}
+
+.top-banner img.banner-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+/* Make banner shorter on tablets and mobile */
+@media (max-width: 880px) {
+  .top-banner img.banner-img {
+    max-height: 220px;
+  }
+}
+
+@media (max-width: 500px) {
+  .top-banner img.banner-img {
+    max-height: 160px;
+  }
+}    
+
+/* --- Fan Gear grid --- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 columns on desktop */
+  gap: 14px;
+}
+@media (max-width: 640px) {
+  .product-grid { grid-template-columns: 1fr; }
+}
+
+.product-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  text-decoration: none;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.product-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0,0,0,0.12);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+}
+.product-card h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  font-family: Montserrat, system-ui, sans-serif;
+}
+.product-card p.small { margin: 2px 0 0; }
+.product-cta { font-weight: 700; opacity: .9; }
+
+/* --- Informational grid (Behind the Club) --- */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+@media (max-width: 640px) {
+  .info-grid { grid-template-columns: 1fr; }
+}
+.info-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  text-decoration: none;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.info-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0,0,0,0.12);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+}
+.info-card h4 { margin: 0; font-size: 1rem; font-weight: 800; font-family: Montserrat, system-ui, sans-serif; }
+.info-card p.small { margin: 2px 0 0; }
+.info-cta { font-weight: 700; opacity: .9; }
+
+/* --- Featured Creators: section panel + card polish --- */
+#creators {
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 28px;
+}
+
+/* Tighten the header spacing inside the panel */
+#creators > h3 { margin-top: 0; }
+
+/* Creator card polish */
+.creator {
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.creator:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0,0,0,0.12);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
+
+/* Avatar ring + crisper look */
+.creator img {
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+/* Subtle arrow affordance on hover */
+.creator::after {
+  content: '→';
+  margin-left: auto;
+  font-weight: 800;
+  opacity: 0;
+  transition: opacity .12s ease, transform .12s ease;
+}
+.creator:hover::after {
+  opacity: .85;
+  transform: translateX(2px);
+}
+
+/* === Black canvas overrides (safe, reversible) === */
+body.canvas--black{
+  /* Dark page background that matches the header */
+  --bg: #0b0e11;      /* page background */
+  --fg: #e8e8e8;      /* text */
+  --muted: #0d1115;   /* muted section bg */
+  --card: #101317;    /* cards on dark */
+  --border: #1b2026;  /* subtle borders on dark */
+  --accent: #79a9ff;  /* link/brand blue on dark */
+  color: var(--fg);
+  background: var(--bg);
+}
+
+/* Make cards feel modern on black */
+body.canvas--black .card{
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: 0 10px 28px rgba(0,0,0,.35);
+}
+
+/* Softer dividers on dark */
+body.canvas--black .notice{
+  background: var(--muted);
+  border-color: var(--border);
+}
+
+/* Let the hero/top banner bleed (no visible box on black) */
+body.canvas--black .top-banner{
+  border: 0;
+  border-radius: 0;
+  margin: 0 0 16px 0;
+}
+body.canvas--black .hero{
+  background: transparent;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+/* Links tweak on dark */
+body.canvas--black a{ color: var(--accent); }
+body.canvas--black a:hover{ text-decoration: underline; }
+
+/* Optional: nudge small text a hair brighter for readability */
+body.canvas--black .small{ color: #c9d2dc; }
+
+/* === White cards on black canvas (override) === */
+/* Keep page background black, but make card-like blocks white with dark text */
+body.canvas--black .card,
+body.canvas--black .product-card,
+body.canvas--black .info-card,
+body.canvas--black .creator{
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+  border-color: #e6e6e6 !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,.20);
+}
+
+/* Ensure text inside those cards is dark */
+body.canvas--black .card h1,
+body.canvas--black .card h2,
+body.canvas--black .card h3,
+body.canvas--black .card h4,
+body.canvas--black .card p,
+body.canvas--black .card .small,
+body.canvas--black .product-card h4,
+body.canvas--black .product-card p,
+body.canvas--black .info-card h4,
+body.canvas--black .info-card p,
+body.canvas--black .creator h4,
+body.canvas--black .creator p{
+  color: #0a0a0a !important;
+}
+
+/* Light, friendly notice panel inside cards */
+body.canvas--black .notice{
+  background: #f5f5f5 !important;
+  border-color: #e6e6e6 !important;
+  color: #0a0a0a !important;
+}
+
+/* Optional: make the Creators section panel slightly darker so white creator cards pop */
+body.canvas--black #creators{ background:#0d1115; border-color:#1b2026; }
+
+/* Links inside white cards: keep accent blue */
+body.canvas--black .card a,
+body.canvas--black .product-card a,
+body.canvas--black .info-card a,
+body.canvas--black .creator a{ color:#1f6fff; }
+    
+</style>
+
+<!-- === BEGIN: TOPBAR CSS === -->
+
+/* === Newcastle Unite 2.0 — Global tokens (badge colours) === */
+:root{
+  --color-black:#000000;
+  --color-white:#ffffff;
+  --color-gold:#F0B83D;
+  --color-grey:#BBBDBF;
+  --color-blue:#00B6F1;
+  --color-red:#EF3E2E;
+
+  --card-bg: var(--color-white);
+  --card-fg: #0a0a0a;
+  --card-brd:#E6E6E6;
+  --card-shadow: 0 6px 18px rgba(0,0,0,.12);
+  --card-shadow-hover: 0 10px 24px rgba(0,0,0,.16);
+}
+
+/* Base canvas stays black */
+body{ background:var(--color-black); color:var(--color-white); }
+
+/* Links & primary buttons in badge blue */
+a, .btn-primary{
+  color: var(--color-white);
+  background: var(--color-blue);
+  text-decoration:none;
+}
+a:hover, .btn-primary:hover{ filter: brightness(.92); }
+
+/* === Global card system === */
+.card{
+  background:var(--card-bg);
+  color:var(--card-fg);
+  border:1px solid var(--card-brd);
+  border-radius:14px;
+  box-shadow: var(--card-shadow);
+  overflow:hidden;
+}
+.card:hover{ box-shadow: var(--card-shadow-hover); }
+
+/* Section titles (clean by default) */
+.section-title{
+  font: 800 1.6rem/1.2 Montserrat, system-ui, sans-serif;
+  letter-spacing:.1px;
+  margin: 4px 0 16px;
+  color: var(--color-white);
+}
+
+/* Optional graffiti accent (OFF until you add .theme--graffiti on <body>) */
+.theme--graffiti .section-title{
+  background:
+    radial-gradient(120px 40px at 0 100%, rgba(240,184,61,.22), transparent 60%),
+    radial-gradient(120px 40px at 100% 0, rgba(0,182,241,.18), transparent 60%);
+  border-radius:10px; padding:6px 10px;
+}
+
+/* === Featured Creators: modern card grid (CSS-only) === */
+body.cards-modern .grid#creator-grid{
+  display:grid;
+  gap:16px;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+}
+@media (max-width:1000px){
+  body.cards-modern .grid#creator-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width:640px){
+  body.cards-modern .grid#creator-grid{ grid-template-columns: 1fr; }
+}
+
+/* Turn each .creator into a card with a top banner image */
+body.cards-modern .creator{
+  display:grid;
+  grid-template-rows: 160px auto;  /* big stretched image look */
+  padding:0;
+  border-radius:14px;
+  border:1px solid var(--card-brd);
+  background:#fff;
+  color:#0a0a0a;
+  box-shadow:var(--card-shadow);
+  overflow:hidden;
+}
+body.cards-modern .creator:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* The creator image becomes a banner (stretched) */
+body.cards-modern .creator img{
+  width:100%; height:160px; object-fit:cover;
+  border:0; border-radius:0; box-shadow:none; background:#ddd;
+}
+
+/* Text area */
+body.cards-modern .creator > div{ padding:12px 14px 14px; }
+body.cards-modern .creator h4{
+  margin:0 0 6px; font:800 1rem/1.2 Montserrat, system-ui, sans-serif; color:#0a0a0a;
+}
+body.cards-modern .creator p{ margin:0; font-size:.93rem; color:#333; }
+
+/* Minimal arrow affordance */
+body.cards-modern .creator::after{
+  content:'→'; margin:0 10px 10px auto; font-weight:800; opacity:.6;
+  transform:translateX(0); transition: transform .12s ease, opacity .12s ease;
+}
+body.cards-modern .creator:hover::after{ opacity:.9; transform:translateX(2px); }
+
+/* === Minute Magpie UI pack (toggle with .mm-led on <body>) === */
+.mm-badge, .mm-sticker, .mm-bubble{position:relative; display:inline-block;}
+.mm-badge{
+  font: 800 12px/1.1 Montserrat, system-ui, sans-serif;
+  padding:6px 10px; border-radius:999px; background:var(--color-blue); color:var(--color-white);
+  letter-spacing:.2px;
+}
+.mm-sticker{
+  background:var(--color-white); color:var(--color-black);
+  border:1px solid var(--card-brd); border-radius:14px; padding:6px 10px;
+  box-shadow:var(--card-shadow); transform: rotate(-2deg);
+}
+.mm-bubble{
+  background:var(--color-white); color:#0a0a0a; border:1px solid var(--card-brd);
+  border-radius:14px; padding:10px 12px; max-width:320px; box-shadow:0 8px 22px rgba(0,0,0,.12);
+}
+.mm-bubble:after{
+  content:""; position:absolute; left:16px; bottom:-8px; width:16px; height:16px;
+  background:inherit; border-left:inherit; border-bottom:inherit; transform:rotate(45deg);
+}
+
+/* Place MM sticker beside section titles when .mm-led is on */
+.mm-led .section-title{ display:flex; align-items:center; gap:10px; }
+.mm-led .section-title .mm-sticker{ font-weight:800; font-size:.92rem; }
+  
+<style>
+:root{
+  --topbar-h: 64px;
+  --container-max: 1200px;
+  --section-pad-x: clamp(16px, 4vw, 32px);
+}
+
+/* helper container (separate from your .wrap; both can co-exist) */
+.container{max-width:var(--container-max);margin-inline:auto;padding-inline:var(--section-pad-x);}
+
+/* Skip link (for keyboard users) */
+.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;}
+.skip-link:focus{position:fixed;left:16px;top:12px;width:auto;height:auto;padding:8px 12px;background:#fff;color:#000;border-radius:8px;z-index:10000;}
+
+/* Top bar shell */
+.site-topbar{
+  position:sticky;top:0;z-index:1000;
+  background:#0b0e11;color:#fff;min-height:var(--topbar-h);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.site-topbar.is-scrolled{box-shadow:0 6px 20px rgba(0,0,0,.25);}
+
+.site-topbar__inner{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding-block:10px;
+}
+
+/* Brand line */
+.brandline{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.brandline__kicker{text-transform:uppercase;letter-spacing:.08em;font-weight:800;font-size:.82rem}
+.brandline__title{font-weight:800;font-size:clamp(1rem,2.4vw,1.25rem);opacity:.95}
+
+/* Nav */
+.topnav__toggle{
+  appearance:none;border:1px solid rgba(255,255,255,.25);
+  background:transparent;color:#fff;padding:6px 10px;border-radius:10px;
+  display:none;
+}
+.topnav__menu{display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0}
+.topnav__menu a{
+  display:inline-block;
+  padding:5px 9px;                 /* was 8px 12px */
+  border-radius:10px;
+  text-decoration:none;
+  color:#fff;
+  font-weight:700;
+  letter-spacing:.005em;           /* was .01em */
+  outline:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);
+  font-size: clamp(.80rem, 1.4vw, .90rem);  /* smaller text */
+  white-space: nowrap;             /* keep on one line on wide screens */
+}
+
+.topnav__menu a:hover,.topnav__menu a:focus{background:rgba(255,255,255,.10)}
+
+/* Mobile */
+@media (max-width: 860px){
+  .topnav__toggle{display:block}
+  .topnav__menu{
+    position:absolute;right:16px;left:16px;top:calc(100% + 8px);
+    background:#0b0e11;border:1px solid rgba(255,255,255,.12);border-radius:12px;
+    padding:10px;display:none;flex-direction:column;gap:8px;
+  }
+  .topnav__menu.is-open{display:flex}
+  .topnav__menu a{ white-space: normal; }
+}
+
+/* Smooth scroll + anchor offset so sticky bar doesn’t cover titles */
+html{scroll-behavior:smooth}
+/* Global anchor landing (baseline) */
+[id]{scroll-margin-top:calc(var(--topbar-h, 64px) + 24px)}
+
+/* unify brand line typography */
+.brandline__kicker { display: none !important; } /* belt-and-braces, in case it still exists */
+.brandline__title {
+  font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif !important;
+  font-weight: 800;
+  letter-spacing: .02em;
+  font-size: clamp(1.05rem, 2.6vw, 1.3rem); /* same size across the whole line */
+  line-height: 1.1;
+  opacity: 1; /* ensure full white */
+}
+
+/* extra cushion for About on wide screens */
+
+/* Desktop-only: reduce anchor gap for Fan Gear & Behind the Club */
+
+html{scroll-behavior:smooth}
+/* Global anchor landing (baseline) */
+[id]{scroll-margin-top:calc(var(--topbar-h, 64px) + 24px)}
+
+/* Desktop-only: ensure Polls & About headings clear the sticky bar */
+@media (min-width: 861px){
+  #polls-section,
+  #about-section {
+    scroll-margin-top: calc(var(--topbar-h, 64px) + 40px);
+  }
+}
+
+/* === White cards + white section panels on black canvas === */
+
+/* Make the hero info banner (with mascot + copy) white */
+body.canvas--black .hero-banner{
+  background: #ffffff !important;      /* remove the dark gradient */
+  background-image: none !important;
+  color: #0a0a0a !important;
+  border: 1px solid #e6e6e6 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,.20);
+}
+body.canvas--black .banner-kicker,
+body.canvas--black .banner-title,
+body.canvas--black .banner-sub{
+  color: #0a0a0a !important;
+}
+
+/* White panels behind whole sections */
+body.canvas--black #creators,               /* Featured Creators panel */
+body.canvas--black #shop,                   /* Fan Gear section wrapper */
+body.canvas--black #behind-the-club,        /* Behind the Club section wrapper */
+body.canvas--black #newsletter,             /* Newsletter section wrapper */
+body.canvas--black section:has(> h3#polls-section),   /* Polls (targets the section with that H3) */
+body.canvas--black section:has(> h3#about-section)    /* About (targets the section with that H3) */
+{
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+  border: 1px solid #e6e6e6 !important;
+  border-radius: 16px !important;
+  padding: 16px !important;                /* gives the “panel” look */
+}
+
+/* Keep all the smaller “cards” inside those sections white with dark text */
+body.canvas--black .card,
+body.canvas--black .product-card,
+body.canvas--black .info-card,
+body.canvas--black .creator{
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+  border-color: #e6e6e6 !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.16);
+}
+body.canvas--black .card h1,
+body.canvas--black .card h2,
+body.canvas--black .card h3,
+body.canvas--black .card h4,
+body.canvas--black .card p,
+body.canvas--black .card .small,
+body.canvas--black .product-card h4,
+body.canvas--black .product-card p,
+body.canvas--black .info-card h4,
+body.canvas--black .info-card p,
+body.canvas--black .creator h4,
+body.canvas--black .creator p{
+  color: #0a0a0a !important;
+}
+
+/* Light notice inside white panels */
+body.canvas--black .notice{
+  background: #f5f5f5 !important;
+  border-color: #e6e6e6 !important;
+  color: #0a0a0a !important;
+}
+  
+</style>
+<!-- === END: TOPBAR CSS === -->
+
+</head>
+<body class="canvas--black cards-modern magz mm-led">
+
+<!-- === BEGIN: TOPBAR HTML === -->
+<header class="site-topbar" role="banner">
+  <div class="site-topbar__inner container">
+    <!-- Rally line -->
+    <div class="brandline" aria-label="Site statement">
+      <span class="brandline__title brandline__title--single">NEWCASTLEUNITE - One Toon, One Tune</span>
+    </div>
+
+    <!-- Mobile toggle -->
+    <button class="topnav__toggle" aria-controls="topnav-menu" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span> ☰
+    </button>
+
+    <!-- Primary nav -->
+    <nav class="topnav" aria-label="Primary">
+      <ul id="topnav-menu" class="topnav__menu">
+        <li><a data-ga="nav_click" data-nav="minute_magpie"      href="#minute-magpie">Minute Magpie</a></li>
+        <li><a data-ga="nav_click" data-nav="featured_creators"  href="#creators">Featured Creators</a></li>
+        <li><a data-ga="nav_click" data-nav="fan_gear"           href="#fan-gear">Fan Gear</a></li>
+        <li><a data-ga="nav_click" data-nav="behind_the_club"    href="#behind-the-club">Behind the Club</a></li>
+        <li><a data-ga="nav_click" data-nav="polls"              href="#polls-section">Polls</a></li>
+        <li><a data-ga="nav_click" data-nav="about"              href="#about-section">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- === END: TOPBAR HTML === -->
+<!-- brand v=topbar-text1 -->
+  
+<!-- MAIN START -->
+<main id="main">
+  
+  <section class="hero">
+    <!-- Top banner image -->
+    <div class="top-banner">
+      <img
+        src="/assets/brand/newcastleunitemagpiebanner1manymagpies.png"
+        alt="Newcastle Unite Magpie Crowd Banner"
+        class="banner-img"
+      />
+    </div>
+    <div class="wrap" style="padding: 24px 16px;">
+      <div class="hero-banner">
+        <div class="banner-inner">
+          <div class="banner-copy">
+          <div class="banner-kicker">Minute Magpie</div>
+          <div class="banner-title">One Toon. One Tune.</div>
+          <div class="banner-sub">Your 60-second serving of mag-nificent NUFC news and updates.</div>
+         </div>
+         <img
+           class="banner-mascot"
+           src="/assets/mascot/minutemagpiecaptransparent.png"
+           alt="Minute Magpie mascot"
+        />
+      </div>
+     </div>
+  
+      <div class="card">
+        <h2 id="minute-magpie" class="mm-title">Minute Magpie — Today’s 60-Second Toon Brief</h2>
+        <div class="mm-meta" id="mm-meta">Published: <span id="mm-time">—</span> (SGT)</div>
+        <div id="mm-script">
+          <p>Howay! Minute Magpie here — your one‑minute Toon brief. This is placeholder copy. Replace this with today’s top 3–4 bullets once your JSON feed is wired up.</p>
+          <ul>
+            <li><strong>Squad note:</strong> Training update for key players ahead of the weekend.</li>
+            <li><strong>Tactics talk:</strong> What creators spotted about the next opponent.</li>
+            <li><strong>Fan watch:</strong> Flags & fan plans for matchday.</li>
+          </ul>
+          <p>Keep it friendly, keep it black‑and‑white — links below. Away the lads!</p>
+        </div>
+        <div class="mm-actions">
+          <button class="btn primary" id="btn-play" aria-label="Play 60 second brief">▶ Play 60s</button>
+          <a class="btn primary" href="#newsletter">Subscribe</a>
+        </div>
+        <div class="source-credits" id="mm-credits">Credits: Keith Downie, The Magpie Channel TV, António Mango, True Faith, NUFC Matters, Adam Pearson.</div>
+       </div>
+    </div>
+  </section>
+
+  <div class="wrap" style="padding-top: 24px;">
+    <section id="creators" style="margin-top: 16px;">
+     <main class="wrap" style="padding-top: 24px;">
+        
+<section style="margin-top: 16px;">
+  <h3 id="creators" class="section__title" 
+      style="display:flex;align-items:center;gap:8px;font-family:Montserrat;font-weight:800;margin:0 0 10px;">
+    <img src="/assets/mascot/minutemagpiecaptransparent.png" alt="" 
+         style="width:22px;height:22px;border-radius:50%;object-fit:contain;"
+    />
+    Featured Creators
+  </h3>
+  <div class="grid" id="creator-grid"></div>
+  <p class="small" style="margin-top:10px;">We link out and attribute everything — discover great NUFC voices and watch on their channels.</p>
+</section>
+
+<!-- Fan Gear (affiliate-friendly) -->
+<section id="shop" style="margin-top: 28px;">
+  <h3 id="fan-gear" style="display:flex; align-items:center; gap:8px; font-family: Montserrat; font-weight:800; margin: 0 0 10px;">
+  <img
+    src="/assets/mascot/minutemagpieoriginal.png"
+    alt=""
+    style="width:24px; height:24px; border-radius:50%; object-fit:contain; transform: scaleX(-1);"
+  />
+  Fan Gear
+</h3>
+
+  <div class="product-grid">
+    <!-- Card: Official NUFC Shop -->
+    <a class="product-card"
+      href="https://shop.nufc.co.uk/"
+      target="_blank" rel="noopener nofollow sponsored"
+      onclick="event.preventDefault();
+               const url=this.href;
+               let done=false;
+               const go=()=>{ if(!done){ done=true; location.href=url; } };
+               const timer=setTimeout(go,800);
+               gtag('event','affiliate_click',{
+                 item:'Official_NUFC_Shop',
+                 section:'fan_gear',
+                 event_callback:()=>{ clearTimeout(timer); go(); }
+               });">
+
+      <div class="product-info">
+        <h4>Official NUFC Shop</h4>
+      <p class="small">Official kits, scarves & gifts — support the club.</p>
+    </div>
+    <div class="product-cta">Shop Official →</div>
+  </a>
+
+    <!-- Card: Adidas Football -->
+    <a class="product-card"
+       href="https://www.adidas.com/football"
+       rel="noopener nofollow sponsored"
+       onclick="event.preventDefault();
+                console.log('affiliate_click firing for Adidas_Football');
+                const url=this.href;
+                let done=false;
+                const go=()=>{ if(!done){ done=true; location.href=url; } };
+                const timer=setTimeout(go,800);
+                gtag('event','affiliate_click',{
+                  item:'Adidas_Football',
+                  section:'fan_gear',
+                  event_callback:()=>{ clearTimeout(timer); go(); }
+                });">
+ 
+      <div class="product-info">
+        <h4>Adidas Football</h4>
+       <p class="small">Boots & gear. NUFC collab range.</p>
+    </div>
+    <div class="product-cta">Shop Adidas →</div>
+  </a>
+    
+  </div>
+  <p class="small" style="margin-top:10px;">
+    We may use affiliate links. This helps keep NewcastleUnite free and supports creator features. <em>Thank you!</em>
+  </p>
+</section>
+
+<!-- Behind the Club (neutral, informational) -->
+<section id="behind-the-club" style="margin-top: 28px;">
+  <h3 style="display:flex; align-items:center; gap:8px; font-family: Montserrat; font-weight:800; margin: 0 0 10px;">
+    <img
+      src="/assets/mascot/minutemagpieoriginal.png"
+      alt=""
+      style="width:24px; height:24px; border-radius:50%; object-fit:contain;"
+    />
+    Behind the Club
+  </h3>
+
+  <div class="info-grid">
+    <!-- Club Ownership overview -->
+    <a class="info-card" href="https://www.nufc.co.uk/club/ownership-and-board/" target="_blank" rel="noopener nofollow">
+      <div class="info-body">
+        <h4>Ownership & Board</h4>
+        <p class="small">Who runs Newcastle United — official overview from the club.</p>
+      </div>
+      <div class="info-cta">Learn more →</div>
+    </a>
+
+    <!-- PIF official site (neutral) -->
+    <a class="info-card" href="https://www.pif.gov.sa/en/Pages/default.aspx" target="_blank" rel="noopener nofollow">
+      <div class="info-body">
+        <h4>Public Investment Fund</h4>
+        <p class="small">Background on PIF and its global investment strategy.</p>
+      </div>
+      <div class="info-cta">Visit site →</div>
+    </a>
+  </div>
+
+  <p class="small" style="margin-top:10px;">
+    This section is informational and neutral. We’ll add project updates and community initiatives over time.
+  </p>
+</section>
+
+<!-- === Polls section (restored) === -->
+<section style="margin-top: 28px;">
+  <h3 id="polls-section" style="font-family: Montserrat; font-weight:800; margin: 0 0 10px;">Polls</h3>
+  <div class="card">
+    <p class="small">Embed a Google Form or Typeform here (e.g., score prediction, MOTM). For now this is a placeholder.</p>
+  </div>
+</section>
+<!-- === /Polls section === -->
+    
+    <section id="newsletter" style="margin-top: 28px;">
+      <h3 style="font-family: Montserrat; font-weight:800; margin: 0 0 10px;">Subscribe to the Minute Magpie</h3>
+      <div class="card">
+        <p>Get the 60‑second brief in your inbox. (Plug in Buttondown, Mailchimp, etc.)</p>
+        <a class="btn primary" href="#newsletter"
+           onclick="gtag('event','subscribe_click',{section:'newsletter',location:'hero'});">
+          Subscribe
+        </a>
+        
+      </div>
+    </section>
+
+    <section style="margin-top: 28px;">
+      <h3 id="about-section" style="font-family: Montserrat; font-weight:800; margin: 0 0 10px;">About</h3>
+      <div class="card">
+        <p><strong>NewcastleUnite</strong> is a global fan hub for Newcastle United supporters — playful, positive, and uniting. We aggregate public updates via official embeds and links, always crediting creators. The <em>Minute Magpie</em> gives you a friendly 60‑second daily brief.</p>
+        <div class="notice small"><strong>Creators Partnership & Attribution (placeholder):</strong> NewcastleUnite aggregates public embeds and links with full credit. We do not rehost third‑party content. Creators can opt‑out or collaborate — contact: <a href="mailto:hello@newcastleunite.com">hello@newcastleunite.com</a>.</div>
+      </div>
+    </section>
+  </div>
+
+</main>
+       
+  <footer>
+    <div class="wrap" style="padding: 16px;">
+      <div class="small">© <span id="year"></span> NewcastleUnite • One Toon. One Tune.</div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Simple speech synthesis for the 60s brief ---
+    const playBtn = document.getElementById('btn-play');
+    playBtn?.addEventListener('click', () => {
+      const text = document.getElementById('mm-script')?.innerText || '';
+      if (!('speechSynthesis' in window)) { alert('Speech not supported on this browser.'); return; }
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.rate = 1.08; // a touch brisk
+      u.pitch = 1.0;
+      // Try to prefer an English voice if available
+      const v = speechSynthesis.getVoices().find(v => /en-|English/i.test(v.lang || v.name))
+      if (v) u.voice = v;
+      speechSynthesis.speak(u);
+    });
+
+    // --- Render current year ---
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // --- Data fetching helpers ---
+    async function loadJSON(path) {
+      try {
+        const res = await fetch(path, { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return await res.json();
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // --- Load minute.json if present ---
+    (async function initMinute() {
+      const data = await loadJSON('data/minute.json');
+      if (!data) {
+        // Keep placeholder
+        document.getElementById('mm-time').textContent = new Date().toLocaleString('en-SG');
+        return;
+      }
+      document.getElementById('mm-time').textContent = (data.published_sgt || new Date().toLocaleString('en-SG'));
+      const scriptEl = document.getElementById('mm-script');
+      scriptEl.innerHTML = '';
+      if (data.hook) {
+        const p = document.createElement('p'); p.textContent = data.hook; scriptEl.appendChild(p);
+      }
+      if (Array.isArray(data.bullets)) {
+        const ul = document.createElement('ul');
+        data.bullets.forEach(b => { const li = document.createElement('li'); li.innerHTML = b; ul.appendChild(li); });
+        scriptEl.appendChild(ul);
+      }
+      if (data.signoff) {
+        const p = document.createElement('p'); p.textContent = data.signoff; scriptEl.appendChild(p);
+      }
+      const credits = document.getElementById('mm-credits');
+      credits.innerHTML = 'Credits: ' + (data.credits?.map(c => `<a href="${c.url}" target="_blank" rel="noopener">${c.name}</a>`).join(', ') || '—');
+    })();
+
+    // --- Load creators.json if present ---
+    (async function initCreators() {
+      const grid = document.getElementById('creator-grid');
+      const data = await loadJSON('data/creators.json');
+      const fallback = [
+        { name: 'Adam Pearson', url: '#', avatar: '', blurb: 'NUFC analysis & match previews.' },
+        { name: 'The Magpie Channel TV', url: '#', avatar: '', blurb: 'Fan channel • vlogs & interviews.' },
+        { name: 'António Mango', url: '#', avatar: '', blurb: 'Commentary & tactics chat.' },
+        { name: 'True Faith', url: '#', avatar: '', blurb: 'Podcast & fan media.' },
+        { name: 'NUFC Matters', url: '#', avatar: '', blurb: 'Daily fan show.' },
+        { name: 'Keith Downie', url: '#', avatar: '', blurb: 'NE football reporter (links to X).' }
+      ];
+      const creators = data?.creators?.length ? data.creators : fallback;
+      creators.forEach(c => {
+        const a = document.createElement('a'); a.href = c.url || '#'; a.target = '_blank'; a.rel = 'noopener'; a.className = 'creator';
+
+// Track creator clicks with GA and then navigate
+a.addEventListener('click', (ev) => {
+  ev.preventDefault();
+
+  const url = a.href;
+  const creatorName = (c.name || 'Unknown').replace(/\s+/g, '_');
+
+  // Open a blank tab immediately (so popup blockers don't kill it),
+  // then navigate it after GA confirms (with a fallback timer).
+  const w = window.open('about:blank');
+
+  const t = setTimeout(() => {
+    if (w) { w.location = url; } else { location.href = url; }
+  }, 800);
+
+  console.log('creator_view firing for', creatorName);
+
+  gtag('event', 'creator_view', {
+    creator: creatorName,
+    section: 'creators',
+    event_callback: () => {
+      clearTimeout(t);
+      if (w) { w.location = url; } else { location.href = url; }
+    }
+  });
+});
+   
+        const img = document.createElement('img'); img.alt = (c.name || 'Creator') + ' avatar'; const initials = (c.name||'').split(/\s+/).map(s=>s[0]).slice(0,2).join('').toUpperCase() || 'NU'; img.src = c.avatar || `https://placehold.co/88x88?text=${initials}`; img.onerror = () => { img.src = `https://placehold.co/88x88?text=${initials}`; };
+        const box = document.createElement('div');
+        const h4 = document.createElement('h4'); h4.textContent = c.name || 'Creator';
+        const p = document.createElement('p'); p.textContent = c.blurb || '';
+        box.appendChild(h4); box.appendChild(p);
+        a.appendChild(img); a.appendChild(box);
+        grid.appendChild(a);
+      });
+
+// After you have created all your creator cards and appended them to #creator-grid,
+// add a single click listener for the whole grid:
+      
+    })();
+  </script>
+
+  <!--
+  ==============================
+  DATA SCHEMAS (drop these into /data)
+  ==============================
+
+  /data/minute.json
+  {
+    "published_sgt": "2025-09-21 19:30",
+    "hat": "Flat cap",
+    "tone": "Calm update",
+    "hook": "Howay! Minute Magpie here — your one‑minute Toon brief.",
+    "bullets": [
+      "<strong>Squad note:</strong> Eddie Howe confirms light training for [player]; status <em>TBC</em> for [fixture].",
+      "<strong>Tactics talk:</strong> [Creator] spots patterns that could unlock [opponent]’s press.",
+      "<strong>Fan watch:</strong> Wor Flags teasing a big tifo for the weekend."
+    ],
+    "signoff": "Keep it friendly, keep it black‑and‑white — links below. Away the lads!",
+    "credits": [
+      { "name": "Adam Pearson", "url": "https://www.youtube.com/@AdamPearsonNUFC" },
+      { "name": "The Magpie Channel TV", "url": "https://www.youtube.com/@TheMagpieChannelTV" }
+    ]
+  }
+
+  /data/creators.json
+  {
+    "creators": [
+      {
+        "name": "Adam Pearson",
+        "url": "https://www.youtube.com/@AdamPearsonNUFC",
+        "avatar": "https://yt3.googleusercontent.com/...",
+        "blurb": "NUFC analysis & match previews."
+      },
+      {
+        "name": "The Magpie Channel TV",
+        "url": "https://www.youtube.com/@TheMagpieChannelTV",
+        "avatar": "https://yt3.googleusercontent.com/...",
+        "blurb": "Fan channel • vlogs & interviews."
+      }
+    ]
+  }
+  -->
+</main>
+<!-- MAIN END -->
+
+<!-- === BEGIN: TOPBAR JS === -->
+<script>
+(function(){
+  const header = document.querySelector('.site-topbar');
+  const btn = document.querySelector('.topnav__toggle');
+  const menu = document.getElementById('topnav-menu');
+
+  // Mobile toggle (hamburger)
+  btn?.addEventListener('click', () => {
+    const open = menu.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+
+  // Close menu after clicking a link (mobile)
+  menu?.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') {
+      menu.classList.remove('is-open');
+      btn?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Add a soft shadow when you scroll
+  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 6);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // GA: top nav usage (safe if GA not loaded)
+  document.querySelectorAll('[data-ga="nav_click"]').forEach(a => {
+    a.addEventListener('click', () => {
+      try { gtag('event', 'nav_click', { link: a.dataset.nav }); } catch {}
+    });
+  });
+})();
+</script>
+
+<!-- === BEGIN: TOPBAR HEIGHT VAR === -->
+<script>
+(function(){
+  const header = document.querySelector('.site-topbar');
+  function setTopbarVar(){
+    if (!header) return;
+    const h = header.offsetHeight;            // measure sticky bar height
+    document.documentElement.style.setProperty('--topbar-h', h + 'px');
+  }
+  setTopbarVar();
+  // update on resize and after fonts load
+  window.addEventListener('resize', setTopbarVar, {passive:true});
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(setTopbarVar).catch(()=>{});
+  }
+})();
+</script>
+<!-- === END: TOPBAR HEIGHT VAR === -->
+  
+<!-- === END: TOPBAR JS === -->
+  
+</body>
+</html>
