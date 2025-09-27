@@ -411,6 +411,7 @@ body.canvas--black .product-card a,
 body.canvas--black .info-card a,
 body.canvas--black .creator a{ color:#1f6fff; }
 
+<style>
 /* === Newcastle Unite 2.0 — Global tokens (badge colours) === */
 :root{
   --color-black:#000000;
@@ -538,7 +539,64 @@ body.cards-modern .creator:hover::after{ opacity:.9; transform:translateX(2px); 
 
 /* Place MM sticker beside section titles when .mm-led is on */
 .mm-led .section-title{ display:flex; align-items:center; gap:10px; }
-.mm-led .section-title .mm-sticker{ font-weight:800; font-size:.92rem; }    
+.mm-led .section-title .mm-sticker{ font-weight:800; font-size:.92rem; }
+
+/* === Minute Magpie 3-up layout (must be inside <style>) === */
+body.magz .mm-3up{
+  display:grid;
+  gap:16px;
+  grid-template-columns: 2fr 1.2fr 1fr; /* Left / Mid / Right */
+  align-items:start;
+  margin-top:10px;
+}
+@media (max-width:1100px){
+  body.magz .mm-3up{ grid-template-columns: 1.6fr 1.2fr .9fr; }
+}
+@media (max-width:860px){
+  body.magz .mm-3up{ grid-template-columns: 1fr; }
+}
+body.magz .mm-3up > *{
+  background:var(--card-bg);
+  color:var(--card-fg);
+  border:1px solid var(--card-brd);
+  border-radius:14px;
+  box-shadow:var(--card-shadow);
+  padding:14px;
+  overflow:hidden;
+}
+body.magz .mm-3up > * h3,
+body.magz .mm-3up > * h4{
+  margin:0 0 8px;
+  font: 800 1.05rem/1.2 Montserrat, system-ui, sans-serif;
+  color:#0a0a0a;
+}
+body.magz .mm-3up > * p{
+  margin:0 0 8px;
+  color:#333;
+  font-size:.95rem;
+}
+body.magz .mm-3up ul{ list-style:none; margin:0; padding:0; }
+body.magz .mm-3up li{
+  display:flex; gap:8px; align-items:flex-start;
+  padding:6px 0; border-bottom:1px dashed #eee;
+}
+body.magz .mm-3up li:last-child{ border-bottom:0; }
+body.magz .mm-3up li::before{
+  content:""; flex:0 0 6px; height:6px; border-radius:50%;
+  background:var(--color-blue); margin-top:.5rem;
+}
+body.magz .mm-credits a,
+body.magz .mm-credits span{
+  display:inline-block;
+  background:#f7f7f7;
+  color:#0a0a0a;
+  border:1px solid var(--card-brd);
+  border-radius:999px;
+  padding:6px 10px;
+  margin:4px 6px 0 0;
+  font:700 .85rem/1 Montserrat, system-ui, sans-serif;
+}
+body.magz .mm-credits a:hover{ background:#f0f0f0; border-color:#e2e2e2; }
 </style>
 
 <!-- === BEGIN: TOPBAR CSS === -->
