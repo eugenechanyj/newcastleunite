@@ -649,6 +649,19 @@ body.cards-modern .grid#creator-grid{
 
 /* Tighten list spacing slightly */
 body.magz .mm-3up li{ padding: 4px 0; }
+
+/* === Global container for consistent width === */
+:root{ --container: 1200px; --gutter: 16px; }
+
+/* Apply same centered width to MM row and Creators grid */
+body.magz #minute-magpie.mm-3up,
+body.cards-modern #creator-grid,
+body.cards-modern .grid#creator-grid{
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  box-sizing: border-box;
+}
     
 </style>
 
