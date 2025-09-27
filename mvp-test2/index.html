@@ -624,6 +624,19 @@ body.magz .mm-3up li{
   /* border-bottom: 1px solid #eee;  <-- use this instead if you want faint solid lines */
 }
 body.magz .mm-3up li:last-child{ border-bottom: none; }
+
+/* === Global container === */
+:root{ --container: 1200px; --gutter: 16px; }
+
+/* Apply same centered width to key sections */
+body.magz .mm-3up,
+body.cards-modern .grid#creator-grid{
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* Optional: if your other sections should match, add their selectors here too */
     
 </style>
 
