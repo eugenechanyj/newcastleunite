@@ -637,6 +637,18 @@ body.cards-modern .grid#creator-grid{
 }
 
 /* Optional: if your other sections should match, add their selectors here too */
+
+/* === Line clamp utilities (for cleaner cards) === */
+.clamp-2, .clamp-3{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.clamp-2{ -webkit-line-clamp: 2; }
+.clamp-3{ -webkit-line-clamp: 3; }
+
+/* Tighten list spacing slightly */
+body.magz .mm-3up li{ padding: 4px 0; }
     
 </style>
 
