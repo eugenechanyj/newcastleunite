@@ -752,22 +752,40 @@ body.canvas--black .notice{
         class="banner-img"
       />
     </div>
-    <div class="wrap" style="padding: 24px 16px;">
-      <div class="hero-banner">
-        <div class="banner-inner">
-          <div class="banner-copy">
-          <div class="banner-kicker">Minute Magpie</div>
-          <div class="banner-title">One Toon. One Tune.</div>
-          <div class="banner-sub">Your 60-second serving of mag-nificent NUFC news and updates.</div>
-         </div>
-         <img
-           class="banner-mascot"
-           src="/assets/minutemagpiecaptransparent.png"
-           alt="Minute Magpie mascot"
-        />
-      </div>
-     </div>
+   
+<!-- New wrapper section with the grid class -->
+<section id="minute-magpie" class="mm-3up">
   
+  <!-- Card 1: your current Minute Magpie content -->
+  <div class="card">
+    
+    <!-- Modern section title with MM sticker -->
+    <h2 class="section-title">
+      <span class="mm-sticker">Minute Magpie</span>
+      Your 60-second Toon fix
+    </h2>
+    
+    <div class="mm-meta" id="mm-meta">
+      Published: <span id="mm-time">—</span> (SGT)
+    </div>
+    
+    <div id="mm-script">
+      <p>Howay! Minute Magpie here — your one-minute Toon brief. This is placeholder copy. Replace this with today’s top 3–4 bullets once your JSON feed is wired up.</p>
+      <ul>
+        <li><strong>Squad note:</strong> Training update for key players ahead of the weekend.</li>
+        <li><strong>Tactics talk:</strong> What creators spotted about the next opponent.</li>
+        <li><strong>Fan watch:</strong> Flags & fan plans for matchday.</li>
+      </ul>
+      <p>Keep it friendly, keep it black-and-white — links below. Away the lads!</p>
+    </div>
+    
+  </div> <!-- end card -->
+
+  <!-- (Later) Card 2: Top 5 list will go here -->
+  <!-- (Later) Card 3: Credits chips will go here -->
+
+</section>
+    
       <div class="card">
         <h2 id="minute-magpie" class="mm-title">Minute Magpie — Today’s 60-Second Toon Brief</h2>
         <div class="mm-meta" id="mm-meta">Published: <span id="mm-time">—</span> (SGT)</div>
@@ -780,6 +798,8 @@ body.canvas--black .notice{
           </ul>
           <p>Keep it friendly, keep it black‑and‑white — links below. Away the lads!</p>
         </div>
+
+        
         <div class="mm-actions">
           <button class="btn primary" id="btn-play" aria-label="Play 60 second brief">▶ Play 60s</button>
           <a class="btn primary" href="#newsletter">Subscribe</a>
