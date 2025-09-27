@@ -597,6 +597,34 @@ body.magz .mm-credits span{
   font:700 .85rem/1 Montserrat, system-ui, sans-serif;
 }
 body.magz .mm-credits a:hover{ background:#f0f0f0; border-color:#e2e2e2; }
+
+/* === Minute Magpie 3-up: equal widths & equal heights === */
+body.magz .mm-3up{
+  display:grid;
+  gap:16px;
+  grid-template-columns: repeat(3, minmax(0,1fr)); /* equal columns */
+  align-items: stretch; /* make items same height */
+}
+
+/* Make each card fill the grid track height */
+body.magz .mm-3up > *{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Optional: keep inner content from sticking to edges */
+body.magz .mm-3up > * > *{ /* direct children inside the card */
+  /* no change needed if you already have padding on the card */
+}
+
+/* === Lists: remove dashed separators (or make solid if you prefer) === */
+body.magz .mm-3up li{
+  border-bottom: none;            /* remove dotted lines */
+  /* border-bottom: 1px solid #eee;  <-- use this instead if you want faint solid lines */
+}
+body.magz .mm-3up li:last-child{ border-bottom: none; }
+    
 </style>
 
 <!-- === BEGIN: TOPBAR CSS === -->
