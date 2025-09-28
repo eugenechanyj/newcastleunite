@@ -53,7 +53,7 @@
   /* Section titles */
   .section-title{
     margin:0 0 12px;
-    font: 800 clamp(1.2rem, 3vw, 1.6rem)/1.15 Montserrat, system-ui, sans-serif;
+    font: 800 clamp(1.2rem, vw, 1.6rem)/1.15 Montserrat, system-ui, sans-serif;
     letter-spacing:.2px;
     color:#fff;
     display:flex;align-items:center;gap:10px;
@@ -68,7 +68,7 @@
   }
 
   /* Clamp utilities */
-  .clamp-2,.clamp-3{display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
+  .clamp-2,.clamp-{display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
   .clamp-2{-webkit-line-clamp:2}
   .clamp-3{-webkit-line-clamp:3}
 
@@ -282,6 +282,20 @@ section.container,
   </div>
 </div>
 
+<!-- Card 3: Live Table -->
+<div class="card">
+  <h3 class="section-title" style="color:#0a0a0a">Live Table</h3>
+
+  <!-- FootballWidgets embed -->
+  <div class="tlds_widget"
+       data-widget="table"
+       data-theme="default"
+       data-comp="4"              <!-- Premier League -->
+       data-team="231"            <!-- Newcastle United -->
+       data-accent-color="#00B6F1"></div>
+</div>
+</section>        
+
 <!-- ===== Rail: Club News ===== -->
 <section class="rail container" id="club-news" aria-label="Club News">
   <div class="rail__title">
@@ -462,5 +476,8 @@ section.container,
       });
     }
   </script>
+
+<script type="text/javascript" src="https://www.footballwidgets.com/js/widgets.js" async="async"></script>
+    
 </body>
 </html>
