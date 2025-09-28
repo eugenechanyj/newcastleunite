@@ -127,6 +127,28 @@
     :root{ --rail-card-w:76vw; --rail-card-h:calc(76vw * 9 / 16) }
     .mm-3up{grid-template-columns:1fr}
   }
+
+/* === Normalize section widths/edges === */
+section.container,
+.hero .hero__inner,
+.rail.container,
+#news.container,
+#gear.container,
+#creators.container,
+#newsletter.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  box-sizing: border-box;
+}
+
+/* Make rail title + track line up to the same left edge */
+.rail .rail__title { padding: 0; }
+.rail .rail__track { padding-left: 0; padding-right: 0; }
+
+/* Ensure MM 3-up matches exactly too */
+#news .mm-3up { margin: 0; }
+    
   </style>
 </head>
 <body class="rails">
