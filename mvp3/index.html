@@ -148,6 +148,18 @@ section.container,
 
 /* Ensure MM 3-up matches exactly too */
 #news .mm-3up { margin: 0; }
+
+/* === Normalize "Join the Flock" left edge to match other sections === */
+#newsletter.container{
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);   /* same side padding as rails/news */
+  box-sizing: border-box;
+}
+/* prevent any child from adding odd left margins */
+#newsletter .section-title,
+#newsletter p,
+#newsletter form{ margin-left: 0; }
     
   </style>
 </head>
