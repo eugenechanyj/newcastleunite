@@ -164,6 +164,40 @@ section.container,
 /* Keep the Scoreaxis iframe from collapsing while it loads */
 #live-table-card iframe{ min-height: 280px; }
 #live-table-card { overflow: hidden; } /* avoid any scrollbars in the card */
+
+/* === MM cards: fixed panel height + inner scroll areas === */
+
+/* Set a consistent height for the three cards */
+#news .mm-3up > .card{
+  min-height: 440px;          /* adjust to taste: 400–520px */
+  display: flex;
+  flex-direction: column;     /* keep buttons at bottom */
+}
+
+/* Generic vertical scroll container for content inside a card */
+.mm-scroll{
+  overflow: auto;
+  max-height: 280px;          /* adjust: card height minus header/buttons/banners */
+  padding-right: 6px;         /* breathing room next to scrollbar */
+}
+
+/* If a banner image is present, give a little more room below */
+.card .card-banner + .mm-scroll{
+  max-height: 240px;          /* reduces a bit to account for the banner */
+}
+
+/* LIVE table (Scoreaxis) as a fixed-height, scrollable embed */
+#live-table-card .embed-scroll{
+  height: 320px;              /* visible window into the table */
+  overflow: auto;             /* shows scrollbar inside the card */
+  border-radius: 10px;
+  background: #fff;
+}
+#live-table-card iframe{
+  width: 100%;
+  height: 100% !important;    /* fill the embed window; keep scroll inside iframe */
+  border: none;
+}    
     
   </style>
 </head>
