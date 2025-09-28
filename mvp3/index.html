@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NewcastleUnite — MVP3.0</title>
+  <meta name="theme-color" content="#0B0E11">
+  <style>
+  /* ===========================
+     NewcastleUnite MVP 3.0 Base
+     =========================== */
+
+  /* Brand tokens (NUFC badge tones) */
+  :root{
+    --black:#0B0E11;   /* deep canvas, softer than pure black */
+    --white:#FFFFFF;
+    --blue:#00B6F1;    /* CTA / links */
+    --gold:#F0B83D;    /* accent tags */
+    --grey:#BBBDBF;    /* subtle text, borders */
+    --border:#E6E6E6;
+    --shadow:0 6px 18px rgba(0,0,0,.12);
+    --shadow-lg:0 10px 24px rgba(0,0,0,.16);
+
+    --container:1200px;
+    --gutter:16px;
+
+    --rail-card-w:280px;   /* default rail tile size */
+    --rail-card-h:158px;   /* ~16:9 (280x158) */
+    --banner-h:180px;      /* card banner height for non-rail cards */
+  }
+
+  /* Base canvas */
+  html,body{margin:0;padding:0}
+  body.rails{
+    background:var(--black);
+    color:var(--white);
+    font: 400 16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+  a{color:var(--blue);text-decoration:none}
+  a:hover{filter:brightness(.92)}
+
+  /* Buttons */
+  .btn{display:inline-block;border-radius:12px;border:1px solid var(--border);padding:10px 14px;
+       font:700 .95rem/1 Montserrat, system-ui, sans-serif;cursor:pointer}
+  .btn-primary{background:var(--blue);color:#fff;border-color:transparent}
+  .btn-primary:hover{filter:brightness(.92)}
+  .btn-secondary{background:#fff;color:#0a0a0a}
+  .btn-secondary:hover{background:#f2f2f2}
+
+  /* Utility: container width */
+  .container{max-width:var(--container);margin:0 auto;padding:0 var(--gutter);box-sizing:border-box}
+
+  /* Section titles */
+  .section-title{
+    margin:0 0 12px;
+    font: 800 clamp(1.2rem, 3vw, 1.6rem)/1.15 Montserrat, system-ui, sans-serif;
+    letter-spacing:.2px;
+    color:#fff;
+    display:flex;align-items:center;gap:10px;
+  }
+  .mm-sticker{
+    background:#fff;color:#000;border:1px solid var(--border);
+    border-radius:14px;padding:6px 10px;box-shadow:var(--shadow);font-weight:800
+  }
+  .mm-badge{
+    display:inline-block;background:var(--blue);color:#fff;border-radius:999px;
+    padding:6px 10px;font:800 12px/1.1 Montserrat, system-ui, sans-serif
+  }
+
+  /* Clamp utilities */
+  .clamp-2,.clamp-3{display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
+  .clamp-2{-webkit-line-clamp:2}
+  .clamp-3{-webkit-line-clamp:3}
+
+  /* Hero (Netflix vibe) */
+  .hero{
+    position:relative;min-height:52vh;display:flex;align-items:flex-end;
+    background:#0B0E11 center/cover no-repeat;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,.25))
+  }
+  .hero__inner{position:relative;z-index:1}
+  .hero__inner h1{margin:8px 0 6px;font:900 clamp(1.6rem, 5vw, 3rem)/1.05 Montserrat, system-ui, sans-serif}
+  .hero__inner p{margin:0 0 14px;font:500 1.05rem/1.45 Inter, system-ui, sans-serif;opacity:.95}
+
+  /* Rail (horizontal carousel) */
+  .rail{position:relative;margin:24px 0}
+  .rail__title{display:flex;align-items:center;justify-content:space-between;margin:8px 0 10px}
+  .rail__title h2,.rail__title h3{margin:0;font:800 1.3rem/1.1 Montserrat, system-ui, sans-serif;color:#fff}
+  .rail__track{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;
+               padding-bottom:6px;-webkit-overflow-scrolling:touch}
+  .rail__track::-webkit-scrollbar{display:none}
+  .rail__item{flex:0 0 var(--rail-card-w);scroll-snap-align:start}
+  .rail__card{background:#fff;color:#0a0a0a;border:1px solid var(--border);border-radius:14px;
+              box-shadow:var(--shadow);overflow:hidden;transition:transform .12s ease, box-shadow .12s ease;display:block}
+  .rail__card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+  .rail__img{width:100%;height:var(--rail-card-h);object-fit:cover;display:block;background:#ddd}
+  .rail__meta{padding:10px 12px}
+  .rail__meta h4{margin:0 0 4px;font:800 .98rem/1.15 Montserrat, system-ui, sans-serif;color:#0a0a0a}
+  .rail__meta p{margin:0;font:.92rem/1.25 Inter, system-ui, sans-serif;color:#333}
+
+  /* Rail arrows */
+  .rail__btn{
+    background:rgba(0,0,0,.6);color:#fff;border:0;width:36px;height:36px;border-radius:999px;
+    display:grid;place-items:center;cursor:pointer;position:absolute;top:50%;transform:translateY(-50%)
+  }
+  .rail__btn:hover{background:rgba(0,0,0,.75)}
+  .rail__btn--prev{left:6px}
+  .rail__btn--next{right:6px}
+
+  /* Minute Magpie 3-up (kept for non-rail editorial block) */
+  .mm-3up{display:grid;gap:16px;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .mm-3up > .card{background:#fff;color:#0a0a0a;border:1px solid var(--border);border-radius:14px;
+                  box-shadow:var(--shadow);padding:14px;display:flex;flex-direction:column}
+  .card-banner{display:block;width:100%;height:var(--banner-h);object-fit:cover;background:#ddd;border:0;border-radius:10px;margin:0 0 10px}
+  .mm-actions{margin-top:auto}
+  .mm-credits a{display:inline-block;background:#f7f7f7;color:#0a0a0a;border:1px solid var(--border);
+                border-radius:999px;padding:6px 10px;margin:4px 6px 0 0;font:700 .85rem/1 Montserrat, system-ui, sans-serif}
+
+  /* Responsive */
+  @media (max-width: 900px){
+    :root{ --rail-card-w:240px; --rail-card-h:135px }
+  }
+  @media (max-width: 640px){
+    :root{ --rail-card-w:76vw; --rail-card-h:calc(76vw * 9 / 16) }
+    .mm-3up{grid-template-columns:1fr}
+  }
+  </style>
+</head>
+<body class="rails">
+
+  <!-- Top bar (simple) -->
+  <header class="container" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <img src="/assets/logo-nu.svg" alt="NewcastleUnite" style="height:28px">
+      <strong style="letter-spacing:.3px">NewcastleUnite</strong>
+    </div>
+    <nav style="display:flex;gap:14px;font-weight:700;font-size:.95rem">
+      <a href="#news">News</a>
+      <a href="#creators">Creators</a>
+      <a href="#gear">Gear</a>
+      <a href="#magpie-corner">Magpie Corner</a>
+      <a href="#newsletter" class="btn btn-primary" style="padding:8px 12px">Subscribe</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" style="background-image:url('/assets/hero-graffiti.jpg')">
+    <div class="container hero__inner">
+      <div class="mm-badge">Minute Magpie</div>
+      <h1>Your 60-second Toon Fix</h1>
+      <p class="clamp-2">Fresh updates, creators, and gear — in a bold, modern hub for the Toon Army.</p>
+      <button class="btn btn-primary">▶ Play 60s</button>
+      <a class="btn btn-secondary" href="#newsletter">Learn more</a>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- Rail: Featured Creators -->
+    <section class="rail container" id="creators" aria-label="Featured Creators">
+      <div class="rail__title">
+        <h2 class="section-title"><span class="mm-sticker">Featured</span> Creators</h2>
+        <!-- <a href="#" class="mm-badge">See all</a> -->
+      </div>
+
+      <button class="rail__btn rail__btn--prev" data-target="#rail-creators" aria-label="Previous">‹</button>
+      <button class="rail__btn rail__btn--next" data-target="#rail-creators" aria-label="Next">›</button>
+
+      <div class="rail__track" id="rail-creators">
+        <!-- Repeat items; use your real images later -->
+        <article class="rail__item">
+          <a class="rail__card" href="#">
+            <img class="rail__img" src="/assets/creator-1.jpg" alt="Creator 1">
+            <div class="rail__meta">
+              <h4>NUFC Stats Lab</h4>
+              <p class="clamp-2">Two smart breakdowns weekly.</p>
+            </div>
+          </a>
+        </article>
+
+        <article class="rail__item">
+          <a class="rail__card" href="#">
+            <img class="rail__img" src="/assets/creator-2.jpg" alt="Creator 2">
+            <div class="rail__meta">
+              <h4>Toon Tactics</h4>
+              <p class="clamp-2">Short videos on pressing traps.</p>
+            </div>
+          </a>
+        </article>
+
+        <article class="rail__item">
+          <a class="rail__card" href="#">
+            <img class="rail__img" src="/assets/creator-3.jpg" alt="Creator 3">
+            <div class="rail__meta">
+              <h4>Magpie Diaries</h4>
+              <p class="clamp-2">Travel logs & matchday vibes.</p>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Editorial block: Minute Magpie 3-up (kept as cards for variety) -->
+    <section class="container" id="news" style="margin:28px auto">
+      <h2 class="section-title">
+        <span class="mm-sticker">Minute Magpie</span> Fresh Off the Wall
+      </h2>
+
+      <div class="mm-3up">
+        <!-- Card 1 -->
+        <div class="card">
+          <img class="card-banner" src="/assets/mm-latest.jpg" alt="Minute Magpie latest">
+          <h3 class="section-title" style="color:#0a0a0a">Your 60-second Toon fix</h3>
+          <p class="clamp-3" style="color:#333;margin:0 0 8px">
+            Placeholder copy for today’s brief. Swap with live feed later.
+          </p>
+          <ul style="margin:0 0 10px 16px;color:#333">
+            <li class="clamp-2"><strong>Squad:</strong> Fitness updates ahead of weekend.</li>
+            <li class="clamp-2"><strong>Tactics:</strong> Press triggers vs next opponent.</li>
+            <li class="clamp-2"><strong>Fans:</strong> Flags, travel, matchday energy.</li>
+          </ul>
+          <div class="mm-actions">
+            <button class="btn btn-primary">▶ Play 60s</button>
+            <a class="btn btn-secondary" href="#newsletter">Subscribe</a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+          <img class="card-banner" src="/assets/mm-top5.jpg" alt="Top 5">
+          <h3 class="section-title" style="color:#0a0a0a">Top 5</h3>
+          <ul style="margin:0 0 10px 16px;color:#333">
+            <li class="clamp-2">Story 1 — short, punchy, no fluff.</li>
+            <li class="clamp-2">Story 2 — short, punchy, no fluff.</li>
+            <li class="clamp-2">Story 3 — short, punchy, no fluff.</li>
+            <li class="clamp-2">Story 4 — short, punchy, no fluff.</li>
+            <li class="clamp-2">Story 5 — short, punchy, no fluff.</li>
+          </ul>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card mm-credits">
+          <img class="card-banner" src="/assets/mm-credits.jpg" alt="Sources & Credits">
+          <h3 class="section-title" style="color:#0a0a0a">Sources & Credits</h3>
+          <a href="#" class="mm-badge">BBC</a>
+          <a href="#" class="mm-badge">Sky Sports</a>
+          <a href="#" class="mm-badge">Official NUFC</a>
+          <a href="#" class="mm-badge">Fan Forum</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rail: Gear (affiliate-ready) -->
+    <section class="rail container" id="gear" aria-label="Fan Gear">
+      <div class="rail__title">
+        <h2 class="section-title"><span class="mm-sticker">Gear</span> Picks</h2>
+        <span style="opacity:.8;font-size:.85rem">Some links may earn a small commission</span>
+      </div>
+
+      <button class="rail__btn rail__btn--prev" data-target="#rail-gear" aria-label="Previous">‹</button>
+      <button class="rail__btn rail__btn--next" data-target="#rail-gear" aria-label="Next">›</button>
+
+      <div class="rail__track" id="rail-gear">
+        <article class="rail__item">
+          <a class="rail__card" href="#">
+            <img class="rail__img" src="/assets/gear-1.jpg" alt="Gear 1">
+            <div class="rail__meta">
+              <h4>Home Shirt (Kids)</h4>
+              <p class="clamp-2">Official 24/25 kit.</p>
+            </div>
+          </a>
+        </article>
+        <article class="rail__item">
+          <a class="rail__card" href="#">
+            <img class="rail__img" src="/assets/gear-2.jpg" alt="Gear 2">
+            <div class="rail__meta">
+              <h4>Scarf</h4>
+              <p class="clamp-2">Matchday essential.</p>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section class="container" id="newsletter" style="margin:28px auto;padding:16px 0 32px">
+      <h2 class="section-title"><span class="mm-sticker">Join</span> the Flock</h2>
+      <p class="clamp-2" style="opacity:.9">Get a 60-second Toon briefing and creator picks in your inbox.</p>
+      <form onsubmit="return false" style="margin-top:8px">
+        <input type="email" placeholder="you@example.com"
+               style="padding:12px 14px;border-radius:10px;border:1px solid var(--border);width:min(420px,90%);margin-right:8px">
+        <button class="btn btn-primary" type="submit">Subscribe</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="container" style="opacity:.8;padding:24px 0 40px;font-size:.9rem">
+    <div>© NewcastleUnite. Unofficial fan site. Not affiliated with NUFC.</div>
+  </footer>
+
+  <!-- Minimal JS for rail arrows + smooth in-page scroll -->
+  <script>
+    // Rail arrow scrolling
+    function railScroll(track, dir=1){
+      const w = track.getBoundingClientRect().width;
+      track.scrollBy({ left: dir * (w * 0.9), behavior: 'smooth' });
+    }
+    document.querySelectorAll('.rail__btn').forEach(btn=>{
+      const targetSel = btn.getAttribute('data-target');
+      const dir = btn.classList.contains('rail__btn--next') ? 1 : -1;
+      const track = document.querySelector(targetSel);
+      if(!track) return;
+      btn.addEventListener('click', ()=>railScroll(track, dir));
+    });
+
+    // Smooth scroll for nav (respects reduced motion)
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!prefersReduced){
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', e=>{
+          const id=a.getAttribute('href');
+          const el=document.querySelector(id);
+          if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+        });
+      });
+    }
+  </script>
+</body>
+</html>
