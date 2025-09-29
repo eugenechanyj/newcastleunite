@@ -188,8 +188,43 @@ section.container,
 
 /* (Old #live-table-card-specific rules removed; now unified via #live .embed-scroll) */
  
+/* Header layout */
+.site-header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 16px;
+}
+.brand{ display:flex; align-items:center; gap:10px; flex-wrap:wrap }
+.brand strong{ letter-spacing:.3px; font-size:1.05rem }
+.brand .tagline{ opacity:.85 }
+
+/* Desktop nav */
+.site-nav{ display:flex; gap:14px; align-items:center; font-weight:700; font-size:.95rem }
+
+/* Burger button: hidden on desktop */
+.nav-toggle{
+  display:none; background:transparent; color:#fff;
+  border:1px solid var(--border); border-radius:10px; padding:6px 10px;
+  font-size:1.1rem; cursor:pointer
+}
+
+/* Mobile behavior */
+@media (max-width: 820px){
+  .site-nav{
+    position:absolute; top:58px; right:16px; left:16px;
+    display:none; flex-direction:column; gap:10px; padding:12px;
+    background:#111418; border:1px solid #22272d; border-radius:12px; box-shadow:var(--shadow-lg);
+    z-index:50;
+  }
+  .site-nav a{ display:block }
+  .site-nav.open{ display:flex }
+  .nav-toggle{ display:inline-block }
+
+  /* smoother anchor jump with sticky header on mobile */
+  :target{ scroll-margin-top: 72px; }
+}
     
   </style>
+  
 </head>
 <body class="rails">
 
