@@ -205,18 +205,21 @@ section.container,
 
   <!-- Top bar (simple) -->
   <header class="container" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px">
-    <div style="display:flex;align-items:center;gap:10px">
-      <img src="/assets/logo-nu.svg" alt="NewcastleUnite" style="height:28px">
-      <strong style="letter-spacing:.3px">NewcastleUnite</strong>
-    </div>
-    <nav style="display:flex;gap:14px;font-weight:700;font-size:.95rem">
-      <a href="#news">News</a>
-      <a href="#creators">Creators</a>
-      <a href="#gear">Gear</a>
-      <a href="#magpie-corner">Magpie Corner</a>
-      <a href="#newsletter" class="btn btn-primary" style="padding:8px 12px">Subscribe</a>
-    </nav>
-  </header>
+  <!-- Left: site name + tagline (no icon) -->
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+    <strong style="letter-spacing:.3px;font-size:1.05rem">NewcastleUnite</strong>
+    <span style="opacity:.85">: One Toon, One Tune</span>
+  </div>
+
+  <!-- Right: refreshed quick links -->
+  <nav style="display:flex;gap:14px;align-items:center;font-weight:700;font-size:.95rem;flex-wrap:wrap">
+    <a href="#creators">Creators</a>
+    <a href="#news">Minute Magpie</a>
+    <a href="#club-news">News</a>
+    <a href="#gear">Gear</a>
+    <a href="#newsletter" class="btn btn-primary" style="padding:8px 12px">Subscribe</a>
+  </nav>
+</header>
 
   <!-- Hero -->
   <section class="hero" style="background-image:url('/assets/hero-graffiti.jpg')">
