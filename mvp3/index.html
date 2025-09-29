@@ -240,6 +240,20 @@ section.container,
   #live .embed-scroll{ height: 180px; }
 }
 #live h3.section-title{ white-space: normal }
+
+/* Keep short labels on one line (nav + white badges) */
+.site-nav a,
+.btn,
+.mm-sticker{
+  white-space: nowrap;
+}
+
+/* Scale badge a touch on small screens so words never break */
+@media (max-width: 640px){
+  .mm-sticker{ font-size: .9rem; padding: 5px 10px; }
+  /* optional: tighten nav link spacing inside the mobile dropdown */
+  .site-nav a{ line-height: 1.2; }
+}
     
   </style>
   
