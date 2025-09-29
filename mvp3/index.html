@@ -222,6 +222,24 @@ section.container,
   /* smoother anchor jump with sticky header on mobile */
   :target{ scroll-margin-top: 72px; }
 }
+
+/* Hero mobile fit */
+@media (max-width: 640px){
+  .hero{ min-height: 40vh; background-position:center top; }
+  .hero__inner h1{ font-size: clamp(1.4rem, 6vw, 2.1rem); }
+  .hero__inner p{ font-size: .98rem; }
+}
+
+/* Long titles never overflow */
+.section-title{ word-wrap: break-word; overflow-wrap: anywhere; }
+
+/* Live row: mobile sizes */
+@media (max-width: 640px){
+  #live .section-title{ font-size: 1.05rem; }
+  #live .mm-3up > .card{ min-height: 260px; }
+  #live .embed-scroll{ height: 180px; }
+}
+#live h3.section-title{ white-space: normal }
     
   </style>
   
