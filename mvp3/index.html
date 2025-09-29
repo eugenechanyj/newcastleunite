@@ -132,9 +132,10 @@
 section.container,
 .hero .hero__inner,
 .rail.container,
-#news.container,
-#gear.container,
 #creators.container,
+#gear.container,
+#club-news.container,
+#live.container,
 #newsletter.container {
   max-width: var(--container);
   margin: 0 auto;
@@ -146,58 +147,47 @@ section.container,
 .rail .rail__title { padding: 0; }
 .rail .rail__track { padding-left: 0; padding-right: 0; }
 
-/* Ensure MM 3-up matches exactly too */
-#news .mm-3up { margin: 0; }
+/* Ensure 3-up grids match edges too */
+#live .mm-3up { margin: 0; }
 
 /* === Normalize "Join the Flock" left edge to match other sections === */
-#newsletter.container{
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 var(--gutter);   /* same side padding as rails/news */
-  box-sizing: border-box;
-}
-/* prevent any child from adding odd left margins */
 #newsletter .section-title,
 #newsletter p,
-#newsletter form{ margin-left: 0; }
+#newsletter form { margin-left: 0; }
 
-/* Keep the Scoreaxis iframe from collapsing while it loads */
-#live-table-card iframe{ min-height: 280px; }
-#live-table-card { overflow: hidden; } /* avoid any scrollbars in the card */
+/* (Old #news styles removed) */
 
-/* === MM cards: reduced height + scroll areas === */
-
-/* Shrink cards to 2/3 the previous height */
-#news .mm-3up > .card{
-  min-height: 290px;          /* was 440px */
-  display: flex;
-  flex-direction: column;
-}
-
-/* Generic scroll area for text parts */
+/* === Generic scroll areas for text inside cards === */
 .mm-scroll{
   overflow: auto;
-  max-height: 160px;          /* shrink proportionally */
+  max-height: 160px;         /* tune to taste */
   padding-right: 6px;
 }
-
 /* If a banner image is present, reduce max-height a bit */
-.card .card-banner + .mm-scroll{
-  max-height: 140px;
+.card .card-banner + .mm-scroll{ max-height: 140px; }
+
+/* === LIVE row: equal card height + scrollable widgets === */
+#live .mm-3up > .card{
+  min-height: 290px;         /* your current “2/3 height” */
+  display: flex;
+  flex-direction: column;    /* keeps actions/credits at bottom */
 }
 
-/* LIVE table fixed window (scroll inside) */
-#live-table-card .embed-scroll{
-  height: 200px;              /* was 320px; now 2/3 */
+/* Fixed-height windows for iframes (Live Scores / PL Table / CL Table) */
+#live .embed-scroll{
+  height: 200px;             /* same window height for all 3 boxes */
   overflow: auto;
   border-radius: 10px;
   background: #fff;
 }
-#live-table-card iframe{
+#live iframe{
   width: 100%;
-  height: 100% !important;
+  height: 100% !important;   /* fill the window; scroll inside */
   border: none;
-}   
+}
+
+/* (Old #live-table-card-specific rules removed; now unified via #live .embed-scroll) */
+ 
     
   </style>
 </head>
@@ -463,74 +453,60 @@ section.container,
 </section>
 <!-- ===== /Rail: Gear ===== -->
 
-<!-- ===== LIVE: Scores • Next Match • Table ===== -->
+<!-- ===== LIVE: Scores / Premier League Table / Champions League Table ===== -->
 <section class="container" id="live" style="margin:28px auto">
   <h2 class="section-title">
-    <span class="mm-sticker">Live</span> Scores • Next Matches • Tables
+    <span class="mm-sticker">Live</span> Scores • Premier League • Champions League
   </h2>
 
   <div class="mm-3up">
-    <!-- Card A: Next Match (Scoreaxis) -->
-    <div class="card" id="live-next-match">
-      <h3 class="section-title" style="color:#0a0a0a">Next Match</h3>
+
+    <!-- Box 1 — Live Scores -->
+    <div class="card" id="live-scores">
+      <h3 class="section-title" style="color:#0a0a0a">Live Scores</h3>
       <div class="embed-scroll">
         <iframe
-          title="Next match widget (Scoreaxis)"
-          src="https://www.scoreaxis.com/widget/live-match/19427632?eventsTab=1&font=1&fontSize=-1&bodyBackground=%23ffffff&textColor=%23000000"
+          title="Live Scores Widget"
+          src="https://www.scoreaxis.com/widget/live-match/19568585?eventsTab=1&font=1&fontSize=-1&bodyBackground=%23ffffff&textColor=%23000000"
           style="width:100%; height:100%; border:none;"></iframe>
       </div>
       <div style="font-size:12px;font-family:Arial,sans-serif;text-align:left;color:#666;margin-top:6px;">
-        Source: <a target="_blank" href="https://www.scoreaxis.com/manchester-united-vs-newcastle-united-live/vLdfiB/">Scoreaxis</a>
+        <a target="_blank" href="https://www.scoreaxis.com/union-saint-gilloise-vs-newcastle-united-live/nupwsr/">Union Saint-Gilloise - Newcastle United Live Score</a>
       </div>
     </div>
 
-    <!-- Card B: Live Scores (placeholder for now; we can swap to a Scoreaxis widget) -->
-    <div class="card" id="live-scores">
-      <h3 class="section-title" style="color:#0a0a0a">Live Scores</h3>
-      <!-- Placeholder table until we add your Scoreaxis livescores embed -->
-      <div class="mm-scroll">
-        <table style="width:100%; border-collapse:collapse; min-width:520px; color:#0a0a0a">
-          <thead style="background:#f7f7f7">
-            <tr>
-              <th style="text-align:left;padding:8px;border-bottom:1px solid var(--border)">Time</th>
-              <th style="text-align:left;padding:8px;border-bottom:1px solid var(--border)">Home</th>
-              <th style="text-align:center;padding:8px;border-bottom:1px solid var(--border)">Score</th>
-              <th style="text-align:left;padding:8px;border-bottom:1px solid var(--border)">Away</th>
-              <th style="text-align:left;padding:8px;border-bottom:1px solid var(--border)">Comp</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="padding:8px;border-bottom:1px solid var(--border)">—</td>
-              <td style="padding:8px;border-bottom:1px solid var(--border)">—</td>
-              <td style="text-align:center;padding:8px;border-bottom:1px solid var(--border)">—</td>
-              <td style="padding:8px;border-bottom:1px solid var(--border)">—</td>
-              <td style="padding:8px;border-bottom:1px solid var(--border)">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div style="font-size:12px;font-family:Arial,sans-serif;text-align:left;color:#666;margin-top:6px;">
-        We can embed Scoreaxis Live Scores here (send me the widget code when ready).
-      </div>
-    </div>
-
-    <!-- Card C: League Table (Scoreaxis) -->
-    <div class="card" id="live-table-card">
+    <!-- Box 2 — Premier League Table -->
+    <div class="card" id="live-pl-table">
       <h3 class="section-title" style="color:#0a0a0a">Premier League Table</h3>
       <div class="embed-scroll">
         <iframe
+          title="Premier League Table Widget"
           src="https://www.scoreaxis.com/widget/standings-widget/8?teamsLogo=1&header=1&borderColor=%23ffffff&fontSize=-2"
-          title="Premier League table (Scoreaxis)"
           style="width:100%; height:100%; border:none;"></iframe>
       </div>
-      <div style="font-size:12px;font-family:Arial, sans-serif;text-align:left;color:#666;margin-top:6px;">
+      <div style="font-size:12px;font-family:Arial,sans-serif;text-align:left;color:#666;margin-top:6px;">
         Data provided by <a target="_blank" href="https://www.scoreaxis.com/">Scoreaxis</a>
       </div>
     </div>
+
+    <!-- Box 3 — Champions League Table -->
+    <div class="card" id="live-cl-table">
+      <h3 class="section-title" style="color:#0a0a0a">Champions League Table</h3>
+      <div class="embed-scroll">
+        <iframe
+          title="Champions League Table Widget"
+          src="https://www.scoreaxis.com/widget/standings-widget/5?teamsLogo=1&header=1&borderColor=%23ffffff&fontSize=-2"
+          style="width:100%; height:100%; border:none;"></iframe>
+      </div>
+      <div style="font-size:12px;font-family:Arial,sans-serif;text-align:left;color:#666;margin-top:6px;">
+        Data provided by <a target="_blank" href="https://www.scoreaxis.com/">Scoreaxis</a>
+      </div>
+    </div>
+
   </div>
 </section>
 <!-- ===== /LIVE ===== -->
+
     
     <!-- Newsletter CTA -->
     <section class="container" id="newsletter" style="margin:28px auto;padding:16px 0 32px">
