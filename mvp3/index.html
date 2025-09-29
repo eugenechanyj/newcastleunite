@@ -462,6 +462,75 @@ section.container,
   </div>
 </section>
 <!-- ===== /Rail: Gear ===== -->
+
+<!-- ===== LIVE: Scores • Next Match • Table ===== -->
+<section class="container" id="live" style="margin:28px auto">
+  <h2 class="section-title">
+    <span class="mm-sticker">Live</span> Scores • Next Matches • Tables
+  </h2>
+
+  <div class="mm-3up">
+    <!-- Card A: Next Match (Scoreaxis) -->
+    <div class="card" id="live-next-match">
+      <h3 class="section-title" style="color:#0a0a0a">Next Match</h3>
+      <div class="embed-scroll">
+        <iframe
+          title="Next match widget (Scoreaxis)"
+          src="https://www.scoreaxis.com/widget/live-match/19427632?eventsTab=1&font=1&fontSize=-1&bodyBackground=%23ffffff&textColor=%23000000"
+          style="width:100%; height:100%; border:none;"></iframe>
+      </div>
+      <div style="font-size:12px;font-family:Arial,sans-serif;text-align:left;color:#666;margin-top:6px;">
+        Source: <a target="_blank" href="https://www.scoreaxis.com/manchester-united-vs-newcastle-united-live/vLdfiB/">Scoreaxis</a>
+      </div>
+    </div>
+
+    <!-- Card B: Live Scores (placeholder for now; we can swap to a Scoreaxis widget) -->
+    <div class="card" id="live-scores">
+      <h3 class="section-title" style="color:#0a0a0a">Live Scores</h3>
+      <!-- Placeholder table until we add your Scoreaxis livescores embed -->
+      <div class="mm-scroll">
+        <table style="width:100%; border-collapse:collapse; min-width:520px; color:#0a0a0a">
+          <thead style="background:#f7f7f7">
+            <tr>
+              <th style="text-align:left;padding:8px;border-bottom:1px solid var(--border)">Time</th>
+              <th style="text-align:left;padding:8px;border-bottom:1px solid var(--border)">Home</th>
+              <th style="text-align:center;padding:8px;border-bottom:1px solid var(--border)">Score</th>
+              <th style="text-align:left;padding:8px;border-bottom:1px solid var(--border)">Away</th>
+              <th style="text-align:left;padding:8px;border-bottom:1px solid var(--border)">Comp</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:8px;border-bottom:1px solid var(--border)">—</td>
+              <td style="padding:8px;border-bottom:1px solid var(--border)">—</td>
+              <td style="text-align:center;padding:8px;border-bottom:1px solid var(--border)">—</td>
+              <td style="padding:8px;border-bottom:1px solid var(--border)">—</td>
+              <td style="padding:8px;border-bottom:1px solid var(--border)">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="font-size:12px;font-family:Arial,sans-serif;text-align:left;color:#666;margin-top:6px;">
+        We can embed Scoreaxis Live Scores here (send me the widget code when ready).
+      </div>
+    </div>
+
+    <!-- Card C: League Table (Scoreaxis) -->
+    <div class="card" id="live-table-card">
+      <h3 class="section-title" style="color:#0a0a0a">Premier League Table</h3>
+      <div class="embed-scroll">
+        <iframe
+          src="https://www.scoreaxis.com/widget/standings-widget/8?teamsLogo=1&header=1&borderColor=%23ffffff&fontSize=-2"
+          title="Premier League table (Scoreaxis)"
+          style="width:100%; height:100%; border:none;"></iframe>
+      </div>
+      <div style="font-size:12px;font-family:Arial, sans-serif;text-align:left;color:#666;margin-top:6px;">
+        Data provided by <a target="_blank" href="https://www.scoreaxis.com/">Scoreaxis</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ===== /LIVE ===== -->
     
     <!-- Newsletter CTA -->
     <section class="container" id="newsletter" style="margin:28px auto;padding:16px 0 32px">
