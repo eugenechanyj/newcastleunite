@@ -194,28 +194,31 @@ section.container,
 <body class="rails">
 
   <!-- Top bar (simple) -->
-  <header class="container" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px">
-  <!-- Left: site name + tagline (no icon) -->
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-    <strong style="letter-spacing:.3px;font-size:1.05rem">NewcastleUnite</strong>
-    <span style="opacity:.85">: One Toon, One Tune</span>
+  <header class="container site-header">
+  <!-- Left: name + tagline -->
+  <div class="brand">
+    <strong>NewcastleUnite</strong>
+    <span class="tagline">: One Toon, One Tune</span>
   </div>
 
-  <!-- Right: refreshed quick links -->
-  <nav style="display:flex;gap:14px;align-items:center;font-weight:700;font-size:.95rem;flex-wrap:wrap">
+  <!-- Right: primary nav -->
+  <nav class="site-nav" id="site-nav">
     <a href="#creators">Creators</a>
-    <a href="#news">Minute Magpie</a>
+    <a href="#live">Live</a>
     <a href="#club-news">News</a>
     <a href="#gear">Gear</a>
     <a href="#newsletter" class="btn btn-primary" style="padding:8px 12px">Subscribe</a>
   </nav>
+
+  <!-- Hamburger (mobile) -->
+  <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">☰</button>
 </header>
 
   <!-- Hero -->
   <section class="hero" style="background-image:url('/assets/newcastleunitegraffitwallstretched.jpg')">
     <div class="container hero__inner">
       <h1>Got a minute?</h1>
-      <p class="clamp-2">Here's uour daily 60-second podcast with NUFC legends!</p>
+      <p class="clamp-2">Here's your daily 60-second podcast with NUFC legends!</p>
       <button class="btn btn-primary">▶ Play </button>
       <a class="btn btn-secondary" href="#newsletter">Who's Minute-Magpie?</a>
     </div>
