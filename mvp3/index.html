@@ -254,6 +254,47 @@ section.container,
   /* optional: tighten nav link spacing inside the mobile dropdown */
   .site-nav a{ line-height: 1.2; }
 }
+
+/* Join the Flock layout */
+.join-flock{
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+  padding:20px; background:var(--color-white); color:var(--card-fg);
+  border-radius:14px; box-shadow:var(--card-shadow);
+  flex-wrap:wrap;
+}
+
+/* Mascot and speech bubble */
+.join-flock-graphic{ position:relative; display:inline-block; }
+.join-mascot{ width:120px; height:auto; }
+.speech-bubble{
+  position:absolute; top:-10px; left:100%;
+  background:#fff; color:#000; border:1px solid var(--card-brd);
+  border-radius:12px; padding:6px 10px; font-weight:700; box-shadow:0 4px 10px rgba(0,0,0,.12);
+  white-space:nowrap;
+}
+.speech-bubble:after{
+  content:""; position:absolute; left:-8px; top:50%; transform:translateY(-50%) rotate(45deg);
+  width:12px; height:12px; background:inherit; border-left:inherit; border-top:inherit;
+}
+
+/* Email form */
+#newsletter-form{
+  display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+}
+#newsletter-form input[type="email"]{
+  padding:10px; border:1px solid var(--card-brd); border-radius:8px;
+  flex:1; min-width:220px; font-size:.95rem;
+}
+#newsletter-form button{
+  padding:10px 14px; border:none; border-radius:8px;
+  font-weight:700; font-size:.95rem;
+}
+
+/* Mobile adjustments */
+@media (max-width:640px){
+  .join-flock{ flex-direction:column; text-align:center; }
+  .speech-bubble{ position:static; display:inline-block; margin-top:8px; }
+}
     
   </style>
   
@@ -576,15 +617,26 @@ section.container,
 
     
     <!-- Newsletter CTA -->
-    <section class="container" id="newsletter" style="margin:28px auto;padding:16px 0 32px">
-      <h2 class="section-title"><span class="mm-sticker">Join</span> the Flock</h2>
-      <p class="clamp-2" style="opacity:.9">Get a 60-second Toon briefing and creator picks in your inbox.</p>
-      <form onsubmit="return false" style="margin-top:8px">
-        <input type="email" placeholder="you@example.com"
-               style="padding:12px 14px;border-radius:10px;border:1px solid var(--border);width:min(420px,90%);margin-right:8px">
-        <button class="btn btn-primary" type="submit">Subscribe</button>
-      </form>
-    </section>
+    <section class="container" id="newsletter">
+  <h2 class="section-title">
+    <span class="mm-sticker">Join the Flock</span>
+  </h2>
+
+  <div class="join-flock">
+    <!-- Left: mascot with speech bubble -->
+    <div class="join-flock-graphic">
+      <img src="/assets/minutemagpiecaptransparent.png" alt="Minute Magpie mascot" class="join-mascot">
+      <div class="speech-bubble">Join us!</div>
+    </div>
+
+    <!-- Right: email signup form -->
+    <form id="newsletter-form">
+      <label for="email" class="visually-hidden">Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email…" required>
+      <button type="submit" class="btn btn-primary">Join Us</button>
+    </form>
+  </div>
+</section>
 
   </main>
 
