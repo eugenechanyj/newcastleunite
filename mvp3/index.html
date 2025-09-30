@@ -540,6 +540,69 @@ section.container,
 @media (max-width: 640px){
   #live .mm-3up > .card{ height: 220px; }
 }
+
+/* Base end-cta (already used above) */
+.end-cta{
+  position: relative;
+  display: grid;
+  align-items: center;
+  background: #0B0E11 center/cover no-repeat;
+  margin: 28px 0 0;
+}
+
+/* Use the same darker veil as the top hero (readable text on any image) */
+.end-cta__veil{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.45) 40%, rgba(0,0,0,.45) 60%, rgba(0,0,0,.55) 100%);
+}
+
+/* Inner max-width container */
+.end-cta__inner{
+  position: relative; z-index: 1;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Centered variant for footer banner */
+.end-cta__inner--center{
+  grid-template-columns: 1fr;
+  justify-items: center;            /* center title + form */
+  text-align: center;
+}
+
+/* Form styling (shared) */
+.end-cta__form{
+  display: inline-flex; gap: 8px; align-items:center; flex-wrap: nowrap;
+}
+.end-cta__form input[type="email"]{
+  background:#fff; color:#0a0a0a;
+  border:1px solid var(--card-brd, #E6E6E6); border-radius:10px;
+  padding:10px 12px; font-size:.95rem; min-width: 260px;
+}
+.end-cta__hint{ display:block; margin-top:6px; opacity:.9 }
+
+/* Footer mini-hero sizing (~33% smaller than top hero) */
+.end-cta--footer{ min-height: 32vh; }        /* if top hero ~48vh, this is ~33% smaller */
+
+/* Mobile tweaks */
+@media (max-width: 640px){
+  .end-cta--footer{ min-height: 25vh; }      /* smaller on phones */
+  .end-cta__form.end-cta__form--center{ flex-wrap: wrap; justify-content: center; }
+  .end-cta__form input[type="email"]{ width:100%; min-width:0; padding:9px 10px; font-size:.92rem }
+  .end-cta__hint{ font-size:.85rem }
+}
+
+/* Accessibility helper */
+.visually-hidden{
+  position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px);
+  white-space:nowrap; border:0; padding:0; margin:-1px;
+}
     
 </style>
   
@@ -860,27 +923,23 @@ section.container,
 </section>
 <!-- ===== /LIVE ===== -->
     
-<!-- ===== Bottom Banner CTA ===== -->
-<section class="container" id="newsletter" style="margin:40px auto">
-  <div class="card" style="position:relative; overflow:hidden; border:none; box-shadow:none; padding:0">
-    <!-- Background banner -->
-    <img src="/assets/graffitiwallbottom1.jpg" alt="Join Us Banner" style="width:100%; height:auto; display:block; border-radius:14px">
+<!-- ===== Bottom Mini-Hero (Join Us) ===== -->
+<section id="newsletter" class="end-cta end-cta--footer" style="background-image:url('/assets/graffitwallbottom1.jpg')">
+  <div class="end-cta__veil"></div>
 
-    <!-- Overlay: email input -->
-    <div style="position:absolute; top:50%; right:40px; transform:translateY(-50%);
-                background:rgba(0,0,0,0.55); padding:14px 18px; border-radius:10px; max-width:280px;">
-      <h2 class="section-title" style="color:#fff; font-size:1.4rem; margin:0 0 10px">Join Us</h2>
-      <form id="newsletter-form" onsubmit="return false" style="display:flex; flex-direction:column; gap:10px">
-        <input type="email" name="email" placeholder="Enter your email…" required
-               style="padding:10px; border:1px solid #ccc; border-radius:6px; font-size:.95rem;">
-        <!-- no big blue button; submit stays invisible for accessibility -->
-        <button type="submit" class="visually-hidden">Submit</button>
-        <small style="color:#eee; font-size:.8rem">Press Enter to join</small>
-      </form>
-    </div>
+  <div class="end-cta__inner end-cta__inner--center">
+    <h2 class="section-title" style="margin:0 0 10px">Join Us</h2>
+
+    <form id="newsletter-form" class="end-cta__form end-cta__form--center" onsubmit="return false">
+      <label for="email" class="visually-hidden">Email address</label>
+      <input type="email" id="email" name="email" placeholder="your@email.com" required aria-label="Email address">
+      <!-- no extra button; Enter submits -->
+      <button type="submit" class="visually-hidden">Join</button>
+      <small class="end-cta__hint">Press Enter to join</small>
+    </form>
   </div>
 </section>
-<!-- ===== /Bottom Banner CTA ===== -->
+<!-- ===== /Bottom Mini-Hero ===== -->
 
   </main>
 
