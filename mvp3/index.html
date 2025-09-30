@@ -385,6 +385,32 @@ section.container,
   }
 }
 
+/* === Mobile Super-Compact Pass (phones ≤640px) === */
+@media (max-width:640px){
+
+  html{ font-size: 13.5px; }    /* down from 15px */
+  body{ line-height: 1.4; }
+
+  /* Headings */
+  .section-title{ font-size: clamp(1rem, 3.8vw, 1.15rem); }
+
+  /* Cards smaller */
+  .card{ border-radius:10px; }
+  .card .card-banner{ height: 130px; }
+  .rail__item{ min-width: 58vw; }   /* was 64vw */
+  .rail__meta h4{ font-size:.9rem; }
+  .rail__meta p{ font-size:.85rem; }
+
+  /* Buttons */
+  .btn{ padding:7px 9px; font-size:.85rem; border-radius:8px; }
+
+  /* Hero + End banner */
+  .hero{ min-height: 34vh; }
+  .end-cta{ min-height: 22vh; }
+  .end-cta__form input[type="email"]{ font-size:.85rem; padding:8px 9px; }
+  .end-cta__form .btn{ font-size:.85rem; padding:8px 9px; }
+}
+    
 </style>
   
 </head>
