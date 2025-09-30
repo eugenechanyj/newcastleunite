@@ -255,48 +255,50 @@ section.container,
   .site-nav a{ line-height: 1.2; }
 }
 
-/* Join the Flock layout */
-.join-flock{
-  display:flex; align-items:center; justify-content:space-between; gap:24px;
-  padding:20px; background:var(--color-white); color:var(--card-fg);
-  border-radius:14px; box-shadow:var(--card-shadow);
-  flex-wrap:wrap;
+/* === Join the Flock (minimal footer style) === */
+.join-flock.join-flock--minimal{
+  display:flex; align-items:center; gap:20px;
+  justify-content:center; flex-wrap:wrap;
+  padding:28px 20px;
+  background:transparent; color:var(--color-white);
+  text-align:center;
 }
 
-/* Mascot and speech bubble */
+/* Mascot + splash */
 .join-flock-graphic{ position:relative; display:inline-block; }
-.join-mascot{ width:120px; height:auto; }
+.join-mascot{ width:120px; height:auto; position:relative; z-index:2; }
+.white-splash{
+  position:absolute; top:10px; left:10px; right:10px; bottom:10px;
+  background:#fff; opacity:.9; border-radius:50%;
+  z-index:1;
+}
+
+/* Organic speech bubble (DIV, not SVG) */
 .speech-bubble{
   position:absolute; top:-10px; left:100%;
-  background:#fff; color:#000; border:1px solid var(--card-brd);
-  border-radius:12px; padding:6px 10px; font-weight:700; box-shadow:0 4px 10px rgba(0,0,0,.12);
+  background:#fff; color:#000;
+  border-radius:16px; padding:10px 14px;
+  font-weight:700; box-shadow:0 4px 10px rgba(0,0,0,.15);
   white-space:nowrap;
 }
 .speech-bubble:after{
-  content:""; position:absolute; left:-8px; top:50%; transform:translateY(-50%) rotate(45deg);
-  width:12px; height:12px; background:inherit; border-left:inherit; border-top:inherit;
+  content:""; position:absolute; left:-8px; top:50%;
+  transform:translateY(-50%) rotate(45deg);
+  width:16px; height:16px; background:#fff;
 }
 
 /* Email form */
-#newsletter-form{
-  display:flex; flex-wrap:wrap; gap:8px; align-items:center;
-}
-#newsletter-form input[type="email"]{
-  padding:10px; border:1px solid var(--card-brd); border-radius:8px;
-  flex:1; min-width:220px; font-size:.95rem;
-}
-#newsletter-form button{
-  padding:10px 14px; border:none; border-radius:8px;
-  font-weight:700; font-size:.95rem;
-}
+#newsletter-form{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin-top:16px; }
+#newsletter-form input[type="email"]{ padding:10px; border:1px solid var(--card-brd); border-radius:8px; flex:1; min-width:220px; font-size:.95rem; }
+#newsletter-form button{ padding:10px 14px; border:none; border-radius:8px; font-weight:700; font-size:.95rem; }
 
 /* Mobile adjustments */
 @media (max-width:640px){
-  .join-flock{ flex-direction:column; text-align:center; }
+  .join-flock{ flex-direction:column; }
   .speech-bubble{ position:static; display:inline-block; margin-top:8px; }
 }
-    
-  </style>
+
+</style>
   
 </head>
 <body class="rails">
@@ -617,23 +619,29 @@ section.container,
 
     
     <!-- Newsletter CTA -->
-    <section class="container" id="newsletter">
-  <h2 class="section-title">
-    <span class="mm-sticker">Join the Flock</span>
-  </h2>
+<section class="container" id="newsletter">
+  <h2 class="section-title"><span class="mm-sticker">Join the Flock</span></h2>
 
-  <div class="join-flock">
-    <!-- Left: mascot with speech bubble -->
+  <div class="join-flock join-flock--minimal">
+    <!-- Left: mascot with organic bubble + white splash behind -->
     <div class="join-flock-graphic">
-      <img src="/assets/minutemagpiecaptransparent.png" alt="Minute Magpie mascot" class="join-mascot">
+      <!-- soft white splash behind mascot -->
+      <div class="white-splash"></div>
+
+      <!-- mascot -->
+      <img src="/assets/minute-magpie.png" alt="Minute Magpie mascot" class="join-mascot">
+
+      <!-- CSS-driven speech bubble (matches your CSS) -->
       <div class="speech-bubble">Join us!</div>
     </div>
 
-    <!-- Right: email signup form -->
-    <form id="newsletter-form">
+    <!-- Right: email input only (no big blue button) -->
+    <form id="newsletter-form" onsubmit="return false" class="join-form">
       <label for="email" class="visually-hidden">Email</label>
       <input type="email" id="email" name="email" placeholder="Enter your email…" required>
-      <button type="submit" class="btn btn-primary">Join Us</button>
+      <!-- keep a submit button for accessibility, but visually hide it -->
+      <button type="submit" class="visually-hidden">Join</button>
+      <small class="form-hint">Press Enter to join</small>
     </form>
   </div>
 </section>
