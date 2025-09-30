@@ -438,6 +438,27 @@ section.container,
   .card{ border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,.12); }
   .card .card-banner{ height: 130px; }              /* hero-style images inside cards */
 }
+
+/* === Mobile box widths & heights (phones ≤640px) === */
+@media (max-width:640px){
+
+  /* Horizontal rails (Creators, Club News, Gear) */
+  .rail__item{
+    min-width: 44vw;     /* was 64vw → now 44vw (narrower) */
+  }
+
+  /* Creator cards (banner images smaller too) */
+  body.cards-modern .creator img{ height: 110px; }
+  body.cards-modern .creator h4{ font-size:.88rem; }
+  body.cards-modern .creator p{ font-size:.8rem; }
+
+  /* Club news / gear etc. inside rails */
+  .rail__img{ height: 110px; }
+
+  /* LIVE row */
+  #live .mm-3up > .card{ min-height: 180px; }   /* shorter */
+  #live .embed-scroll{ height: 120px; }
+}
     
 </style>
   
