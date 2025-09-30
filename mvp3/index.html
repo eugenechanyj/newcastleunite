@@ -410,6 +410,34 @@ section.container,
   .end-cta__form input[type="email"]{ font-size:.85rem; padding:8px 9px; }
   .end-cta__form .btn{ font-size:.85rem; padding:8px 9px; }
 }
+
+/* === Mobile: ~25% smaller card footprints (phones ≤640px) === */
+@media (max-width:640px){
+
+  /* Horizontal rails (Creators / Club News / Gear) */
+  .rail__item{ min-width: 48vw; }                 /* was ~64vw → ~25% narrower */
+  .rail__img{ height: 112px; }                     /* was ~150px → ~25% shorter */
+  .rail__track{ gap: 8px; }
+
+  /* Featured Creators banner image inside each card */
+  body.cards-modern .creator img{ height: 120px; } /* was 160px → ~25% shorter */
+  body.cards-modern .creator{ border-radius: 12px; }
+
+  /* Live row (3-up) */
+  #live .mm-3up{ gap: 10px; }
+  #live .mm-3up > .card{
+    min-height: 195px;                              /* was ~260px → ~25% shorter */
+  }
+  #live .embed-scroll{
+    height: 140px;                                  /* was ~180–200px → smaller window */
+  }
+  /* If you use text scroll areas inside cards, trim them too */
+  .mm-scroll{ max-height: 110px; }                  /* was ~140–160px */
+
+  /* Generic card visuals a touch tighter */
+  .card{ border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,.12); }
+  .card .card-banner{ height: 130px; }              /* hero-style images inside cards */
+}
     
 </style>
   
