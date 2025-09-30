@@ -467,6 +467,34 @@ section.container,
     margin-bottom: 8px;
   }
 }
+
+/* === Mobile: shrink last word in rail titles === */
+@media (max-width:640px){
+  .rail__title{
+    font-size: 1rem; /* overall heading a bit smaller */
+  }
+  .rail__title::after{
+    content:""; /* ensures we can split words */
+  }
+  /* Target the last word in the title */
+  .rail__title{
+    display:inline-block;
+  }
+  .rail__title span:last-child{
+    font-size: 0.82em;   /* ~20% smaller */
+    font-weight: 700;
+    opacity: 0.92;
+  }
+}
+
+/* Mobile: shrink the last word in rail headings (e.g., Creators) */
+@media (max-width: 640px){
+  .rail__title .rail-last{
+    font-size: 0.82em;   /* ~18% smaller */
+    font-weight: 700;    /* keep strong but less shouty */
+    opacity: 0.92;
+  }
+}
     
 </style>
   
@@ -506,7 +534,7 @@ section.container,
     <!-- Rail: Featured Creators -->
     <section class="rail container" id="creators" aria-label="Featured Creators">
       <div class="rail__title">
-        <h2 class="section-title"><span class="mm-sticker">Featured</span> Creators</h2>
+        <h2 class="section-title"><span class="mm-sticker">Featured</span> <span class="rail-last">Creators</span></h2>
         <!-- <a href="#" class="mm-badge">See all</a> -->
       </div>
 
