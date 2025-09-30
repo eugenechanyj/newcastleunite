@@ -255,48 +255,68 @@ section.container,
   .site-nav a{ line-height: 1.2; }
 }
 
-/* === Join the Flock (minimal footer style) === */
-.join-flock.join-flock--minimal{
-  display:flex; align-items:center; gap:20px;
-  justify-content:center; flex-wrap:wrap;
-  padding:28px 20px;
-  background:transparent; color:var(--color-white);
-  text-align:center;
+/* === End Banner (compact hero footer) === */
+.end-cta{
+  position: relative;
+  min-height: 32vh;                       /* tune 28–36vh as you like */
+  display: grid;
+  align-items: center;
+  background: #0B0E11 center/cover no-repeat;
+  margin: 28px 0 0;
 }
-
-/* Mascot + splash */
-.join-flock-graphic{ position:relative; display:inline-block; }
-.join-mascot{ width:120px; height:auto; position:relative; z-index:2; }
-.white-splash{
-  position:absolute; top:10px; left:10px; right:10px; bottom:10px;
-  background:#fff; opacity:.9; border-radius:50%;
-  z-index:1;
+.end-cta__veil{
+  position:absolute; inset:0;
+  /* subtle gradient for legibility */
+  background: linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,.2) 70%, rgba(0,0,0,.35) 100%);
 }
-
-/* Organic speech bubble (DIV, not SVG) */
-.speech-bubble{
-  position:absolute; top:-10px; left:100%;
+.end-cta__inner{
+  position: relative; z-index: 1;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr auto;        /* text/space | form */
+  gap: 16px;
+  align-items: center;
+}
+.end-cta__badge{
+  justify-self: start;
   background:#fff; color:#000;
-  border-radius:16px; padding:10px 14px;
-  font-weight:700; box-shadow:0 4px 10px rgba(0,0,0,.15);
-  white-space:nowrap;
-}
-.speech-bubble:after{
-  content:""; position:absolute; left:-8px; top:50%;
-  transform:translateY(-50%) rotate(45deg);
-  width:16px; height:16px; background:#fff;
+  padding:6px 10px; border-radius:999px; font:800 .9rem/1.1 Montserrat, system-ui, sans-serif;
+  box-shadow: var(--shadow, 0 6px 18px rgba(0,0,0,.12));
 }
 
-/* Email form */
-#newsletter-form{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin-top:16px; }
-#newsletter-form input[type="email"]{ padding:10px; border:1px solid var(--card-brd); border-radius:8px; flex:1; min-width:220px; font-size:.95rem; }
-#newsletter-form button{ padding:10px 14px; border:none; border-radius:8px; font-weight:700; font-size:.95rem; }
-
-/* Mobile adjustments */
-@media (max-width:640px){
-  .join-flock{ flex-direction:column; }
-  .speech-bubble{ position:static; display:inline-block; margin-top:8px; }
+/* Form (right aligned) */
+.end-cta__form{
+  justify-self: end;
+  display: inline-flex; gap: 8px; align-items:center; flex-wrap: nowrap;
 }
+.end-cta__form input[type="email"]{
+  background:#fff; color:#0a0a0a;
+  border:1px solid var(--card-brd, #E6E6E6); border-radius:10px;
+  padding:10px 12px; font-size:.95rem; min-width: 240px;
+}
+.end-cta__form .btn{ padding:10px 12px; font-size:.95rem; border-radius:10px }
+
+/* Accessibility helper */
+.visually-hidden{
+  position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px);
+  white-space:nowrap; border:0; padding:0; margin:-1px;
+}
+
+/* Mobile: stack and fill width */
+@media (max-width: 640px){
+  .end-cta{ min-height: 26vh; }
+  .end-cta__inner{
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .end-cta__badge{ justify-self: start; font-size:.85rem }
+  .end-cta__form{ justify-self: stretch; }
+  .end-cta__form input[type="email"]{ width:100%; min-width:0; padding:9px 10px; font-size:.92rem }
+  .end-cta__form .btn{ padding:9px 10px; font-size:.92rem }
+}
+
 
 </style>
   
@@ -619,29 +639,19 @@ section.container,
 
     
     <!-- Newsletter CTA -->
-<section class="container" id="newsletter">
-  <h2 class="section-title"><span class="mm-sticker">Join the Flock</span></h2>
+<!-- End Banner / Subscribe -->
+<section id="newsletter" class="end-cta" style="background-image:url('/assets/minutemagpiebigbenstretched.jpg')">
+  <div class="end-cta__veil"></div>
 
-  <div class="join-flock join-flock--minimal">
-    <!-- Left: mascot with organic bubble + white splash behind -->
-    <div class="join-flock-graphic">
-      <!-- soft white splash behind mascot -->
-      <div class="white-splash"></div>
+  <div class="end-cta__inner">
+    <!-- Optional tiny label; remove if your image already says "Join us" -->
+    <span class="end-cta__badge">Join the Flock</span>
 
-      <!-- mascot -->
-      <img src="/assets/minute-magpie.png" alt="Minute Magpie mascot" class="join-mascot">
-
-      <!-- CSS-driven speech bubble (matches your CSS) -->
-      <div class="speech-bubble">Join us!</div>
-    </div>
-
-    <!-- Right: email input only (no big blue button) -->
-    <form id="newsletter-form" onsubmit="return false" class="join-form">
+    <!-- Right-aligned compact form -->
+    <form id="newsletter-form" class="end-cta__form" onsubmit="return false">
       <label for="email" class="visually-hidden">Email</label>
-      <input type="email" id="email" name="email" placeholder="Enter your email…" required>
-      <!-- keep a submit button for accessibility, but visually hide it -->
-      <button type="submit" class="visually-hidden">Join</button>
-      <small class="form-hint">Press Enter to join</small>
+      <input type="email" id="email" name="email" placeholder="your@email.com" required aria-label="Email address">
+      <button type="submit" class="btn btn-primary">Join</button>
     </form>
   </div>
 </section>
@@ -701,18 +711,20 @@ section.container,
 
 <script>
 (function(){
-  const btn = document.getElementById('nav-toggle');
-  const nav = document.getElementById('site-nav');
-  if(!btn || !nav) return;
-  btn.addEventListener('click', ()=>{
-    const open = nav.classList.toggle('open');
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  nav.querySelectorAll('a').forEach(a=>{
-    a.addEventListener('click', ()=>{
-      nav.classList.remove('open');
-      btn.setAttribute('aria-expanded','false');
-    });
+  const form = document.getElementById('newsletter-form');
+  const email = document.getElementById('email');
+  if(!form) return;
+  form.addEventListener('submit', function(){
+    const v = (email.value||'').trim();
+    if(!v) return email.focus();
+    try{
+      const key = 'newsletter_emails';
+      const data = JSON.parse(localStorage.getItem(key)||'[]');
+      if(!data.includes(v)) data.push(v);
+      localStorage.setItem(key, JSON.stringify(data));
+      email.value = '';
+      alert('Thanks! You’re on the list.'); // replace with real provider soon
+    }catch(e){}
   });
 })();
 </script>
