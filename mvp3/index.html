@@ -859,30 +859,33 @@ section.container,
   </div>
 </section>
 <!-- ===== /LIVE ===== -->
-
     
-    <!-- Newsletter CTA -->
-<!-- End Banner / Subscribe -->
-<section id="newsletter" class="end-cta" style="background-image:url('/assets/minutemagpiebigbenstretched.jpg')">
-  <div class="end-cta__veil"></div>
+<!-- ===== Bottom Banner CTA ===== -->
+<section class="container" id="newsletter" style="margin:40px auto">
+  <div class="card" style="position:relative; overflow:hidden; border:none; box-shadow:none; padding:0">
+    <!-- Background banner -->
+    <img src="/assets/graffitwallbottom1.jpg" alt="Join Us Banner" style="width:100%; height:auto; display:block; border-radius:14px">
 
-  <div class="end-cta__inner">
-    <!-- Optional tiny label; remove if your image already says "Join us" -->
-    <span class="end-cta__badge">Join the Flock</span>
-
-    <!-- Right-aligned compact form -->
-    <form id="newsletter-form" class="end-cta__form" onsubmit="return false">
-      <label for="email" class="visually-hidden">Email</label>
-      <input type="email" id="email" name="email" placeholder="your@email.com" required aria-label="Email address">
-      <button type="submit" class="btn btn-primary">Join</button>
-    </form>
+    <!-- Overlay: email input -->
+    <div style="position:absolute; top:50%; right:40px; transform:translateY(-50%);
+                background:rgba(0,0,0,0.55); padding:14px 18px; border-radius:10px; max-width:280px;">
+      <h2 class="section-title" style="color:#fff; font-size:1.4rem; margin:0 0 10px">Join Us</h2>
+      <form id="newsletter-form" onsubmit="return false" style="display:flex; flex-direction:column; gap:10px">
+        <input type="email" name="email" placeholder="Enter your email…" required
+               style="padding:10px; border:1px solid #ccc; border-radius:6px; font-size:.95rem;">
+        <!-- no big blue button; submit stays invisible for accessibility -->
+        <button type="submit" class="visually-hidden">Submit</button>
+        <small style="color:#eee; font-size:.8rem">Press Enter to join</small>
+      </form>
+    </div>
   </div>
 </section>
+<!-- ===== /Bottom Banner CTA ===== -->
 
   </main>
 
   <footer class="container" style="opacity:.8;padding:24px 0 40px;font-size:.9rem">
-    <div>© NewcastleUnite. Unofficial fan site. Not affiliated with NUFC.</div>
+    <div>© NewcastleUnite. Unofficial fan site spreading fun and love. Not affiliated with NUFC.</div>
   </footer>
 
   <!-- Minimal JS for rail arrows + smooth in-page scroll -->
