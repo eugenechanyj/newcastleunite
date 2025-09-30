@@ -652,6 +652,50 @@ section.container,
 #nav-overlay.active{
   opacity: 1; visibility: visible;
 }
+
+/* === RESCUE: Mobile drawer nav (≤820px) — force overrides === */
+@media (max-width: 820px){
+  /* Drawer panel */
+  .site-nav{
+    position: fixed !important;
+    top: 0; right: 0; bottom: 0;
+    width: 70%; max-width: 320px;
+    display: flex !important;
+    flex-direction: column; gap: 14px;
+    padding: 80px 20px 20px;
+    background: #111418;
+    border-left: 1px solid #22272d;
+    box-shadow: -4px 0 16px rgba(0,0,0,.35);
+    z-index: 10000;
+
+    /* start off-canvas */
+    transform: translateX(100%);
+    transition: transform .3s ease;
+  }
+  .site-nav a{ color:#fff; display:block; font-size:1.05rem; padding:12px 0; }
+
+  /* Open state */
+  .site-nav.open{ transform: translateX(0); }
+
+  /* Burger must be above overlay */
+  .nav-toggle{ display:inline-block !important; position:relative; z-index:10001; }
+
+  /* Dim overlay */
+  #nav-overlay{
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.5);
+    opacity: 0; visibility: hidden;
+    transition: opacity .3s ease;
+    z-index: 9999;
+  }
+  #nav-overlay.show{ opacity:1; visibility:visible; }
+
+  /* Prevent earlier rules from hiding the nav */
+  .site-nav[style*="display:none"]{ display:flex !important; }
+
+  /* Anchor jump offset */
+  :target{ scroll-margin-top: 72px; }
+}
     
 </style>
   
@@ -1043,26 +1087,8 @@ section.container,
 })();
 </script>
 
-<script>
-(function(){
-  const form = document.getElementById('newsletter-form');
-  const email = document.getElementById('email');
-  if(!form) return;
-  form.addEventListener('submit', function(){
-    const v = (email.value||'').trim();
-    if(!v) return email.focus();
-    try{
-      const key = 'newsletter_emails';
-      const data = JSON.parse(localStorage.getItem(key)||'[]');
-      if(!data.includes(v)) data.push(v);
-      localStorage.setItem(key, JSON.stringify(data));
-      email.value = '';
-      alert('Thanks! You’re on the list.'); // replace with real provider soon
-    }catch(e){}
-  });
-})();
-</script>
-
+<div id="nav-overlay"></div>
+  
 <script>
 (function(){
   const btn = document.getElementById('nav-toggle');
@@ -1072,12 +1098,10 @@ section.container,
 
   function openNav(){
     nav.classList.add('open');
-    overlay.classList.add('show');     // matches CSS: #nav-overlay.show { display:block; }
+    overlay.classList.add('show');     // CSS listens for .show
     btn.setAttribute('aria-expanded', 'true');
-    // Optional: lock body scroll while drawer is open
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'; // lock scroll
   }
-
   function closeNav(){
     nav.classList.remove('open');
     overlay.classList.remove('show');
@@ -1088,17 +1112,9 @@ section.container,
   btn.addEventListener('click', ()=>{
     if(nav.classList.contains('open')) closeNav(); else openNav();
   });
-
-  // Close when clicking overlay or any nav link
   overlay.addEventListener('click', closeNav);
-  nav.querySelectorAll('a').forEach(a=>{
-    a.addEventListener('click', closeNav);
-  });
-
-  // Close on Escape key
-  document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape') closeNav();
-  });
+  nav.querySelectorAll('a').forEach(a=> a.addEventListener('click', closeNav));
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeNav(); });
 })();
 </script>
   
