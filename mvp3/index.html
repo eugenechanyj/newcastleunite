@@ -751,6 +751,42 @@ section.container,
 
   :target{ scroll-margin-top: 72px; }
 }
+
+/* Drawer footer icon */
+.drawer-footer{
+  margin-top: auto;   /* pushes it to the bottom */
+  padding-top: 20px;
+  text-align: center;
+}
+.drawer-icon{
+  width: 60px; height: auto;
+  opacity: 0.9;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+}
+
+/* Drawer footer icon with hover effect */
+.drawer-footer{
+  margin-top: auto;   /* push to bottom */
+  padding-top: 20px;
+  text-align: center;
+}
+
+.drawer-link{
+  display:inline-block;
+}
+
+.drawer-icon{
+  width: 64px; height: auto;
+  opacity: 0.9;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.drawer-link:hover .drawer-icon{
+  transform: scale(1.1);
+  opacity: 1;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.5));
+}
     
 </style>
   
@@ -766,11 +802,20 @@ section.container,
 
 <nav class="site-nav" id="site-nav" aria-label="Main">
   <div class="nav-bg-overlay"></div>
+
   <a href="#creators">Creators</a>
   <a href="#club-news">News</a>
   <a href="#gear">Merch</a>
   <a href="#live">Hub</a>
   <a href="#newsletter" class="btn btn-primary" style="padding:8px 12px">Join Us</a>
+
+ <!-- Drawer footer logo/icon with link -->
+<div class="drawer-footer">
+  <a href="/minute-magpie" class="drawer-link">
+    <img src="/assets/minutemagpiespraycan.jpg" alt="Minute Magpie" class="drawer-icon">
+  </a>
+</div>
+
 </nav>
 
   <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">☰</button>
