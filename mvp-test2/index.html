@@ -673,6 +673,30 @@ body.cards-modern .grid#creator-grid{
   border:0; border-radius:0; box-shadow:none;
   margin:0 0 10px;
 }
+
+/* === Hero + Bottom Banner Overlay Films === */
+.hero::before,
+.banner-bottom::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.45); /* adjust opacity: 0.55 darker → 0.35 lighter */
+  z-index:1;
+}
+
+/* Make sure the image stays behind the overlay */
+.hero, .banner-bottom {
+  position:relative;
+  overflow:hidden;
+}
+.hero img,
+.banner-bottom img {
+  display:block;
+  width:100%;
+  height:auto;
+  z-index:0;
+  position:relative;
+}
     
 </style>
 
