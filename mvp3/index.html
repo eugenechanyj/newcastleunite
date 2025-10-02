@@ -1370,6 +1370,25 @@ section.container,
 @media (max-width: 640px){
   .nu-hero .nu-hero__inner h1{ margin-bottom: 0.15em !important; }
 }
+
+/* Mobile: shrink hero height by ~25% for better balance */
+@media (max-width: 640px){
+  .hero.hero--carousel{
+    min-height: 38vh !important;  /* was ~50vh */
+  }
+}
+
+/* Slightly bigger hero headline */
+.nu-hero .nu-hero__inner h1{
+  font-size: 3.3rem !important;   /* was ~3rem */
+}
+
+/* Mobile: scale up headline proportionally */
+@media (max-width: 640px){
+  .nu-hero .nu-hero__inner h1{
+    font-size: 2.2rem !important;  /* was ~2rem */
+  }
+}
     
 </style>            
   
