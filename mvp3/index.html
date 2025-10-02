@@ -787,6 +787,12 @@ section.container,
   opacity: 1;
   filter: drop-shadow(0 6px 12px rgba(0,0,0,0.5));
 }
+
+/* Mobile: make hero ~20% taller for better balance */
+@media (max-width: 640px){
+  .hero{ min-height: 50vh; }  /* try 48–50; was ~40 */
+  .hero__inner{ padding-top: 14px; padding-bottom: 14px; }
+}
     
 </style>
   
