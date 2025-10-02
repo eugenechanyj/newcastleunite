@@ -1064,6 +1064,39 @@ section.container,
 
 /* DEBUG: show first slide no matter what */
 .hero__slides .hero__slide:first-child{ display:block !important; }
+
+/* ==== HERO (STATIC RESET) ==== */
+.hero.hero--static{
+  position: relative;
+  min-height: 50vh;            /* visible on all devices */
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  background: #0B0E11;         /* safe fallback */
+}
+.hero.hero--static .hero__bg{ position:absolute; inset:0; z-index:0; }
+.hero.hero--static .hero__bg img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover; object-position:center;
+  display:block;
+}
+.hero.hero--static .hero__veil{
+  position:absolute; inset:0; z-index:1;
+  /* slightly lighter film—tune last numbers for darker/lighter */
+  background: linear-gradient(to top, rgba(0,0,0,.40), rgba(0,0,0,.12));
+}
+.hero.hero--static .hero__inner{
+  position: relative; z-index:2;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 26px var(--gutter);
+  display: grid; align-content: end;
+  height: 50vh;                 /* aligns text to bottom nicely */
+}
+@media (max-width: 640px){
+  .hero.hero--static{ min-height: 48vh; }
+  .hero.hero--static .hero__inner{ height: 48vh; }
+}
     
 </style>            
   
@@ -1098,65 +1131,25 @@ section.container,
   <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">☰</button>
 </header>
 
-  <!-- ===== HERO CAROUSEL ===== -->
-<section class="hero hero--carousel" id="hero">
-  <div class="hero__slides">
-    <!-- Slide 1 -->
-    <article class="hero__slide is-active">
-      <div class="hero__bg">
-        <img src="/assets/newcastleunitegraffitiwallstretched.jpg" alt="">
-      </div>
-      <div class="hero__veil"></div>
-      <div class="hero__inner">
-        <h1>Got a minute?</h1>
-        <p>Get your 60-sec podcast snack now!</p>
-        <div class="hero__actions">
-          <a class="btn btn-primary" href="#news">Play 60s</a>
-          <a class="btn btn-secondary" href="#newsletter">Join Us</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Slide 2 -->
-    <article class="hero__slide">
-      <div class="hero__bg">
-        <img src="/assets/minutemagpiebigbenstretched.jpg" alt="">
-      </div>
-      <div class="hero__veil"></div>
-      <div class="hero__inner">
-        <h1>Move aside Kong!</h1>
-        <p>Minute's here with 60 second updates!</p>
-        <div class="hero__actions">
-          <a class="btn btn-primary" href="#creators">Explore Creators</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Slide 3 -->
-    <article class="hero__slide">
-      <div class="hero__bg">
-        <img src="/assets/minutemagpieblindboxstretched1.jpg" alt="">
-      </div>
-      <div class="hero__veil"></div>
-      <div class="hero__inner">
-        <h1>Labubus are so yesterday :)</h1>
-        <p>Check out our latest Mystery Boxes!</p>
-        <div class="hero__actions">
-          <a class="btn btn-primary" href="#gear">Shop the Picks</a>
-        </div>
-      </div>
-    </article>
+<!-- ===== HERO (STATIC RESET) ===== -->
+<section class="hero hero--static" id="hero">
+  <div class="hero__bg">
+    <!-- Use one image you KNOW exists (adjust filename if needed) -->
+    <img src="/assets/newcastleunitegraffitiwallstretched.jpg" alt="Newcastle Unite" />
   </div>
 
-  <!-- Controls -->
-  <button class="hero__ctrl hero__prev" aria-label="Previous">‹</button>
-  <button class="hero__ctrl hero__next" aria-label="Next">›</button>
+  <div class="hero__veil"></div>
 
-  <!-- Dots -->
-  <div class="hero__dots" role="tablist" aria-label="Hero slides"></div>
+  <div class="hero__inner">
+    <h1>Got a minute?</h1>
+    <p>Get your 60-sec podcast snack now!</p>
+    <div class="hero__actions">
+      <a class="btn btn-primary" href="#news">Play 60s</a>
+      <a class="btn btn-secondary" href="#newsletter">Join Us</a>
+    </div>
+  </div>
 </section>
-<!-- ===== /HERO CAROUSEL ===== -->
-
+<!-- ===== /HERO (STATIC RESET) ===== -->
 
   <main>
 
