@@ -793,6 +793,63 @@ section.container,
   .hero{ min-height: 50vh; }  /* try 48–50; was ~40 */
   .hero__inner{ padding-top: 14px; padding-bottom: 14px; }
 }
+
+/* HERO CAROUSEL */
+.hero.hero--carousel{
+  position:relative; min-height: 52vh; /* desktop height */
+  background:#0B0E11;
+  overflow:hidden;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.hero__slides{ position:relative; height:100%; }
+.hero__slide{
+  position:absolute; inset:0;
+  background-position:center center; background-size:cover; background-repeat:no-repeat;
+  opacity:0; pointer-events:none;
+  transition: opacity .6s ease;
+}
+.hero__slide.is-active{
+  opacity:1; pointer-events:auto;
+}
+.hero__veil{
+  position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.15));
+}
+.hero__inner{
+  position:relative; z-index:1;
+  max-width: var(--container); margin: 0 auto; padding: 26px var(--gutter);
+  display:grid; align-content:end; height:100%;
+}
+.hero__actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+
+.hero__ctrl{
+  position:absolute; top:50%; transform:translateY(-50%);
+  background: rgba(0,0,0,.45); color:#fff; border:1px solid rgba(255,255,255,.18);
+  width:38px; height:38px; border-radius:10px; font-size:20px;
+  display:grid; place-items:center; cursor:pointer;
+}
+.hero__prev{ left:12px; }
+.hero__next{ right:12px; }
+
+.hero__dots{
+  position:absolute; left:0; right:0; bottom:12px;
+  display:flex; gap:8px; justify-content:center;
+}
+.hero__dots button{
+  width:9px; height:9px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.7); background:transparent;
+  opacity:.6; cursor:pointer;
+}
+.hero__dots button.is-active{
+  background:#fff; opacity:1;
+}
+
+/* Mobile hero height (coexists with A); keep taller for presence */
+@media (max-width: 640px){
+  .hero.hero--carousel{ min-height: 50vh; } /* pairs with A’s 48vh base */
+  .hero__inner h1{ font-size: clamp(1.4rem, 6vw, 2.1rem); }
+  .hero__inner p{ font-size: .98rem; }
+}
     
 </style>
   
@@ -827,15 +884,59 @@ section.container,
   <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">☰</button>
 </header>
 
-  <!-- Hero -->
-  <section class="hero" style="background-image:url('/assets/newcastleunitegraffitwallstretched.jpg')">
-    <div class="container hero__inner">
-      <h1>Got a minute?</h1>
-      <p class="clamp-2">Here's your daily 60-second podcast snack</p>
-      <button class="btn btn-primary">▶ Play </button>
-      <a class="btn btn-secondary" href="#newsletter">Who's Minute-Magpie?</a>
-    </div>
-  </section>
+  <!-- ===== HERO CAROUSEL ===== -->
+<section class="hero hero--carousel" id="hero">
+  <div class="hero__slides">
+    <!-- Slide 1 -->
+    <article class="hero__slide is-active"
+             style="background-image:url('/assets/newcastleunitegraffitiwallstretched.jpg')">
+      <div class="hero__veil"></div>
+      <div class="hero__inner">
+        <h1>Got a minute?</h1>
+        <p>Get your 60-sec podcast snack now!</p>
+        <div class="hero__actions">
+          <a class="btn btn-primary" href="#news">Play 60s</a>
+          <a class="btn btn-secondary" href="#newsletter">Join Us</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Slide 2 -->
+    <article class="hero__slide"
+             style="background-image:url('/assets/minutemagpiebigbenstretched.jpg')">
+      <div class="hero__veil"></div>
+      <div class="hero__inner">
+        <h1>Move aside Kong!</h1>
+        <p>Minute Magpie with 60 second updates!</p>
+        <div class="hero__actions">
+          <a class="btn btn-primary" href="#creators">Explore Creators</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Slide 3 -->
+    <article class="hero__slide"
+             style="background-image:url('/assets/minutemagpieblindboxstretched1.jpg')">
+      <div class="hero__veil"></div>
+      <div class="hero__inner">
+        <h1>Score some limited edition merch!</h1>
+        <p>Check out our latest Mystery Boxes</p>
+        <div class="hero__actions">
+          <a class="btn btn-primary" href="#gear">Shop the Picks</a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Controls -->
+  <button class="hero__ctrl hero__prev" aria-label="Previous">‹</button>
+  <button class="hero__ctrl hero__next" aria-label="Next">›</button>
+
+  <!-- Dots -->
+  <div class="hero__dots" role="tablist" aria-label="Hero slides"></div>
+</section>
+<!-- ===== /HERO CAROUSEL ===== -->
+
 
   <main>
 
@@ -1222,6 +1323,65 @@ section.container,
   overlay.addEventListener('click', closeNav);
   nav.querySelectorAll('a').forEach(a=> a.addEventListener('click', closeNav));
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeNav(); });
+})();
+</script>
+
+<script>
+(function(){
+  const root = document.getElementById('hero');
+  if(!root) return;
+  const slides = Array.from(root.querySelectorAll('.hero__slide'));
+  const prev = root.querySelector('.hero__prev');
+  const next = root.querySelector('.hero__next');
+  const dotsWrap = root.querySelector('.hero__dots');
+
+  let idx = 0, timer = null, interval = 6000; // 6s
+
+  // Build dots
+  slides.forEach((_, i)=>{
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', 'Go to slide ' + (i+1));
+    b.addEventListener('click', ()=> go(i, true));
+    dotsWrap.appendChild(b);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function render(){
+    slides.forEach((s,i)=> s.classList.toggle('is-active', i===idx));
+    dots.forEach((d,i)=> d.classList.toggle('is-active', i===idx));
+  }
+  function go(i, user=false){
+    idx = (i + slides.length) % slides.length;
+    render();
+    if(user) restart();
+  }
+  function nextSlide(){ go(idx+1); }
+  function prevSlide(){ go(idx-1, true); }
+
+  function start(){ timer = setInterval(nextSlide, interval); }
+  function stop(){ clearInterval(timer); timer = null; }
+  function restart(){ stop(); start(); }
+
+  next.addEventListener('click', prevSlide); // “›” on right goes forward (Netflix style uses either)
+  prev.addEventListener('click', prevSlide);
+  next.addEventListener('click', ()=> go(idx+1, true));
+  prev.addEventListener('click', ()=> go(idx-1, true));
+
+  // Pause on hover (desktop)
+  root.addEventListener('mouseenter', stop);
+  root.addEventListener('mouseleave', start);
+
+  // Basic touch swipe
+  let x0 = null;
+  root.addEventListener('touchstart', e=> x0 = e.touches[0].clientX, {passive:true});
+  root.addEventListener('touchend', e=>{
+    if(x0==null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if(Math.abs(dx) > 40){ go(dx<0 ? idx+1 : idx-1, true); }
+    x0 = null;
+  }, {passive:true});
+
+  render(); start();
 })();
 </script>
   
