@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>NewcastleUnite — MVP3.0</title>
   <meta name="theme-color" content="#0B0E11">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
   <style>
   /* ===========================
      NewcastleUnite MVP 3.0 Base
@@ -1208,6 +1209,39 @@ section.container,
   }
   .hero__inner p{
     font-size: clamp(.9rem, 4vw, 1.1rem);
+  }
+}
+
+/* === NU Hero headline: extra impactful === */
+.nu-hero .nu-hero__inner h1{
+  font-family: 'Anton', Montserrat, system-ui, sans-serif;
+  font-size: clamp(3rem, 9vw, 6rem);   /* up to ~96px on large screens */
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+  color: #fff;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+}
+
+/* Subtitle contrast */
+.nu-hero .nu-hero__inner p{
+  font-size: clamp(1rem, 3.5vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: #f5f5f5;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+}
+
+/* Mobile override: still punchy but controlled */
+@media (max-width: 640px){
+  .nu-hero .nu-hero__inner h1{
+    font-size: clamp(2.4rem, 10vw, 3.2rem);
+    line-height: 1.1;
+  }
+  .nu-hero .nu-hero__inner p{
+    font-size: clamp(.95rem, 4vw, 1.15rem);
   }
 }
     
