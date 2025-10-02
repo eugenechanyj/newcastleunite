@@ -795,53 +795,74 @@ section.container,
 }
 
 /* HERO CAROUSEL */
+/* ==== HERO CAROUSEL — minimal, collision-proof ==== */
 .hero.hero--carousel{
-  position:relative; min-height: 52vh; /* desktop height */
+  position: relative;
   background:#0B0E11;
-  overflow:hidden;
   border-bottom: 1px solid rgba(255,255,255,.08);
+  overflow: hidden;
 }
-.hero__slides{ position:relative; height:100%; }
+
+/* Slides: use display switch instead of layered opacity */
+.hero__slides{ position:relative; }
 .hero__slide{
-  position:absolute; inset:0;
-  background-position:center center; background-size:cover; background-repeat:no-repeat;
-  opacity:0; pointer-events:none;
-  transition: opacity .6s ease;
+  display: none;                  /* hidden by default */
+  position: relative;             /* create positioning context for children */
+  height: 52vh;                   /* desktop/base height */
 }
-.hero__slide.is-active{
-  opacity:1; pointer-events:auto;
-}
-.hero__veil{
+.hero__slide.is-active{ display:block; }
+
+/* Background image layer as <img> */
+.hero__bg{ position:absolute; inset:0; z-index:0; }
+.hero__bg img{
   position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit: cover; object-position: center;
+  display:block;
+}
+
+/* Veil + content above image */
+.hero__veil{ position:absolute; inset:0; z-index:1;
   background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.15));
 }
 .hero__inner{
-  position:relative; z-index:1;
-  max-width: var(--container); margin: 0 auto; padding: 26px var(--gutter);
-  display:grid; align-content:end; height:100%;
+  position: relative; z-index:2;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 26px var(--gutter);
+  display: grid;
+  align-content: end;
+  height: 100%;
 }
-.hero__actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
 
+/* Controls + dots */
+.hero__ctrl, .hero__dots{ position:absolute; z-index:3; }
 .hero__ctrl{
-  position:absolute; top:50%; transform:translateY(-50%);
-  background: rgba(0,0,0,.45); color:#fff; border:1px solid rgba(255,255,255,.18);
+  top:50%; transform: translateY(-50%);
+  background: rgba(0,0,0,.45); color:#fff;
+  border:1px solid rgba(255,255,255,.18);
   width:38px; height:38px; border-radius:10px; font-size:20px;
   display:grid; place-items:center; cursor:pointer;
 }
-.hero__prev{ left:12px; }
-.hero__next{ right:12px; }
+.hero__prev{ left:12px; } .hero__next{ right:12px; }
 
-.hero__dots{
-  position:absolute; left:0; right:0; bottom:12px;
-  display:flex; gap:8px; justify-content:center;
-}
+.hero__dots{ left:0; right:0; bottom:12px; display:flex; gap:8px; justify-content:center; }
 .hero__dots button{
-  width:9px; height:9px; border-radius:50%;
-  border:1px solid rgba(255,255,255,.7); background:transparent;
-  opacity:.6; cursor:pointer;
+  all: unset;
+  width: 9px; height: 9px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.7);
+  background: transparent;
+  display: inline-block; cursor: pointer; opacity: .7;
 }
-.hero__dots button.is-active{
-  background:#fff; opacity:1;
+.hero__dots button.is-active{ background:#fff; opacity:1; }
+
+/* Kill any older pseudo overlays that might be covering things */
+.hero.hero--carousel::before,
+.hero.hero--carousel::after{ display:none !important; }
+
+/* Mobile: a touch taller for presence */
+@media (max-width: 640px){
+  .hero__slide{ height: 50vh; }
 }
 
 /* Mobile hero height (coexists with A); keep taller for presence */
@@ -1041,7 +1062,7 @@ section.container,
   .hero.hero--carousel{ min-height: 50vh; }
 }
     
-</style>
+</style>            
   
 </head>
 <body class="rails">
