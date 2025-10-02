@@ -1177,6 +1177,39 @@ section.container,
   font-weight: 500;
   line-height: 1.4;
 }
+
+/* === HERO headline: extra impactful === */
+.hero__inner h1{
+  font-family: 'Impact', 'Anton', 'Oswald', Montserrat, system-ui, sans-serif;
+  font-size: clamp(2.8rem, 8vw, 5rem);   /* desktop up to ~80px */
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+  color: #fff;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+}
+
+/* Subtitle contrast */
+.hero__inner p{
+  font-size: clamp(1rem, 3.5vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: #f5f5f5;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+}
+
+/* Mobile override: slightly smaller but still punchy */
+@media (max-width: 640px){
+  .hero__inner h1{
+    font-size: clamp(2rem, 9vw, 3rem);  /* ~32–48px */
+    line-height: 1.15;
+  }
+  .hero__inner p{
+    font-size: clamp(.9rem, 4vw, 1.1rem);
+  }
+}
     
 </style>            
   
