@@ -1244,6 +1244,29 @@ section.container,
     font-size: clamp(.95rem, 4vw, 1.15rem);
   }
 }
+
+/* === NU Hero headline cleanup === */
+.nu-hero .nu-hero__inner h1{
+  font-family: 'Anton', Montserrat, system-ui, sans-serif;
+  font-size: clamp(1.8rem, 5vw, 3.2rem);  /* scaled down ~50% */
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.3px;
+  margin-bottom: 0.5em;
+  color: #fff;
+
+  /* keep ONE clean shadow only */
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+}
+
+/* Subtitle smaller to match */
+.nu-hero .nu-hero__inner p{
+  font-size: clamp(.9rem, 3.2vw, 1.2rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: #f5f5f5;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.45);
+}
     
 </style>            
   
