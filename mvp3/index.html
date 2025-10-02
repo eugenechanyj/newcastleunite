@@ -1097,7 +1097,70 @@ section.container,
   .hero.hero--static{ min-height: 48vh; }
   .hero.hero--static .hero__inner{ height: 48vh; }
 }
-    
+
+/* ===== NU HERO CAROUSEL (isolated) ===== */
+.nu-hero{
+  position: relative;
+  background:#0B0E11;   /* fallback while image loads */
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  overflow: hidden;
+  min-height: 52vh;
+}
+.nu-hero__slides{ position: relative; }
+.nu-hero__slide{
+  display: none; position: relative;
+  min-height: 52vh;
+}
+.nu-hero__slide.is-active{ display:block; }
+
+.nu-hero__bg{ position:absolute; inset:0; z-index:0; }
+.nu-hero__bg img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:center; display:block;
+}
+
+.nu-hero__veil{
+  position:absolute; inset:0; z-index:1;
+  background: linear-gradient(to top, rgba(0,0,0,.42), rgba(0,0,0,.14));
+}
+.nu-hero__inner{
+  position:relative; z-index:2;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 26px var(--gutter);
+  display:grid; align-content:end; min-height: 52vh;
+}
+.nu-hero__actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+
+/* Controls */
+.nu-hero__ctrl{
+  position:absolute; top:50%; transform:translateY(-50%);
+  background: rgba(0,0,0,.45); color:#fff;
+  border:1px solid rgba(255,255,255,.18);
+  width:38px; height:38px; border-radius:10px; font-size:20px;
+  display:grid; place-items:center; cursor:pointer; z-index:3;
+}
+.nu-hero__prev{ left:12px; } .nu-hero__next{ right:12px; }
+
+/* Dots */
+.nu-hero__dots{
+  position:absolute; left:0; right:0; bottom:12px;
+  display:flex; gap:8px; justify-content:center; z-index:3;
+}
+.nu-hero__dots button{
+  all: unset;
+  width: 9px; height: 9px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.7);
+  background: transparent; display: inline-block; cursor: pointer; opacity:.7;
+}
+.nu-hero__dots button.is-active{ background:#fff; opacity:1; }
+
+/* Mobile: slightly shorter for balance */
+@media (max-width: 640px){
+  .nu-hero{ min-height: 50vh; }
+  .nu-hero__slide{ min-height: 50vh; }
+  .nu-hero__inner{ min-height: 50vh; }
+}    
 </style>            
   
 </head>
@@ -1131,25 +1194,64 @@ section.container,
   <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">☰</button>
 </header>
 
-<!-- ===== HERO (STATIC RESET) ===== -->
-<section class="hero hero--static" id="hero">
-  <div class="hero__bg">
-    <!-- Use one image you KNOW exists (adjust filename if needed) -->
-    <img src="/assets/newcastleunitegraffitwallstretched.jpg" alt="Newcastle Unite" />
+<!-- ===== HERO CAROUSEL (clean, isolated) ===== -->
+<section class="nu-hero" id="hero">
+  <div class="nu-hero__slides" aria-live="polite">
+    <!-- Slide 1 -->
+    <article class="nu-hero__slide is-active">
+      <div class="nu-hero__bg">
+        <img src="/assets/newcastleunitegraffitwallstretched.jpg" alt="">
+      </div>
+      <div class="nu-hero__veil"></div>
+      <div class="nu-hero__inner">
+        <h1>Got a minute?</h1>
+        <p>Get your 60-sec podcast snack now!</p>
+        <div class="nu-hero__actions">
+          <a class="btn btn-primary" href="#news">Play 60s</a>
+          <a class="btn btn-secondary" href="#newsletter">Join Us</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Slide 2 -->
+    <article class="nu-hero__slide">
+      <div class="nu-hero__bg">
+        <img src="/assets/minutemagpiebigbenstretched.jpg" alt="">
+      </div>
+      <div class="nu-hero__veil"></div>
+      <div class="nu-hero__inner">
+        <h1>Move aside Kong!</h1>
+        <p>Minute Magpie with 60 second updates!</p>
+        <div class="nu-hero__actions">
+          <a class="btn btn-primary" href="#creators">Explore Creators</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Slide 3 -->
+    <article class="nu-hero__slide">
+      <div class="nu-hero__bg">
+        <img src="/assets/minutemagpieblindboxstretched1.jpg" alt="">
+      </div>
+      <div class="nu-hero__veil"></div>
+      <div class="nu-hero__inner">
+        <h1>Score limited edition merch!</h1>
+        <p>Check out our latest Mystery Boxes</p>
+        <div class="nu-hero__actions">
+          <a class="btn btn-primary" href="#gear">Shop the Picks</a>
+        </div>
+      </div>
+    </article>
   </div>
 
-  <div class="hero__veil"></div>
+  <!-- Controls -->
+  <button class="nu-hero__ctrl nu-hero__prev" aria-label="Previous slide">‹</button>
+  <button class="nu-hero__ctrl nu-hero__next" aria-label="Next slide">›</button>
 
-  <div class="hero__inner">
-    <h1>Got a minute?</h1>
-    <p>Get your 60-sec podcast snack now!</p>
-    <div class="hero__actions">
-      <a class="btn btn-primary" href="#news">Play 60s</a>
-      <a class="btn btn-secondary" href="#newsletter">Join Us</a>
-    </div>
-  </div>
+  <!-- Dots -->
+  <div class="nu-hero__dots" role="tablist" aria-label="Hero slides"></div>
 </section>
-<!-- ===== /HERO (STATIC RESET) ===== -->
+<!-- ===== /HERO CAROUSEL ===== -->
 
   <main>
 
@@ -1541,14 +1643,13 @@ section.container,
 
 <script>
 (function(){
-  const root = document.getElementById('hero');
+  const root = document.getElementById('hero');           // <section id="hero" class="nu-hero">
   if(!root) return;
-  const slides = Array.from(root.querySelectorAll('.hero__slide'));
-  const prev = root.querySelector('.hero__prev');
-  const next = root.querySelector('.hero__next');
-  const dotsWrap = root.querySelector('.hero__dots');
 
-  let idx = 0, timer = null, interval = 6000; // 6s
+  const slides  = Array.from(root.querySelectorAll('.nu-hero__slide'));
+  const prev    = root.querySelector('.nu-hero__prev');
+  const next    = root.querySelector('.nu-hero__next');
+  const dotsWrap= root.querySelector('.nu-hero__dots');
 
   // Build dots
   slides.forEach((_, i)=>{
@@ -1559,6 +1660,12 @@ section.container,
   });
   const dots = Array.from(dotsWrap.children);
 
+  // start index (respect existing .is-active if present)
+  let idx = Math.max(0, slides.findIndex(s => s.classList.contains('is-active')));
+  if (idx === -1) { idx = 0; slides[0].classList.add('is-active'); }
+
+  let timer = null, interval = 6000; // 6s
+
   function render(){
     slides.forEach((s,i)=> s.classList.toggle('is-active', i===idx));
     dots.forEach((d,i)=> d.classList.toggle('is-active', i===idx));
@@ -1566,19 +1673,13 @@ section.container,
   function go(i, user=false){
     idx = (i + slides.length) % slides.length;
     render();
-    if(user) restart();
+    if (user) restart();
   }
   function nextSlide(){ go(idx+1); }
   function prevSlide(){ go(idx-1, true); }
 
-  function start(){ timer = setInterval(nextSlide, interval); }
-  function stop(){ clearInterval(timer); timer = null; }
-  function restart(){ stop(); start(); }
-
-  next.addEventListener('click', prevSlide); // “›” on right goes forward (Netflix style uses either)
-  prev.addEventListener('click', prevSlide);
-  next.addEventListener('click', ()=> go(idx+1, true));
-  prev.addEventListener('click', ()=> go(idx-1, true));
+  if (prev) prev.addEventListener('click', ()=> go(idx-1, true));
+  if (next) next.addEventListener('click', ()=> go(idx+1, true));
 
   // Pause on hover (desktop)
   root.addEventListener('mouseenter', stop);
@@ -1594,9 +1695,13 @@ section.container,
     x0 = null;
   }, {passive:true});
 
+  function start(){ timer = setInterval(nextSlide, interval); }
+  function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+  function restart(){ stop(); start(); }
+
   render(); start();
 })();
 </script>
-  
+ 
 </body>
 </html>
