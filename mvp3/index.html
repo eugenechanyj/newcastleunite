@@ -1355,6 +1355,21 @@ section.container,
 .nu-hero .nu-hero__inner h1 {
   line-height: 1.1;  /* reduce vertical gap between lines */
 }
+
+/* Tighter gap between hero headline and subline */
+.nu-hero .nu-hero__inner h1{
+  line-height: 1.08 !important;     /* keeps lines in the H1 close */
+  margin-bottom: 0.20em !important;  /* pulls the subline up */
+}
+
+.nu-hero .nu-hero__inner p{
+  margin-top: 0 !important;          /* ensure no extra top margin */
+}
+
+/* Mobile: nudge a touch tighter */
+@media (max-width: 640px){
+  .nu-hero .nu-hero__inner h1{ margin-bottom: 0.15em !important; }
+}
     
 </style>            
   
