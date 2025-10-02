@@ -1267,6 +1267,51 @@ section.container,
   color: #f5f5f5;
   text-shadow: 0 1px 4px rgba(0,0,0,0.45);
 }
+
+/* === HERO Headline Refinement === */
+.hero__inner h1{
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-weight: 900;                  /* strong bold */
+  font-size: clamp(2rem, 6vw, 4rem); /* big but responsive */
+  line-height: 1.05;                 /* tighter so lines sit closer */
+  margin: 0 0 0.4em;                 /* small bottom gap */
+  letter-spacing: -0.5px;
+  color: #fff;
+
+  /* reset shadows globally so no stacking */
+  text-shadow: none !important;
+  filter: none !important;
+  -webkit-text-stroke: 0 !important;
+  
+  /* apply ONE clean shadow */
+  text-shadow: 2px 2px 8px rgba(0,0,0,.55);
+}
+
+.hero__inner p{
+  font-size: clamp(1rem, 3.2vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: #f5f5f5;
+
+  /* reset old styles */
+  text-shadow: none !important;
+  filter: none !important;
+  -webkit-text-stroke: 0 !important;
+
+  text-shadow: 1px 1px 5px rgba(0,0,0,.45);
+}
+
+/* === HERO headline: mobile adjustment === */
+@media (max-width: 640px){
+  .hero__inner h1{
+    font-size: clamp(1.6rem, 7vw, 2.4rem);  /* smaller on mobile */
+    line-height: 1.1;                       /* a touch looser so lines breathe */
+    margin-bottom: 0.5em;
+  }
+  .hero__inner p{
+    font-size: clamp(0.9rem, 3.8vw, 1.2rem);
+  }
+}
     
 </style>            
   
