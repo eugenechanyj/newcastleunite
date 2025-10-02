@@ -950,6 +950,48 @@ section.container,
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+/* === HERO CAROUSEL: height + layers + dots reset === */
+.hero.hero--carousel{
+  position: relative;
+  min-height: 52vh;                 /* ensures we can see the slide */
+  background: #0B0E11;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.hero__slides{ position: relative; height: 100%; z-index: 0; }
+.hero__slide{
+  position: absolute; inset: 0;
+  background-position: center; background-size: cover; background-repeat: no-repeat;
+  opacity: 0; pointer-events: none; transition: opacity .6s ease;
+  z-index: 0;                      /* image layer */
+}
+.hero__slide.is-active{ opacity: 1; pointer-events: auto; }
+.hero__slide .hero__veil{
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.15));
+  z-index: 1;                      /* veil above image */
+}
+.hero__inner{ position: relative; z-index: 2; }  /* text/buttons above veil */
+.hero__ctrl, .hero__dots{ position: absolute; z-index: 3; }
+
+/* Reset dots so global button styles don't deform them */
+.hero__dots button{
+  all: unset;
+  width: 9px; height: 9px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.7);
+  background: transparent; display: inline-block; cursor: pointer; opacity: .7;
+}
+.hero__dots button.is-active{ background:#fff; opacity:1; }
+
+/* If you still have an older hero overlay, disable it for the carousel */
+.hero.hero--carousel::before,
+.hero.hero--carousel::after{ display: none !important; }
+
+/* Mobile balance */
+@media (max-width: 640px){
+  .hero.hero--carousel{ min-height: 50vh; }
+}
     
 </style>
   
