@@ -1720,6 +1720,43 @@ section, header, main, footer, .container { max-width: 100vw; overflow-x: clip; 
     border-left: 1px solid #22272d !important;               /* only when open */
   }
 }
+
+/* === Horizontal overflow clamps (surgical) === */
+html, body { width:100%; max-width:100%; overflow-x: hidden !important; }
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Big wrappers never exceed the viewport */
+header, main, footer, section, .container { max-width: 100vw; overflow-x: clip; }
+
+/* Hero & slides: trap transforms inside */
+#hero, #hero .nu-hero__slides, #hero .nu-hero__slide {
+  width: 100% !important;
+  overflow: hidden !important;
+  contain: layout paint style;
+}
+
+/* Rails: page doesn’t scroll, only the track does */
+.rail { position: relative; overflow-x: clip; }
+.rail .rail__track { overflow-x: auto; overscroll-behavior-x: contain; }
+
+/* === Drawer: no peeking on mobile === */
+@media (max-width: 820px){
+  #site-nav{
+    position: fixed !important;
+    top: 0; right: -4px !important; bottom: 0;          /* nudge off the edge */
+    width: 70vw; max-width: 340px;
+    transform: translateX(100%) !important;             /* fully off-canvas */
+    border-left: 0 !important;
+    box-shadow: none !important;
+    will-change: transform;
+  }
+  #site-nav.open{
+    right: 0 !important;
+    transform: translateX(0) !important;
+    box-shadow: -4px 0 20px rgba(0,0,0,.5) !important;
+    border-left: 1px solid #22272d !important;
+  }
+}
     
 </style>
   
@@ -2386,6 +2423,46 @@ section, header, main, footer, .container { max-width: 100vw; overflow-x: clip; 
 })();
 </script>
   
- 
+<script id="overflow-debug">
+(function(){
+  function markOverflows(){
+    // remove old marks
+    document.querySelectorAll('[data-overflow-mark]').forEach(el=>{
+      el.style.outline=''; el.removeAttribute('data-overflow-mark');
+    });
+    const offenders = [];
+    const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    document.querySelectorAll('body *').forEach(el=>{
+      const r = el.getBoundingClientRect();
+      // allow 1px tolerance for subpixel/layout rounding
+      if (r.right - vw > 1 || r.left < -1) {
+        el.setAttribute('data-overflow-mark','');
+        el.style.outline = '2px solid #ff0077';   // hot pink outline
+        offenders.push(el);
+      }
+    });
+    console.clear();
+    if (!offenders.length){
+      console.log('✅ No horizontal overflow detected.');
+      return;
+    }
+    console.log('⚠️ Horizontal overflow offenders:', offenders);
+    // show a small on-page note
+    let note = document.getElementById('overflow-note');
+    if (!note){
+      note = document.createElement('div');
+      note.id = 'overflow-note';
+      note.style.cssText = 'position:fixed;left:8px;bottom:8px;z-index:99999;background:#ff0077;color:#fff;padding:6px 10px;border-radius:8px;font:600 12px/1.2 system-ui';
+      document.body.appendChild(note);
+    }
+    note.textContent = 'Overflow: ' + offenders.slice(0,3).map(o=>o.className||o.id||o.tagName).join(' • ') + (offenders.length>3?' …':'');
+  }
+  window.addEventListener('load', markOverflows);
+  window.addEventListener('resize', markOverflows);
+  // expose a manual trigger
+  window.__checkOverflow = markOverflows;
+})();
+</script>
+  
 </body>
 </html>
