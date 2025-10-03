@@ -1566,6 +1566,20 @@ section.container,
   /* buttons wrap neatly and stay near the bottom */
   .nu-hero__actions{ justify-content: flex-start; gap: 8px; }
 }
+
+/* FORCE: lighter, full-width veil */
+.nu-hero{ position: relative !important; }
+.nu-hero__bg{ position:absolute !important; inset:0 !important; }
+.nu-hero__veil{
+  position:absolute !important; inset:0 !important; z-index:1 !important;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.26) 0%,
+    rgba(0,0,0,.20) 22%,
+    rgba(0,0,0,.10) 68%,
+    rgba(0,0,0,0)  100%
+  ) !important;
+}
     
 </style>            
   
