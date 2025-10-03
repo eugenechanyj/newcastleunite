@@ -1835,6 +1835,40 @@ header.container.site-header{
   min-width: 0 !important;      /* allow children to shrink */
   flex-shrink: 1 !important;    /* force children to compress */
 }
+
+/* === STOP SIDEWAYS SCROLL: clamp header + allow nav to wrap === */
+
+/* 1) header itself can never make the page wider */
+header.container.site-header{
+  max-width: 100vw !important;
+  overflow-x: clip !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-wrap: wrap !important;     /* allow items to move to the next line */
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+/* 2) nav is allowed to shrink and wrap inside the header */
+header.container.site-header .site-nav{
+  flex: 1 1 auto !important;
+  min-width: 0 !important;        /* critical for flex children */
+  display: flex !important;
+  flex-wrap: wrap !important;      /* allow multi-line links */
+  gap: 14px !important;
+  overflow-x: hidden !important;   /* never push the page */
+}
+
+/* 3) override the earlier global 'nowrap' just for header nav links */
+header.container.site-header .site-nav a{
+  white-space: normal !important;  /* allow wrapping */
+}
+
+/* 4) brand group can shrink too (prevents forcing width) */
+header.container.site-header .brand{
+  flex: 0 1 auto !important;
+  min-width: 0 !important;
+}
     
 </style>
   
