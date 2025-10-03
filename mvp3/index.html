@@ -1681,6 +1681,8 @@ html, body { max-width: 100%; overflow-x: clip !important; }  /* ‘clip’ prev
     box-shadow: -4px 0 20px rgba(0,0,0,.5) !important;
   }
 }
+
+html, body { max-width: 100%; overflow-x: clip !important; }
     
 </style>
   
@@ -1717,114 +1719,36 @@ html, body { max-width: 100%; overflow-x: clip !important; }  /* ‘clip’ prev
 
   
 <!-- ===== HERO CAROUSEL (clean, isolated) ===== -->
-<!-- Local, surgical CSS — safe to keep even if the big stylesheet has issues -->
-<style>
-  /* Stop page-wide sideways scroll caused by slide transforms */
-  html, body { max-width: 100%; overflow-x: clip; }
+<section class="nu-hero" id="hero"
+  style="position:relative; overflow:hidden; min-height:52vh; border-bottom:1px solid rgba(255,255,255,.08); background:#0B0E11;">
+  <div class="nu-hero__slides" aria-live="polite"
+    style="position:relative; min-height:52vh; overflow:hidden;">
 
-  /* Hero layout + slide motion (scoped to #hero only) */
-  #hero { position: relative; overflow: hidden; min-height: 52vh; border-bottom: 1px solid rgba(255,255,255,.08); background: #0B0E11; }
-  #hero .nu-hero__slides { position: relative; min-height: 52vh; }
-  #hero .nu-hero__slide{
-    position: absolute; inset: 0;
-    overflow: hidden;                 /* trap transforms */
-    contain: layout paint style;      /* sandbox slide animations */
-    transform: translateX(100%);      /* parked off-screen by default */
-    transition: transform .55s ease;
-    will-change: transform;
-    z-index: 0;
-  }
-  #hero .nu-hero__slide.is-active{ transform: translateX(0); z-index: 1; }
-  #hero .nu-hero__slide.enter-from-right{ transform: translateX(100%); }
-  #hero .nu-hero__slide.enter-from-left{  transform: translateX(-100%); }
-  #hero .nu-hero__slide.exit-to-left{     transform: translateX(-100%); }
-  #hero .nu-hero__slide.exit-to-right{    transform: translateX(100%); }
-
-  /* Layers */
-  #hero .nu-hero__bg, #hero .nu-hero__veil{ position: absolute; inset: 0; }
-  #hero .nu-hero__bg img{
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; object-position: center; display: block;
-  }
-  /* Lighter, edge-to-edge veil */
-  #hero .nu-hero__veil{ z-index: 1; background: rgba(0,0,0,.14); }
-
-  /* Text container: fill height; bottom row for content */
-  #hero .nu-hero__inner{
-    position: relative; z-index: 2;
-    max-width: 1200px; margin: 0 auto; padding: 26px 16px;
-    display: grid; grid-template-rows: 1fr auto; align-content: stretch;
-    min-height: 52vh; box-sizing: border-box;
-  }
-
-  /* Keep the text/buttons grouped; NO dark slab */
-  #hero .nu-hero__panel{
-    background: transparent;
-    border: 0;
-    border-radius: 12px;
-    padding: 12px 14px;
-    box-shadow: none;
-    max-width: min(90ch, 92%);
-    align-self: end;           /* pin to bottom row */
-    justify-self: start;       /* left-aligned; change to center if you prefer */
-    margin: 0 12px;
-    text-align: left;
-  }
-
-  /* Headline + subline defaults (kept simple; your main stylesheet can style further) */
-  #hero .nu-hero__panel h1{
-    margin: 0 0 .25em;
-    font: 900 clamp(28px, 5vw, 48px)/1.08 Montserrat, system-ui, sans-serif;
-    color: #fff;
-    text-shadow: 1px 1px 6px rgba(0,0,0,.5);
-  }
-  #hero .nu-hero__panel p{
-    margin: 0 0 10px;
-    font: 500 clamp(14px, 3.2vw, 18px)/1.35 Montserrat, system-ui, sans-serif;
-    color: #f5f5f5;
-    text-shadow: 0 1px 4px rgba(0,0,0,.45);
-  }
-  #hero .nu-hero__actions{ display: flex; gap: 10px; flex-wrap: wrap; }
-
-  /* Controls + dots stay on top */
-  #hero .nu-hero__ctrl, #hero .nu-hero__dots{ position: absolute; z-index: 3; }
-  #hero .nu-hero__ctrl{
-    top: 50%; transform: translateY(-50%);
-    background: rgba(0,0,0,.45); color:#fff;
-    border:1px solid rgba(255,255,255,.18);
-    width:38px; height:38px; border-radius:10px; font-size:20px;
-    display:grid; place-items:center; cursor:pointer;
-  }
-  #hero .nu-hero__prev{ left:12px; } 
-  #hero .nu-hero__next{ right:12px; }
-
-  #hero .nu-hero__dots{ left:0; right:0; bottom:12px; display:flex; gap:8px; justify-content:center; }
-  #hero .nu-hero__dots button{
-    all: unset; width: 9px; height: 9px; border-radius: 50%;
-    border: 1px solid rgba(255,255,255,.7); background: transparent;
-    display: inline-block; cursor: pointer; opacity: .7;
-  }
-  #hero .nu-hero__dots button.is-active{ background:#fff; opacity:1; }
-
-  /* Mobile: a bit shorter hero, grounded text preserved */
-  @media (max-width: 640px){
-    #hero, #hero .nu-hero__slides, #hero .nu-hero__slide, #hero .nu-hero__inner{ min-height: 40vh; }
-  }
-</style>
-
-<section class="nu-hero" id="hero">
-  <div class="nu-hero__slides" aria-live="polite">
     <!-- Slide 1 -->
-    <article class="nu-hero__slide is-active">
-      <div class="nu-hero__bg">
-        <img src="/assets/newcastleunitegraffitwallstretched.jpg" alt="">
+    <article class="nu-hero__slide is-active"
+      style="position:absolute; inset:0; min-height:52vh; overflow:hidden; contain:layout paint style; transform:translateX(0); transition:transform .55s ease; z-index:1;">
+      <div class="nu-hero__bg" style="position:absolute; inset:0; z-index:0;">
+        <img src="/assets/newcastleunitegraffitwallstretched.jpg" alt=""
+             style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
       </div>
-      <div class="nu-hero__veil"></div>
-      <div class="nu-hero__inner">
-        <div class="nu-hero__panel">
-          <h1>Got a minute?</h1>
-          <p>Get your 60-sec podcast snack now!</p>
-          <div class="nu-hero__actions">
+      <div class="nu-hero__veil"
+           style="position:absolute; inset:0; z-index:1; background:rgba(0,0,0,.14) !important;"></div>
+      <div class="nu-hero__inner"
+           style="position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:26px 16px;
+                  display:grid; grid-template-rows:1fr auto; align-content:stretch;
+                  min-height:52vh; box-sizing:border-box;
+                  background:transparent !important; box-shadow:none !important;">
+        <div class="nu-hero__panel"
+             style="background:transparent !important; border:0 !important; border-radius:12px;
+                    padding:12px 14px; box-shadow:none !important; max-width:min(90ch,92%);
+                    align-self:end; justify-self:start; margin:0 12px; text-align:left;">
+          <h1 style="margin:0 0 .25em; font:900 clamp(28px, 5vw, 48px)/1.08 Montserrat, system-ui, sans-serif; color:#fff; text-shadow:1px 1px 6px rgba(0,0,0,.5);">
+            Got a minute?
+          </h1>
+          <p style="margin:0 0 10px; font:500 clamp(14px, 3.2vw, 18px)/1.35 Montserrat, system-ui, sans-serif; color:#f5f5f5; text-shadow:0 1px 4px rgba(0,0,0,.45);">
+            Get your 60-sec podcast snack now!
+          </p>
+          <div class="nu-hero__actions" style="display:flex; gap:10px; flex-wrap:wrap;">
             <a class="btn btn-primary" href="#news">Play 60s</a>
             <a class="btn btn-secondary" href="#newsletter">Join Us</a>
           </div>
@@ -1833,16 +1757,30 @@ html, body { max-width: 100%; overflow-x: clip !important; }  /* ‘clip’ prev
     </article>
 
     <!-- Slide 2 -->
-    <article class="nu-hero__slide">
-      <div class="nu-hero__bg">
-        <img src="/assets/minutemagpiecomic3.png" alt="">
+    <article class="nu-hero__slide"
+      style="position:absolute; inset:0; min-height:52vh; overflow:hidden; contain:layout paint style; transform:translateX(100%); transition:transform .55s ease; z-index:0;">
+      <div class="nu-hero__bg" style="position:absolute; inset:0; z-index:0;">
+        <img src="/assets/minutemagpiecomic3.png" alt=""
+             style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
       </div>
-      <div class="nu-hero__veil"></div>
-      <div class="nu-hero__inner">
-        <div class="nu-hero__panel">
-          <h1>The bird of many faces</h1>
-          <p>Find out more about the mysterious magpie!</p>
-          <div class="nu-hero__actions">
+      <div class="nu-hero__veil"
+           style="position:absolute; inset:0; z-index:1; background:rgba(0,0,0,.14) !important;"></div>
+      <div class="nu-hero__inner"
+           style="position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:26px 16px;
+                  display:grid; grid-template-rows:1fr auto; align-content:stretch;
+                  min-height:52vh; box-sizing:border-box;
+                  background:transparent !important; box-shadow:none !important;">
+        <div class="nu-hero__panel"
+             style="background:transparent !important; border:0 !important; border-radius:12px;
+                    padding:12px 14px; box-shadow:none !important; max-width:min(90ch,92%);
+                    align-self:end; justify-self:start; margin:0 12px; text-align:left;">
+          <h1 style="margin:0 0 .25em; font:900 clamp(28px, 5vw, 48px)/1.08 Montserrat, system-ui, sans-serif; color:#fff; text-shadow:1px 1px 6px rgba(0,0,0,.5);">
+            The bird of many faces
+          </h1>
+          <p style="margin:0 0 10px; font:500 clamp(14px, 3.2vw, 18px)/1.35 Montserrat, system-ui, sans-serif; color:#f5f5f5; text-shadow:0 1px 4px rgba(0,0,0,.45);">
+            Find out more about the mysterious magpie!
+          </p>
+          <div class="nu-hero__actions" style="display:flex; gap:10px; flex-wrap:wrap;">
             <a class="btn btn-primary" href="#creators">Explore Creators</a>
           </div>
         </div>
@@ -1850,16 +1788,30 @@ html, body { max-width: 100%; overflow-x: clip !important; }  /* ‘clip’ prev
     </article>
 
     <!-- Slide 3 -->
-    <article class="nu-hero__slide">
-      <div class="nu-hero__bg">
-        <img src="/assets/minutemagpieblindboxstretched1.jpg" alt="">
+    <article class="nu-hero__slide"
+      style="position:absolute; inset:0; min-height:52vh; overflow:hidden; contain:layout paint style; transform:translateX(100%); transition:transform .55s ease; z-index:0;">
+      <div class="nu-hero__bg" style="position:absolute; inset:0; z-index:0;">
+        <img src="/assets/minutemagpieblindboxstretched1.jpg" alt=""
+             style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
       </div>
-      <div class="nu-hero__veil"></div>
-      <div class="nu-hero__inner">
-        <div class="nu-hero__panel">
-          <h1>Score limited edition merch!</h1>
-          <p>Check out our latest Mystery Boxes</p>
-          <div class="nu-hero__actions">
+      <div class="nu-hero__veil"
+           style="position:absolute; inset:0; z-index:1; background:rgba(0,0,0,.14) !important;"></div>
+      <div class="nu-hero__inner"
+           style="position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:26px 16px;
+                  display:grid; grid-template-rows:1fr auto; align-content:stretch;
+                  min-height:52vh; box-sizing:border-box;
+                  background:transparent !important; box-shadow:none !important;">
+        <div class="nu-hero__panel"
+             style="background:transparent !important; border:0 !important; border-radius:12px;
+                    padding:12px 14px; box-shadow:none !important; max-width:min(90ch,92%);
+                    align-self:end; justify-self:start; margin:0 12px; text-align:left;">
+          <h1 style="margin:0 0 .25em; font:900 clamp(28px, 5vw, 48px)/1.08 Montserrat, system-ui, sans-serif; color:#fff; text-shadow:1px 1px 6px rgba(0,0,0,.5);">
+            Score limited edition merch!
+          </h1>
+          <p style="margin:0 0 10px; font:500 clamp(14px, 3.2vw, 18px)/1.35 Montserrat, system-ui, sans-serif; color:#f5f5f5; text-shadow:0 1px 4px rgba(0,0,0,.45);">
+            Check out our latest Mystery Boxes
+          </p>
+          <div class="nu-hero__actions" style="display:flex; gap:10px; flex-wrap:wrap;">
             <a class="btn btn-primary" href="#gear">Shop the Picks</a>
           </div>
         </div>
@@ -1875,6 +1827,7 @@ html, body { max-width: 100%; overflow-x: clip !important; }  /* ‘clip’ prev
   <div class="nu-hero__dots" role="tablist" aria-label="Hero slides"></div>
 </section>
 <!-- ===== /HERO CAROUSEL ===== -->
+
 
 
   <main>
@@ -2376,6 +2329,26 @@ html, body { max-width: 100%; overflow-x: clip !important; }  /* ‘clip’ prev
 })();
 </script>
 
+<script>
+(function(){
+  const nav = document.getElementById('site-nav');
+  if (!nav) return;
+  function apply() {
+    const mobile = window.matchMedia('(max-width: 820px)').matches;
+    const isOpen = nav.classList.contains('open');
+    if (mobile && !isOpen) {
+      nav.style.transform = 'translateX(115%)';
+      nav.style.boxShadow = 'none';
+    } else {
+      nav.style.transform = '';
+      nav.style.boxShadow = '';
+    }
+  }
+  apply();
+  window.addEventListener('resize', apply);
+})();
+</script>
+  
  
 </body>
 </html>
