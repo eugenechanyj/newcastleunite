@@ -1456,6 +1456,35 @@ section.container,
   .nu-hero__slide{ min-height: calc(var(--heroH-mobile) + var(--heroDots)); }
   .nu-hero .nu-hero__inner{ min-height: var(--heroH-mobile); }
 }
+
+/* === Hero text: mobile refinements === */
+@media (max-width: 640px){
+  .hero__inner{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;   /* push text down */
+    align-items: flex-start;     /* keep left-aligned */
+    padding: 0 var(--gutter) 32px; /* breathing room from bottom */
+    background: rgba(0,0,0,0.35); /* subtle dark overlay behind text */
+    border-radius: 8px;
+    margin: 0 12px;              /* keep away from edges */
+  }
+
+  .hero__inner h1{
+    font-size: clamp(1.2rem, 7vw, 2rem); /* ~20% smaller */
+    line-height: 1.15; 
+    margin-bottom: 6px;
+  }
+
+  .hero__inner p{
+    font-size: .92rem;
+    margin-bottom: 10px;
+  }
+
+  .hero__actions{
+    gap: 8px;
+  }
+}
     
 </style>            
   
