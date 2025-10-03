@@ -1485,6 +1485,35 @@ section.container,
     gap: 8px;
   }
 }
+
+/* === NU Hero: mobile grounding + faint floating box + 20% smaller headline === */
+@media (max-width: 640px){
+  .nu-hero .nu-hero__inner{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;            /* push text down */
+    align-items: flex-start;
+    padding: 12px var(--gutter) 28px;     /* comfy bottom space */
+    margin: 0 12px 12px;                  /* keep away from edges */
+    background: rgba(0,0,0,0.35) !important;  /* faint box behind text */
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  }
+
+  .nu-hero .nu-hero__inner h1{
+    /* ~20% smaller than your current big setting */
+    font-size: clamp(1.4rem, 7vw, 2.2rem);
+    line-height: 1.12;
+    margin-bottom: 6px;                   /* pull subtitle closer */
+  }
+
+  .nu-hero .nu-hero__inner p{
+    font-size: .92rem;
+    margin: 0 0 10px;
+  }
+
+  .nu-hero .nu-hero__actions{ gap: 8px; }
+}
     
 </style>            
   
