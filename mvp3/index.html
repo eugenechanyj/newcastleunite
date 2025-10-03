@@ -1582,6 +1582,47 @@ section.container,
 }
     
 </style>            
+
+<style id="nu-hero-hotfix">
+  /* PROVE styles are loading */
+  body { outline: 4px solid hotpink !important; }
+
+  /* Make veil lighter & full width */
+  .nu-hero{ position: relative !important; }
+  .nu-hero__bg{ position:absolute !important; inset:0 !important; }
+  .nu-hero__veil{
+    position:absolute !important; inset:0 !important; z-index:1 !important;
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,.26) 0%,
+      rgba(0,0,0,.20) 22%,
+      rgba(0,0,0,.08) 68%,
+      rgba(0,0,0,0)  100%
+    ) !important;
+  }
+
+  /* Pin text/buttons to bottom on mobile */
+  @media (max-width: 640px){
+    .nu-hero__inner{
+      display: grid !important;
+      grid-template-rows: 1fr auto !important; /* space + content row */
+      align-content: stretch !important;
+      justify-items: start !important;
+      min-height: 42vh !important;
+      padding: 12px 16px 24px !important;
+    }
+    .nu-hero__panel{
+      align-self: end !important;   /* sit on bottom row */
+      justify-self: start !important;
+      margin: 0 12px !important;
+      background: rgba(12,14,17,.26) !important; /* lighter glass */
+      border: 1px solid rgba(255,255,255,.12) !important;
+      border-radius: 10px !important;
+      box-shadow: 0 6px 18px rgba(0,0,0,.18) !important;
+      text-align: left !important;
+    }
+  }
+</style>
   
 </head>
 <body class="rails">
