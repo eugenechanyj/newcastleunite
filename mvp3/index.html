@@ -1416,6 +1416,24 @@ section.container,
   .nu-hero__slide{ min-height: 38vh; }
   .nu-hero .nu-hero__inner{ min-height: 38vh; }
 }
+
+/* Ensure inner fills the slide, so text isn't pushed/cut */
+.nu-hero__slides{ min-height: 52vh; position: relative; }
+.nu-hero__slide{ min-height: 52vh; }
+.nu-hero .nu-hero__inner{
+  height: 100%;
+  display: grid;
+  align-content: end;   /* keeps headline near bottom like Netflix */
+  padding: 26px var(--gutter);
+  box-sizing: border-box;
+}
+
+/* Mobile: keep the shorter hero you wanted */
+@media (max-width: 640px){
+  .nu-hero__slides{ min-height: 38vh; }
+  .nu-hero__slide{  min-height: 38vh; }
+  .nu-hero .nu-hero__inner{ height: 38vh; }
+}
     
 </style>            
   
@@ -1907,7 +1925,6 @@ section.container,
   const nextBtn  = root.querySelector('.nu-hero__next');
   const dotsWrap = root.querySelector('.nu-hero__dots');
 
-  // Build dots
   slides.forEach((_, i)=>{
     const b = document.createElement('button');
     b.setAttribute('aria-label', 'Go to slide ' + (i+1));
@@ -1916,13 +1933,11 @@ section.container,
   });
   const dots = Array.from(dotsWrap.children);
 
-  // Start index (respect an existing is-active)
   let idx = Math.max(0, slides.findIndex(s => s.classList.contains('is-active')));
   if (idx === -1) { idx = 0; slides[0].classList.add('is-active'); }
 
   let timer = null;
-  const interval = 5000;   // 5s hold before transitioning
-  const dur = 500;         // 0.5s slide animation
+  const interval = 5000;   // 5s hold
   let animating = false;
 
   function render(){
@@ -1935,48 +1950,48 @@ section.container,
 
     const from = idx;
     const count = slides.length;
-    // Determine direction (wrap-aware)
     const forward = (to === (idx+1)%count) || (to > idx && !(idx===count-1 && to===0));
     idx = (to + count) % count;
 
     const current = slides[from];
     const next    = slides[idx];
 
-    // Prep classes
     animating = true;
-    // Reset any strays
-    current.classList.remove('enter-from-right','enter-from-left','exit-to-left','exit-to-right');
-    next.classList.remove('enter-from-right','enter-from-left','exit-to-left','exit-to-right','is-active');
 
-    // Set starting positions
+    // Clean any leftover inline styles/classes
+    [current, next].forEach(el=>{
+      el.classList.remove('enter-from-right','enter-from-left','exit-to-left','exit-to-right');
+      el.style.transition = '';
+      el.style.transform = '';
+      el.style.opacity = '';       // <-- clear any inline opacity
+      el.style.pointerEvents = '';
+    });
+
+    // Prepare next start position (no inline opacity!)
     next.style.transition = 'none';
     next.classList.add(forward ? 'enter-from-right' : 'enter-from-left');
-    next.style.opacity = '0';
-    next.style.transform = forward ? 'translateX(20%)' : 'translateX(-20%)';
-    next.style.pointerEvents = 'auto';
-    // Force reflow to apply starting transform before transition
-    void next.offsetWidth;
+    void next.offsetWidth; // reflow
 
-    // Run the animation
+    // Animate
     next.style.transition = '';
-    next.classList.add('is-active'); // bring to front
+    next.classList.add('is-active');
     current.classList.add(forward ? 'exit-to-left' : 'exit-to-right');
 
-    // When done, clean up classes
-    const end = () => {
+    const tidy = () => {
       current.classList.remove('is-active','exit-to-left','exit-to-right');
       next.classList.remove('enter-from-right','enter-from-left');
-      // Ensure only target is active
-      slides.forEach((s,i)=> s.classList.toggle('is-active', i===idx));
-      dots.forEach((d,i)=> d.classList.toggle('is-active', i===idx));
+      [current, next].forEach(el=>{
+        el.style.transition = '';
+        el.style.transform = '';
+        el.style.opacity = '';     // <-- ensure cleared
+        el.style.pointerEvents = '';
+      });
+      render();
       animating = false;
     };
 
-    // Fallback timeout if transitionend doesn't fire
-    let ended = false;
-    const tidy = () => { if (ended) return; ended = true; end(); };
     next.addEventListener('transitionend', tidy, { once:true });
-    setTimeout(tidy, dur + 50); // safety
+    setTimeout(tidy, 700); // safety
 
     if (user) restart();
   }
@@ -1991,11 +2006,9 @@ section.container,
   if (nextBtn) nextBtn.addEventListener('click', ()=> go(idx+1, true));
   if (prevBtn) prevBtn.addEventListener('click', ()=> go(idx-1, true));
 
-  // Pause on hover (desktop)
   root.addEventListener('mouseenter', stop);
   root.addEventListener('mouseleave', start);
 
-  // Touch swipe
   let x0 = null;
   root.addEventListener('touchstart', e=> x0 = e.touches[0].clientX, {passive:true});
   root.addEventListener('touchend', e=>{
@@ -2005,7 +2018,6 @@ section.container,
     x0 = null;
   }, {passive:true});
 
-  // Init
   render(); start();
 })();
 </script>
