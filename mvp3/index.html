@@ -1916,6 +1916,34 @@ header.container.site-header .site-nav a{
   .drawer-footer{ display:block !important; margin-top:auto !important; }
   .drawer-icon{ width:64px !important; height:auto !important; }
 }
+
+/* === HERO: ground text at bottom & lighten veil (surgical) === */
+.nu-hero { position: relative; }
+.nu-hero .nu-hero__inner{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 52vh;
+  padding-bottom: 24px;
+}
+
+.nu-hero .nu-hero__veil{
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.26) 0%,
+    rgba(0,0,0,.18) 24%,
+    rgba(0,0,0,.08) 66%,
+    rgba(0,0,0,0)  100%
+  );
+}
+
+.nu-hero .nu-hero__inner,
+.nu-hero .nu-hero__inner * { position: relative; z-index: 2; }
+
+/* === Header: prevent sideways scroll by allowing wraps (no layout changes) === */
+.site-header .site-nav a{ white-space: normal !important; }
+.site-header{ overflow-x: hidden; }
   
 </style>
   
