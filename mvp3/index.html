@@ -2009,6 +2009,25 @@ html, body{ overflow-x:hidden !important; }
 
 /* Belt-and-braces: kill any horizontal page scroll */
 html, body{ overflow-x: hidden !important; }
+
+/* === Kill sideways movement, even during hero transitions === */
+
+/* Never allow horizontal page scroll (clip is stricter than hidden in modern browsers) */
+html, body { overflow-x: clip !important; max-width: 100% !important; }
+
+/* Clamp the hero and its slides so off-screen content can't widen the page */
+#hero.nu-hero { position: relative !important; overflow: hidden !important; }
+#hero .nu-hero__slides { position: relative !important; overflow: hidden !important; }
+#hero .nu-hero__slide { position: absolute !important; inset: 0 !important; }
+
+/* Make sure images never exceed viewport width */
+#hero .nu-hero__bg img {
+  display: block; width: 100%; max-width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+}
+
+/* Touch intent: allow vertical scrolling only anywhere inside the hero */
+#hero, #hero * { touch-action: pan-y !important; }
     
 </style>
   
@@ -2756,6 +2775,19 @@ html, body{ overflow-x: hidden !important; }
     x0 = y0 = null;
     locked = false;
   }, {passive:true});
+})();
+</script>
+
+<script>
+/* Watchdog: if anything nudges the page horizontally, snap it back immediately. */
+(function(){
+  function killX(){
+    if (window.scrollX !== 0) window.scrollTo(0, window.scrollY);
+  }
+  window.addEventListener('scroll', killX, {passive:true});
+  window.addEventListener('resize', killX);
+  // Safety timer while we stabilize the CSS; you can remove later.
+  setInterval(killX, 300);
 })();
 </script>
   
