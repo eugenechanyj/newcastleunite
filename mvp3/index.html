@@ -1962,19 +1962,44 @@ html, body {
   contain: layout paint style;
 }
 
-/* === Hard stop horizontal gestures globally === */
-html, body {
-  overflow-x: hidden !important;
-  touch-action: pan-y !important;     /* allow vertical only */
-  overscroll-behavior-x: none !important;  /* block sideways overscroll */
+/* === RAIL: safe arrows + touch swipe enabled === */
+.rail {
+  position: relative;
+  /* Never let the rail itself widen the page */
+  overflow-x: clip;
 }
 
-/* Explicitly prevent sideways pan in hero & wrappers */
-#hero, #hero * {
-  touch-action: pan-y !important;
+/* Track can scroll horizontally by finger, but won't drag the whole page */
+.rail .rail__track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  /* IMPORTANT: allow horizontal gestures here */
+  touch-action: pan-x !important;
+  overscroll-behavior-x: contain;   /* stop scroll chaining to page */
+  width: 100%;
 }
-main, header, footer, section {
-  touch-action: pan-y !important;
+
+/* Keep arrows inside the visible rail area (no width overshoot) */
+.rail .rail__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  /* isolate so they don't contribute to layout width */
+  contain: layout paint style;
+  pointer-events: auto;
+}
+
+.rail .rail__btn--prev { left: 8px; }
+.rail .rail__btn--next { right: 8px; }
+
+/* iOS momentum tweak: prevent track “rubber-band” from nudging page */
+@supports (-webkit-touch-callout: none) {
+  .rail .rail__track { overscroll-behavior: contain; }
 }
   
 </style>
