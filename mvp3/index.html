@@ -1390,25 +1390,28 @@ section.container,
   }
 }
 
-/* === NU HERO: smooth slide transitions (RTL like Netflix) === */
+/* === NU HERO: smooth RTL slide (no opacity fade) === */
 .nu-hero{ overflow: hidden; }
-.nu-hero__slides{ position: relative; min-height: 52vh; }
+.nu-hero__slides{ position: relative; }
 .nu-hero__slide{
   position: absolute; inset: 0;
-  opacity: 0; pointer-events: none;
-  transform: translateX(20%);            /* start slightly to the right */
-  transition: transform .5s ease, opacity .5s ease;
+  pointer-events: none;
+  transform: translateX(100%);           /* default parked to the right */
+  transition: transform .55s ease;       /* transform only */
+  opacity: 1;                            /* keep fully visible during move */
+  z-index: 0;
 }
 .nu-hero__slide.is-active{
-  opacity: 1; pointer-events: auto;
+  pointer-events: auto;
   transform: translateX(0);
+  z-index: 1;
 }
 
-/* Directional helpers the JS will toggle during a change */
-.nu-hero__slide.enter-from-right{ transform: translateX(20%); opacity: 0; }
-.nu-hero__slide.enter-from-left{  transform: translateX(-20%); opacity: 0; }
-.nu-hero__slide.exit-to-left{     transform: translateX(-20%); opacity: 0; }
-.nu-hero__slide.exit-to-right{    transform: translateX(20%);  opacity: 0; }
+/* Directional helpers the JS toggles */
+.nu-hero__slide.enter-from-right{ transform: translateX(100%); }
+.nu-hero__slide.enter-from-left{  transform: translateX(-100%); }
+.nu-hero__slide.exit-to-left{     transform: translateX(-100%); }
+.nu-hero__slide.exit-to-right{    transform: translateX(100%); }
 
 /* Mobile height balance (unchanged) */
 @media (max-width: 640px){
@@ -1433,6 +1436,25 @@ section.container,
   .nu-hero__slides{ min-height: 38vh; }
   .nu-hero__slide{  min-height: 38vh; }
   .nu-hero .nu-hero__inner{ height: 38vh; }
+}
+
+/* === NU Hero: height vars + mobile slide extends under dots === */
+:root{
+  --heroH-desktop: 52vh;
+  --heroH-mobile: 40vh;   /* tweak this number if you want shorter/taller */
+  --heroDots: 28px;       /* space for the dots/buttons row */
+}
+
+/* Desktop/base */
+.nu-hero__slides,
+.nu-hero__slide{ min-height: var(--heroH-desktop); }
+.nu-hero .nu-hero__inner{ min-height: var(--heroH-desktop); }
+
+/* Mobile: extend slide so the image covers UNDER the dots too */
+@media (max-width: 640px){
+  .nu-hero__slides,
+  .nu-hero__slide{ min-height: calc(var(--heroH-mobile) + var(--heroDots)); }
+  .nu-hero .nu-hero__inner{ min-height: var(--heroH-mobile); }
 }
     
 </style>            
