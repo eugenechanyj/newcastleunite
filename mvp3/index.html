@@ -1582,6 +1582,53 @@ section.container,
 }
 
 body { outline: 4px solid hotpink !important; }
+
+/* === NU HERO — FINAL OVERRIDES (light veil + bottom on mobile) === */
+
+/* Lighter, full-bleed veil (wins over earlier definitions) */
+#hero.nu-hero .nu-hero__veil{
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.22) 0%,
+    rgba(0,0,0,.16) 24%,
+    rgba(0,0,0,.06) 66%,
+    rgba(0,0,0,0)  100%
+  ) !important;
+}
+
+/* Make sure the section is a positioning context for the veil */
+#hero.nu-hero{ position: relative !important; }
+
+/* Mobile: hard-ensure the content sits at the bottom */
+@media (max-width: 640px){
+  #hero.nu-hero .nu-hero__inner{
+    display: grid !important;
+    grid-template-rows: 1fr auto !important; /* space + content row */
+    align-content: stretch !important;
+    min-height: 42vh !important;
+    padding: 12px var(--gutter,16px) 24px !important;
+  }
+  /* The panel exists now, so pin it */
+  #hero.nu-hero .nu-hero__panel{
+    align-self: end !important;            /* bottom row */
+    justify-self: start !important;        /* left align (change to center if you want) */
+    margin: 0 12px !important;
+    max-width: min(90ch, 92%) !important;
+
+    /* softer glass */
+    background: rgba(12,14,17,.22) !important;
+    border: 1px solid rgba(255,255,255,.12) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,.18) !important;
+    padding: 12px 14px !important;
+    text-align: left !important;
+  }
+  #hero.nu-hero .nu-hero__actions{ gap: 8px !important; justify-content: flex-start !important; }
+}
+
     
 </style>            
 
@@ -1666,14 +1713,17 @@ body { outline: 4px solid hotpink !important; }
         <img src="/assets/newcastleunitegraffitwallstretched.jpg" alt="">
       </div>
       <div class="nu-hero__veil"></div>
-      <div class="nu-hero__inner">
-        <h1>Got a minute?</h1>
-        <p>Get your 60-sec podcast snack now!</p>
-        <div class="nu-hero__actions">
-          <a class="btn btn-primary" href="#news">Play 60s</a>
-          <a class="btn btn-secondary" href="#newsletter">Join Us</a>
-        </div>
-      </div>
+      
+     <div class="nu-hero__inner">
+  <div class="nu-hero__panel">
+    <h1>Got a minute?</h1>
+    <p>Get your 60-sec podcast snack now!</p>
+    <div class="nu-hero__actions">
+      <a class="btn btn-primary" href="#news">Play 60s</a>
+      <a class="btn btn-secondary" href="#newsletter">Join Us</a>
+    </div>
+  </div>
+</div>      
     </article>
 
     <!-- Slide 2 -->
@@ -1683,12 +1733,14 @@ body { outline: 4px solid hotpink !important; }
       </div>
       <div class="nu-hero__veil"></div>
       <div class="nu-hero__inner">
+    <div class="nu-hero__panel">
         <h1>The bird of many faces</h1>
         <p>Find out more about the mysterious magpie!</p>
         <div class="nu-hero__actions">
           <a class="btn btn-primary" href="#creators">Explore Creators</a>
         </div>
       </div>
+  </div>  
     </article>
 
     <!-- Slide 3 -->
@@ -1698,12 +1750,14 @@ body { outline: 4px solid hotpink !important; }
       </div>
       <div class="nu-hero__veil"></div>
       <div class="nu-hero__inner">
+    <div class="nu-hero__panel">
         <h1>Score limited edition merch!</h1>
         <p>Check out our latest Mystery Boxes</p>
         <div class="nu-hero__actions">
           <a class="btn btn-primary" href="#gear">Shop the Picks</a>
         </div>
       </div>
+    </div>    
     </article>
   </div>
 
