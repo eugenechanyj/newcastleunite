@@ -1629,6 +1629,29 @@ body { outline: 4px solid hotpink !important; }
   #hero.nu-hero .nu-hero__actions{ gap: 8px !important; justify-content: flex-start !important; }
 }
 
+/* --- NU HERO: kill the extra inner background box on mobile --- */
+@media (max-width: 640px){
+  #hero.nu-hero .nu-hero__inner{
+    background: transparent !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding-bottom: 24px !important;
+  }
+  /* keep just a subtle glass on the small panel */
+  #hero.nu-hero .nu-hero__panel{
+    background: rgba(12,14,17,.20) !important;
+    border: 1px solid rgba(255,255,255,.12) !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,.16) !important;
+  }
+}    
+
+/* --- NU HERO: lighter flat veil, full-bleed --- */
+#hero.nu-hero .nu-hero__veil{
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  background: rgba(0,0,0,.18) !important; /* tweak .18 → .14 if you want even lighter */
+}
     
 </style>            
 
@@ -2205,6 +2228,10 @@ body { outline: 4px solid hotpink !important; }
   const root = document.getElementById('hero');
   if(!root) return;
 
+  // >>> prevent double-binding if this script runs twice
+  if (root.dataset.bound === '1') return;
+  root.dataset.bound = '1';
+
   const slides   = Array.from(root.querySelectorAll('.nu-hero__slide'));
   const prevBtn  = root.querySelector('.nu-hero__prev');
   const nextBtn  = root.querySelector('.nu-hero__next');
@@ -2222,7 +2249,7 @@ body { outline: 4px solid hotpink !important; }
   if (idx === -1) { idx = 0; slides[0].classList.add('is-active'); }
 
   let timer = null;
-  const interval = 5000;   // 5s hold
+  const interval = 8000;   // 5s hold
   let animating = false;
 
   function render(){
