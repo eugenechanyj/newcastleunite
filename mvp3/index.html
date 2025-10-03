@@ -1973,7 +1973,24 @@ header.container.site-header .site-nav a{
 
 /* Hide drawer mascot by default (desktop + mobile) */
 .drawer-footer{ display: none !important; }
-  
+
+/* === Clamp hero so page never scrolls sideways === */
+#hero.nu-hero{ position:relative; overflow:hidden !important; }
+#hero .nu-hero__slides{ position:relative; overflow:hidden !important; }
+
+/* Slides are absolutely stacked inside, so transforms never affect page layout */
+#hero .nu-hero__slide{ position:absolute !important; inset:0 !important; }
+
+/* Make sure hero images never exceed the viewport width */
+#hero .nu-hero__bg img{
+  display:block;
+  width:100%; max-width:100%; height:100%;
+  object-fit:cover; object-position:center;
+}
+
+/* Belt-and-braces: kill any horizontal page scroll */
+html, body{ overflow-x:hidden !important; }
+    
 </style>
   
 </head>
