@@ -1639,6 +1639,48 @@ html, body { max-width: 100%; overflow-x: clip !important; }  /* clip > hidden a
   overflow: hidden !important;        /* confine transforms inside hero */
   contain: layout paint style;        /* sandbox the slide animations */
 }
+
+/* === FINAL PATCH — hero tint, page scroll, drawer peek ================= */
+
+/* 1) Kill ANY dark box behind hero text (even super-specific old rules) */
+#hero.nu-hero .nu-hero__inner,
+#hero.nu-hero .nu-hero__inner::before,
+#hero.nu-hero .nu-hero__inner::after,
+#hero .hero__inner {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Keep veil only (lighter wash) */
+#hero.nu-hero .nu-hero__veil{
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  background: rgba(0,0,0,.14) !important; /* ← make .14 → .10 if you want even lighter */
+}
+
+/* 2) Stop page-wide horizontal scroll when slides move */
+html, body { max-width: 100%; overflow-x: clip !important; }  /* ‘clip’ prevents layout jumps */
+#hero, #hero .nu-hero__slides, #hero .nu-hero__slide {
+  width: 100% !important;
+  overflow: hidden !important;   /* trap any translateX animations inside hero */
+  contain: layout paint style;   /* sandbox the slide layer */
+}
+
+/* 3) Drawer “peek” fix — force fully off-canvas when closed, zero shadow */
+@media (max-width: 820px){
+  #site-nav{
+    position: fixed !important;
+    top: 0; right: 0; bottom: 0;
+    width: 70vw; max-width: 340px;
+    transform: translateX(115%) !important;   /* fully hidden */
+    box-shadow: none !important;
+  }
+  #site-nav.open{
+    transform: translateX(0) !important;
+    box-shadow: -4px 0 20px rgba(0,0,0,.5) !important;
+  }
+}
     
 </style>
   
@@ -1673,36 +1715,116 @@ html, body { max-width: 100%; overflow-x: clip !important; }  /* clip > hidden a
   <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">☰</button>
 </header>
 
-<!-- ===== HERO CAROUSEL (FORCED VISIBLE FIX) ===== -->
-<section class="nu-hero" id="hero" style="position:relative; overflow:hidden; min-height:52vh; border-bottom:1px solid rgba(255,255,255,.08); background:#0B0E11;">
-  <div class="nu-hero__slides" aria-live="polite" style="position:relative; min-height:52vh;">
+  
+<!-- ===== HERO CAROUSEL (clean, isolated) ===== -->
+<!-- Local, surgical CSS — safe to keep even if the big stylesheet has issues -->
+<style>
+  /* Stop page-wide sideways scroll caused by slide transforms */
+  html, body { max-width: 100%; overflow-x: clip; }
+
+  /* Hero layout + slide motion (scoped to #hero only) */
+  #hero { position: relative; overflow: hidden; min-height: 52vh; border-bottom: 1px solid rgba(255,255,255,.08); background: #0B0E11; }
+  #hero .nu-hero__slides { position: relative; min-height: 52vh; }
+  #hero .nu-hero__slide{
+    position: absolute; inset: 0;
+    overflow: hidden;                 /* trap transforms */
+    contain: layout paint style;      /* sandbox slide animations */
+    transform: translateX(100%);      /* parked off-screen by default */
+    transition: transform .55s ease;
+    will-change: transform;
+    z-index: 0;
+  }
+  #hero .nu-hero__slide.is-active{ transform: translateX(0); z-index: 1; }
+  #hero .nu-hero__slide.enter-from-right{ transform: translateX(100%); }
+  #hero .nu-hero__slide.enter-from-left{  transform: translateX(-100%); }
+  #hero .nu-hero__slide.exit-to-left{     transform: translateX(-100%); }
+  #hero .nu-hero__slide.exit-to-right{    transform: translateX(100%); }
+
+  /* Layers */
+  #hero .nu-hero__bg, #hero .nu-hero__veil{ position: absolute; inset: 0; }
+  #hero .nu-hero__bg img{
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center; display: block;
+  }
+  /* Lighter, edge-to-edge veil */
+  #hero .nu-hero__veil{ z-index: 1; background: rgba(0,0,0,.14); }
+
+  /* Text container: fill height; bottom row for content */
+  #hero .nu-hero__inner{
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto; padding: 26px 16px;
+    display: grid; grid-template-rows: 1fr auto; align-content: stretch;
+    min-height: 52vh; box-sizing: border-box;
+  }
+
+  /* Keep the text/buttons grouped; NO dark slab */
+  #hero .nu-hero__panel{
+    background: transparent;
+    border: 0;
+    border-radius: 12px;
+    padding: 12px 14px;
+    box-shadow: none;
+    max-width: min(90ch, 92%);
+    align-self: end;           /* pin to bottom row */
+    justify-self: start;       /* left-aligned; change to center if you prefer */
+    margin: 0 12px;
+    text-align: left;
+  }
+
+  /* Headline + subline defaults (kept simple; your main stylesheet can style further) */
+  #hero .nu-hero__panel h1{
+    margin: 0 0 .25em;
+    font: 900 clamp(28px, 5vw, 48px)/1.08 Montserrat, system-ui, sans-serif;
+    color: #fff;
+    text-shadow: 1px 1px 6px rgba(0,0,0,.5);
+  }
+  #hero .nu-hero__panel p{
+    margin: 0 0 10px;
+    font: 500 clamp(14px, 3.2vw, 18px)/1.35 Montserrat, system-ui, sans-serif;
+    color: #f5f5f5;
+    text-shadow: 0 1px 4px rgba(0,0,0,.45);
+  }
+  #hero .nu-hero__actions{ display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* Controls + dots stay on top */
+  #hero .nu-hero__ctrl, #hero .nu-hero__dots{ position: absolute; z-index: 3; }
+  #hero .nu-hero__ctrl{
+    top: 50%; transform: translateY(-50%);
+    background: rgba(0,0,0,.45); color:#fff;
+    border:1px solid rgba(255,255,255,.18);
+    width:38px; height:38px; border-radius:10px; font-size:20px;
+    display:grid; place-items:center; cursor:pointer;
+  }
+  #hero .nu-hero__prev{ left:12px; } 
+  #hero .nu-hero__next{ right:12px; }
+
+  #hero .nu-hero__dots{ left:0; right:0; bottom:12px; display:flex; gap:8px; justify-content:center; }
+  #hero .nu-hero__dots button{
+    all: unset; width: 9px; height: 9px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.7); background: transparent;
+    display: inline-block; cursor: pointer; opacity: .7;
+  }
+  #hero .nu-hero__dots button.is-active{ background:#fff; opacity:1; }
+
+  /* Mobile: a bit shorter hero, grounded text preserved */
+  @media (max-width: 640px){
+    #hero, #hero .nu-hero__slides, #hero .nu-hero__slide, #hero .nu-hero__inner{ min-height: 40vh; }
+  }
+</style>
+
+<section class="nu-hero" id="hero">
+  <div class="nu-hero__slides" aria-live="polite">
     <!-- Slide 1 -->
-    <article class="nu-hero__slide is-active" style="position:relative; min-height:52vh;">
-      <div class="nu-hero__bg" style="position:absolute; inset:0; z-index:0;">
-        <img src="/assets/newcastleunitegraffitwallstretched.jpg" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
+    <article class="nu-hero__slide is-active">
+      <div class="nu-hero__bg">
+        <img src="/assets/newcastleunitegraffitwallstretched.jpg" alt="">
       </div>
-
-      <!-- LIGHTER, EDGE-TO-EDGE VEIL -->
-      <div class="nu-hero__veil"
-           style="position:absolute; inset:0; z-index:1;
-                  background:linear-gradient(to top,
-                    rgba(0,0,0,.22) 0%,
-                    rgba(0,0,0,.16) 24%,
-                    rgba(0,0,0,.06) 66%,
-                    rgba(0,0,0,0)  100%);">
-      </div>
-
-      <div class="nu-hero__inner" style="position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:26px 16px; display:grid; align-content:end; min-height:52vh; box-sizing:border-box;">
-        <!-- PANEL WRAPPER (we’ll bottom-lock this on mobile) -->
-        <div class="nu-hero__panel"
-             style="background:rgba(12,14,17,.22); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:12px 14px; box-shadow:0 6px 18px rgba(0,0,0,.18); max-width:min(90ch,92%);">
-          <h1 style="margin:0 0 .25em; font: 900 clamp(28px, 5vw, 48px)/1.08 Montserrat, system-ui; color:#fff; text-shadow:1px 1px 6px rgba(0,0,0,.5);">
-            Got a minute?
-          </h1>
-          <p style="margin:0 0 10px; font: 500 clamp(14px, 3.2vw, 18px)/1.35 Montserrat, system-ui; color:#f5f5f5; text-shadow:0 1px 4px rgba(0,0,0,.45);">
-            Get your 60-sec podcast snack now!
-          </p>
-          <div class="nu-hero__actions" style="display:flex; gap:10px; flex-wrap:wrap;">
+      <div class="nu-hero__veil"></div>
+      <div class="nu-hero__inner">
+        <div class="nu-hero__panel">
+          <h1>Got a minute?</h1>
+          <p>Get your 60-sec podcast snack now!</p>
+          <div class="nu-hero__actions">
             <a class="btn btn-primary" href="#news">Play 60s</a>
             <a class="btn btn-secondary" href="#newsletter">Join Us</a>
           </div>
@@ -1711,28 +1833,16 @@ html, body { max-width: 100%; overflow-x: clip !important; }  /* clip > hidden a
     </article>
 
     <!-- Slide 2 -->
-    <article class="nu-hero__slide" style="position:relative; min-height:52vh;">
-      <div class="nu-hero__bg" style="position:absolute; inset:0; z-index:0;">
-        <img src="/assets/minutemagpiecomic3.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
+    <article class="nu-hero__slide">
+      <div class="nu-hero__bg">
+        <img src="/assets/minutemagpiecomic3.png" alt="">
       </div>
-      <div class="nu-hero__veil"
-           style="position:absolute; inset:0; z-index:1;
-                  background:linear-gradient(to top,
-                    rgba(0,0,0,.22) 0%,
-                    rgba(0,0,0,.16) 24%,
-                    rgba(0,0,0,.06) 66%,
-                    rgba(0,0,0,0)  100%);">
-      </div>
-      <div class="nu-hero__inner" style="position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:26px 16px; display:grid; align-content:end; min-height:52vh; box-sizing:border-box;">
-        <div class="nu-hero__panel"
-             style="background:rgba(12,14,17,.22); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:12px 14px; box-shadow:0 6px 18px rgba(0,0,0,.18); max-width:min(90ch,92%);">
-          <h1 style="margin:0 0 .25em; font: 900 clamp(28px, 5vw, 48px)/1.08 Montserrat, system-ui; color:#fff; text-shadow:1px 1px 6px rgba(0,0,0,.5);">
-            The bird of many faces
-          </h1>
-          <p style="margin:0 0 10px; font: 500 clamp(14px, 3.2vw, 18px)/1.35 Montserrat, system-ui; color:#f5f5f5; text-shadow:0 1px 4px rgba(0,0,0,.45);">
-            Find out more about the mysterious magpie!
-          </p>
-          <div class="nu-hero__actions" style="display:flex; gap:10px; flex-wrap:wrap;">
+      <div class="nu-hero__veil"></div>
+      <div class="nu-hero__inner">
+        <div class="nu-hero__panel">
+          <h1>The bird of many faces</h1>
+          <p>Find out more about the mysterious magpie!</p>
+          <div class="nu-hero__actions">
             <a class="btn btn-primary" href="#creators">Explore Creators</a>
           </div>
         </div>
@@ -1740,28 +1850,16 @@ html, body { max-width: 100%; overflow-x: clip !important; }  /* clip > hidden a
     </article>
 
     <!-- Slide 3 -->
-    <article class="nu-hero__slide" style="position:relative; min-height:52vh;">
-      <div class="nu-hero__bg" style="position:absolute; inset:0; z-index:0;">
-        <img src="/assets/minutemagpieblindboxstretched1.jpg" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; display:block;">
+    <article class="nu-hero__slide">
+      <div class="nu-hero__bg">
+        <img src="/assets/minutemagpieblindboxstretched1.jpg" alt="">
       </div>
-      <div class="nu-hero__veil"
-           style="position:absolute; inset:0; z-index:1;
-                  background:linear-gradient(to top,
-                    rgba(0,0,0,.22) 0%,
-                    rgba(0,0,0,.16) 24%,
-                    rgba(0,0,0,.06) 66%,
-                    rgba(0,0,0,0)  100%);">
-      </div>
-      <div class="nu-hero__inner" style="position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:26px 16px; display:grid; align-content:end; min-height:52vh; box-sizing:border-box;">
-        <div class="nu-hero__panel"
-             style="background:rgba(12,14,17,.22); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:12px 14px; box-shadow:0 6px 18px rgba(0,0,0,.18); max-width:min(90ch,92%);">
-          <h1 style="margin:0 0 .25em; font: 900 clamp(28px, 5vw, 48px)/1.08 Montserrat, system-ui; color:#fff; text-shadow:1px 1px 6px rgba(0,0,0,.5);">
-            Score limited edition merch!
-          </h1>
-          <p style="margin:0 0 10px; font: 500 clamp(14px, 3.2vw, 18px)/1.35 Montserrat, system-ui; color:#f5f5f5; text-shadow:0 1px 4px rgba(0,0,0,.45);">
-            Check out our latest Mystery Boxes
-          </p>
-          <div class="nu-hero__actions" style="display:flex; gap:10px; flex-wrap:wrap;">
+      <div class="nu-hero__veil"></div>
+      <div class="nu-hero__inner">
+        <div class="nu-hero__panel">
+          <h1>Score limited edition merch!</h1>
+          <p>Check out our latest Mystery Boxes</p>
+          <div class="nu-hero__actions">
             <a class="btn btn-primary" href="#gear">Shop the Picks</a>
           </div>
         </div>
@@ -1770,15 +1868,13 @@ html, body { max-width: 100%; overflow-x: clip !important; }  /* clip > hidden a
   </div>
 
   <!-- Controls -->
-  <button class="nu-hero__ctrl nu-hero__prev" aria-label="Previous slide"
-          style="position:absolute; top:50%; transform:translateY(-50%); left:12px; z-index:3; background:rgba(0,0,0,.45); color:#fff; border:1px solid rgba(255,255,255,.18); width:38px; height:38px; border-radius:10px; font-size:20px; display:grid; place-items:center; cursor:pointer;">‹</button>
-  <button class="nu-hero__ctrl nu-hero__next" aria-label="Next slide"
-          style="position:absolute; top:50%; transform:translateY(-50%); right:12px; z-index:3; background:rgba(0,0,0,.45); color:#fff; border:1px solid rgba(255,255,255,.18); width:38px; height:38px; border-radius:10px; font-size:20px; display:grid; place-items:center; cursor:pointer;">›</button>
+  <button class="nu-hero__ctrl nu-hero__prev" aria-label="Previous slide">‹</button>
+  <button class="nu-hero__ctrl nu-hero__next" aria-label="Next slide">›</button>
 
   <!-- Dots -->
-  <div class="nu-hero__dots" role="tablist" aria-label="Hero slides" style="position:absolute; left:0; right:0; bottom:12px; display:flex; gap:8px; justify-content:center; z-index:3;"></div>
+  <div class="nu-hero__dots" role="tablist" aria-label="Hero slides"></div>
 </section>
-<!-- ===== /HERO CAROUSEL (FORCED VISIBLE FIX) ===== -->
+<!-- ===== /HERO CAROUSEL ===== -->
 
 
   <main>
