@@ -795,6 +795,7 @@ section.container,
   .hero__inner{ padding-top: 14px; padding-bottom: 14px; }
 }
 
+/*  === DISABLE START: OLD HERO block #1 =========================  
 /* HERO CAROUSEL */
 /* ==== HERO CAROUSEL — minimal, collision-proof ==== */
 .hero.hero--carousel{
@@ -904,6 +905,7 @@ section.container,
   background: #fff;
   opacity: 1;
 }
+/*  === DISABLE END: OLD HERO block #1 =========================== */
 
 /* === NAV drawer: hide drawer-only bits on desktop, show burger only on mobile === */
 .nav-toggle{ display: none; }          /* hidden by default (desktop) */
@@ -965,6 +967,7 @@ section.container,
   :target{ scroll-margin-top: 72px; }
 }
 
+/*  DISABLE: DEBUG image (old hero)    
 /* HERO DEBUG: force the active slide to show a known image */
 .hero.hero--carousel .hero__slide.is-active{
   background-image: url('/assets/graffitwallbottom1.jpg?v=1') !important;
@@ -972,6 +975,9 @@ section.container,
   background-size: cover;
   background-repeat: no-repeat;
 }
+*/
+
+/*  === DISABLE START: OLD HERO block #2 =========================
 
 /* === HERO CAROUSEL: height + layers + dots reset === */
 .hero.hero--carousel{
@@ -1015,57 +1021,58 @@ section.container,
   .hero.hero--carousel{ min-height: 50vh; }
 }
 
-/* DEBUG: force active slide to show a known image */
+/* DISABLED: DEBUG image (old hero)
 .hero.hero--carousel .hero__slide.is-active{
   background-image: url('/assets/newcastleunitegraffitiwallstretched.jpg?v=debug') !important;
 }
+*/
 
-/* === HERO: render slide images as actual <img> backgrounds === */
-.hero.hero--carousel{ position: relative; min-height: 52vh; overflow: hidden; }
-.hero__slides{ position: relative; height: 100%; z-index: 0; }
-.hero__slide{
-  position: absolute; inset: 0;
-  opacity: 0; pointer-events: none; transition: opacity .6s ease;
+/* DISABLED OLD HERO CAROUSEL (block #3) — using a false media query */
+@media not all {
+  /* === HERO: render slide images as actual <img> backgrounds === */
+  .hero.hero--carousel{ position: relative; min-height: 52vh; overflow: hidden; }
+  .hero__slides{ position: relative; height: 100%; z-index: 0; }
+  .hero__slide{
+    position: absolute; inset: 0;
+    opacity: 0; pointer-events: none; transition: opacity .6s ease;
+  }
+  .hero__slide.is-active{ opacity: 1; pointer-events: auto; }
+
+  /* Background image layer */
+  .hero__bg{ position: absolute; inset: 0; z-index: 0; }
+  .hero__bg img{
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block;
+  }
+
+  /* Veil + content layers */
+  .hero__veil{ position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.15));
+  }
+  .hero__inner{ position: relative; z-index: 2; }
+  .hero__ctrl, .hero__dots{ position: absolute; z-index: 3; }
+
+  /* Reset dots so global .btn styles don't leak */
+  .hero__dots button{
+    all: unset; width: 9px; height: 9px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.7); background: transparent;
+    display: inline-block; cursor: pointer; opacity: .7;
+  }
+  .hero__dots button.is-active{ background:#fff; opacity:1; }
+
+  /* Safety: ensure any older hero overlays are off for carousel */
+  .hero.hero--carousel::before, .hero.hero--carousel::after{ display:none !important; }
+
+  /* Mobile height */
+  @media (max-width: 640px){
+    .hero.hero--carousel{ min-height: 50vh; }
+  }
 }
-.hero__slide.is-active{ opacity: 1; pointer-events: auto; }
+/* END DISABLED OLD HERO CAROUSEL (block #3) */
 
-/* Background image layer */
-.hero__bg{
-  position: absolute; inset: 0; z-index: 0;
-}
-.hero__bg img{
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
-  display: block;
-}
-
-/* Veil + content layers */
-.hero__veil{ position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.15));
-}
-.hero__inner{ position: relative; z-index: 2; }
-.hero__ctrl, .hero__dots{ position: absolute; z-index: 3; }
-
-/* Reset dots so global .btn styles don't leak */
-.hero__dots button{
-  all: unset; width: 9px; height: 9px; border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.7); background: transparent;
-  display: inline-block; cursor: pointer; opacity: .7;
-}
-.hero__dots button.is-active{ background:#fff; opacity:1; }
-
-/* Safety: ensure any older hero overlays are off for carousel */
-.hero.hero--carousel::before, .hero.hero--carousel::after{ display:none !important; }
-
-/* Mobile height */
-@media (max-width: 640px){
-  .hero.hero--carousel{ min-height: 50vh; }
-}
-
-/* DEBUG: show first slide no matter what */
-.hero__slides .hero__slide:first-child{ display:block !important; }
-
+    
 /* ==== HERO (STATIC RESET) ==== */
 .hero.hero--static{
   position: relative;
