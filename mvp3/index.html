@@ -1868,7 +1868,33 @@ header.container.site-header .brand{
   flex: 0 1 auto !important;
   min-width: 0 !important;
 }
-    
+
+/* === HARD CLAMP: header can never be wider than the viewport === */
+header.container.site-header{
+  width: 100vw !important;        /* force header to viewport width */
+  max-width: 100vw !important;
+  margin-left: 0 !important;      /* neutralise centering that can add width */
+  margin-right: 0 !important;
+  overflow-x: clip !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-wrap: wrap !important;     /* allow items to wrap to next line */
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+/* Header children are allowed to shrink (prevents flex overflow) */
+header.container.site-header .brand,
+header.container.site-header .site-nav{
+  min-width: 0 !important;
+  flex-shrink: 1 !important;
+}
+
+/* Let links wrap (overrides earlier global 'nowrap') */
+header.container.site-header .site-nav a{
+  white-space: normal !important;
+}
+  
 </style>
   
 </head>
