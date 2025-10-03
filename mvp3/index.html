@@ -1523,6 +1523,49 @@ section.container,
 }
 
 #hero.nu-hero .nu-hero__inner{ background: rgba(0,0,0,.35) !important; }
+
+/* === NU-HERO QUICK FIXES (place at very bottom of your CSS) === */
+
+/* 1) Lighter, full-width veil that still spans edge-to-edge */
+.nu-hero { position: relative; }              /* ensure veil positions correctly */
+.nu-hero__veil{
+  position: absolute; inset: 0; z-index: 1;
+  /* Lighter bottom, gentler fade — tune .38/.12 if you want more/less */
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.38) 0%,
+    rgba(0,0,0,.32) 22%,
+    rgba(0,0,0,.12) 68%,
+    rgba(0,0,0,0)   100%
+  );
+}
+
+/* If you want an even lighter, flat tint instead of a gradient, use this one line:
+.nu-hero__veil{ background: rgba(0,0,0,.18); } 
+*/
+
+/* 2) On mobile, force the text panel to the BOTTOM (not middle) */
+@media (max-width: 640px){
+  .nu-hero__inner{
+    /* make a 2-row grid: empty space + content row pinned to bottom */
+    display: grid;
+    grid-template-rows: 1fr auto;
+    align-content: stretch;                 /* let grid fill full height */
+    min-height: 42vh;                       /* ensure there’s room to push down */
+    padding: 12px var(--gutter,16px) 24px;  /* comfy bottom space */
+  }
+  .nu-hero__panel{
+    align-self: end;        /* << pin the panel to the bottom row */
+    justify-self: start;    /* left align (change to center if you want) */
+    margin: 0 12px;         /* breathing room from screen edges */
+    text-align: left;
+    /* make the panel itself a touch lighter too */
+    background: rgba(12,14,17,.30);
+    border-color: rgba(255,255,255,.12);
+  }
+  /* buttons wrap neatly and stay near the bottom */
+  .nu-hero__actions{ justify-content: flex-start; gap: 8px; }
+}
     
 </style>            
   
