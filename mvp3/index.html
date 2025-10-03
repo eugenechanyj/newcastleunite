@@ -1961,6 +1961,21 @@ html, body {
   overflow: hidden !important;
   contain: layout paint style;
 }
+
+/* === Hard stop horizontal gestures globally === */
+html, body {
+  overflow-x: hidden !important;
+  touch-action: pan-y !important;     /* allow vertical only */
+  overscroll-behavior-x: none !important;  /* block sideways overscroll */
+}
+
+/* Explicitly prevent sideways pan in hero & wrappers */
+#hero, #hero * {
+  touch-action: pan-y !important;
+}
+main, header, footer, section {
+  touch-action: pan-y !important;
+}
   
 </style>
   
