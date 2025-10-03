@@ -6,6 +6,37 @@
   <title>NewcastleUnite — MVP3.0</title>
   <meta name="theme-color" content="#0B0E11">
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+<style id="rescue-override">
+  /* 1) STOP the whole page from scrolling sideways */
+  html, body { max-width: 100%; overflow-x: hidden !important; }
+
+  /* 2) Keep ONLY one small glass panel; kill the big inner box */
+  #hero.nu-hero .nu-hero__inner{
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  #hero.nu-hero .nu-hero__panel{
+    background: rgba(12,14,17,.20) !important;
+    border: 1px solid rgba(255,255,255,.12) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,.16) !important;
+  }
+
+  /* 3) Lighter, full-bleed veil (edge-to-edge) */
+  #hero.nu-hero { position: relative !important; }
+  #hero.nu-hero .nu-hero__veil{
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+    background: rgba(0,0,0,.18) !important; /* make .18 → .14 if you want lighter */
+  }
+
+  /* Safety nets that can’t hurt */
+  * { box-sizing: border-box; }
+  img, video { max-width: 100%; height: auto; }
+</style>
+  
   <style>
   /* ===========================
      NewcastleUnite MVP 3.0 Base
@@ -1523,7 +1554,29 @@ body { outline: 4px solid hotpink !important; }
     padding: 12px 14px !important;
   }
 }
-  
+
+/* === FINAL NU HERO FIXES === */
+html, body { max-width: 100%; overflow-x: hidden !important; }
+
+#hero.nu-hero .nu-hero__inner{
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+#hero.nu-hero .nu-hero__panel{
+  background: rgba(12,14,17,.20) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.16) !important;
+}
+
+#hero.nu-hero .nu-hero__veil{
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  background: rgba(0,0,0,.18) !important; /* lighter overlay */
+}
+    
 </style>
   
 </head>
