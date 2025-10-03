@@ -1822,6 +1822,19 @@ header.container.site-header{
     box-shadow: -4px 0 20px rgba(0,0,0,.5) !important;
   }
 }
+
+/* === FIX: Clamp header width so it doesn't cause sideways scroll === */
+.site-header {
+  max-width: 100% !important;   /* never wider than screen */
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.site-header .brand,
+.site-header .site-nav {
+  min-width: 0 !important;      /* allow children to shrink */
+  flex-shrink: 1 !important;    /* force children to compress */
+}
     
 </style>
   
