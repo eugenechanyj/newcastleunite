@@ -2619,6 +2619,44 @@ header.container.site-header,
 /* Force dark canvas regardless of missing classes */
 html, body { background:#0B0E11 !important; color:#fff; }
 main, section, header, footer { background: transparent; }
+
+/* Rails — minimal essentials */
+.rail { position: relative; }
+
+.rail .rail__track{
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;               /* horizontal scroll */
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  touch-action: pan-x;            /* enable finger swipe */
+  padding: 0 40px 6px;            /* space so arrows don’t overlap cards */
+}
+
+.rail .rail__track > *{
+  flex: 0 0 var(--rail-card-w);
+  min-width: var(--rail-card-w);
+  scroll-snap-align: start;
+}
+
+.rail .rail__img{
+  width: 100%;
+  height: var(--rail-card-h);
+  object-fit: cover;
+  display: block;
+}
+
+/* Arrows visible and on top */
+.rail .rail__btn{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 1000;
+  width: 36px; height: 36px; border-radius: 999px;
+  display: grid; place-items: center;
+  background: rgba(0,0,0,.75); color: #fff; border: 0; cursor: pointer;
+}
+.rail .rail__btn--prev{ left: 6px; }
+.rail .rail__btn--next{ right: 6px; }
   
 </style>
   
