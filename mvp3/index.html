@@ -3160,6 +3160,39 @@ main, section, header, footer { background: transparent; }
 @media (hover:hover){
   #hero.nu-hero .nu-hero__actions a:hover{ filter: brightness(.92); }
 }
+
+/* === HERO: unify CTA pills across all slides ========================= */
+/* Baseline pill for every slide */
+#hero.nu-hero .nu-hero__actions a{
+  display:inline-block !important;
+  padding:10px 14px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(255,255,255,.85) !important;
+  background: rgba(0,0,0,.42) !important;   /* translucent black */
+  color:#fff !important;
+  font:800 .95rem/1 Montserrat, system-ui, sans-serif !important;
+  text-decoration:none !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.10);
+  -webkit-backdrop-filter: saturate(120%) blur(1.5px);
+  backdrop-filter: saturate(120%) blur(1.5px);
+}
+
+/* In case an older rule made Slide 1 a solid white pill, force it to match */
+#hero.nu-hero .nu-hero__slides > .nu-hero__slide:nth-child(1) .nu-hero__actions a{
+  background: rgba(0,0,0,.42) !important;
+  color:#fff !important;
+  border-color: rgba(255,255,255,.85) !important;
+}
+
+/* Subtle hover (desktop only) */
+@media (hover:hover){
+  #hero.nu-hero .nu-hero__actions a:hover{
+    filter: brightness(1.06);
+  }
+}
+
+/* Slide 1 special case: white Play pill (your chosen primary) */
+#hero.nu-hero .nu-hero__slides > .nu-hero__slide:nth-child(1) .nu-hero__actions a{ ... }  
   
 </style>
   
