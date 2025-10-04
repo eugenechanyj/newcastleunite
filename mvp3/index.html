@@ -3115,6 +3115,51 @@ main, section, header, footer { background: transparent; }
 ) !important;
   }
 }
+
+/* === HERO TEXT & CTA CLEANUP ========================================= */
+/* Align headline + subtitle + CTA to the same left edge */
+#hero.nu-hero .nu-hero__inner{
+  justify-items: start !important;
+}
+#hero.nu-hero .nu-hero__inner h1,
+#hero.nu-hero .nu-hero__inner p{
+  text-align: left !important;
+}
+#hero.nu-hero .nu-hero__inner p{
+  margin-left: 0 !important;   /* remove any leftover nudge */
+  margin-top: 0 !important;    /* keep it snug under H1 */
+}
+
+/* Make CTA always look like a pill button (no “loose words”) */
+#hero.nu-hero .nu-hero__actions{
+  display: flex !important;
+  gap: 10px !important;
+  flex-wrap: wrap;
+  justify-content: flex-start !important;
+}
+#hero.nu-hero .nu-hero__actions a{
+  display: inline-block !important;
+  border-radius: 999px !important;
+  padding: 10px 14px !important;
+  font: 800 .95rem/1 Montserrat, system-ui, sans-serif !important;
+  text-decoration: none !important;
+  border: 1px solid rgba(255,255,255,.65) !important;
+  color: #fff !important;
+  background: transparent !important;          /* default: outline pill */
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+/* Slide 1 special case: white Play pill (your chosen primary) */
+#hero.nu-hero .nu-hero__slides > .nu-hero__slide:nth-child(1) .nu-hero__actions a{
+  background: #fff !important;
+  color: #000 !important;
+  border-color: #E6E6E6 !important;
+}
+
+/* (Optional) tiny hover on desktop */
+@media (hover:hover){
+  #hero.nu-hero .nu-hero__actions a:hover{ filter: brightness(.92); }
+}
   
 </style>
   
