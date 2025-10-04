@@ -2955,6 +2955,19 @@ main, section, header, footer { background: transparent; }
     z-index: 3;
   }
 }
+
+/* Mobile hero fine-tune */
+@media (max-width: 640px){
+  :root{
+    --heroH-mobile: 46vh;   /* was 44vh; bump if you want a bit taller */
+  }
+  #hero.nu-hero .nu-hero__inner{
+    padding-bottom: 26px !important;   /* lift text slightly */
+  }
+  /* Slightly tighter headline/subtitle for balance */
+  #hero.nu-hero .nu-hero__inner h1{ font-size: clamp(1.25rem, 6.8vw, 2.1rem) !important; line-height: 1.12 !important; }
+  #hero.nu-hero .nu-hero__inner p{  font-size: clamp(.9rem, 3.8vw, 1.05rem) !important; line-height: 1.35 !important; }
+}
   
 </style>
   
