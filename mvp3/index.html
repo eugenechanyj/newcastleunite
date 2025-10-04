@@ -3193,6 +3193,40 @@ main, section, header, footer { background: transparent; }
 
 /* Slide 1 special case: white Play pill (your chosen primary) */
 #hero.nu-hero .nu-hero__slides > .nu-hero__slide:nth-child(1) .nu-hero__actions a{ ... }  
+
+/* === HERO: align CTA pill with titles + bold subtitle ================== */
+#hero.nu-hero .nu-hero__inner{
+  justify-items: start !important;                 /* left anchor for grid items */
+}
+#hero.nu-hero .nu-hero__inner h1,
+#hero.nu-hero .nu-hero__inner p,
+#hero.nu-hero .nu-hero__actions{
+  justify-self: start !important;                  /* align all three to same left */
+  text-align: left !important;
+}
+
+/* Subtitle: stronger weight + tidy spacing, no stray left margin */
+#hero.nu-hero .nu-hero__inner p{
+  font-weight: 700 !important;                     /* try 600 if too heavy */
+  margin: 6px 0 12px !important;                   /* snug under H1 */
+  letter-spacing: .1px;
+  color: #fff !important;
+  text-shadow: 1px 1px 5px rgba(0,0,0,.45);
+}
+
+/* CTA row: keep tight to subtitle and ensure pills render as buttons */
+#hero.nu-hero .nu-hero__actions{
+  margin-top: 2px !important;
+}
+#hero.nu-hero .nu-hero__actions a{
+  display: inline-block !important;                /* never collapse to text */
+}
+
+/* Phones: nuke any old nudges */
+@media (max-width: 640px){
+  #hero.nu-hero .nu-hero__inner p{  margin-left: 0 !important; }
+  #hero.nu-hero .nu-hero__actions{  margin-left: 0 !important; }
+}
   
 </style>
   
