@@ -2763,6 +2763,26 @@ main, section, header, footer { background: transparent; }
     font:800 16px/1.1 Montserrat, system-ui, sans-serif !important;
   }
 }
+
+/* === LIVE Hub only: match pill + title size to other rails (desktop) === */
+@media (min-width: 821px){
+  /* Match outside title text to 16px */
+  #live .section-title{
+    font: 800 1rem/1.1 Montserrat, system-ui, sans-serif !important;
+    margin: 0 0 8px !important;
+  }
+  /* Pill text exactly like other rails (16px, white pill, black text) */
+  #live .section-title .mm-sticker{
+    background:#fff !important;
+    color:#000 !important;
+    border:1px solid #E6E6E6 !important;
+    border-radius:999px !important;
+    padding:6px 12px !important;
+    font:800 16px/1.1 Montserrat, system-ui, sans-serif !important;
+  }
+  /* In case LIVE uses h3 specifically */
+  #live h3.section-title .mm-sticker{ font-size:16px !important; }
+}
   
 </style>
   
