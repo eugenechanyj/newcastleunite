@@ -3047,6 +3047,46 @@ main, section, header, footer { background: transparent; }
     display: block !important;
   }
 }
+
+/* === HERO: +30% headline size and left-aligned titles ================= */
+
+/* Desktop */
+@media (min-width: 821px){
+  #hero.nu-hero .nu-hero__inner{
+    justify-items: start !important;            /* grid: place items left */
+  }
+  #hero.nu-hero .nu-hero__inner h1{
+    /* ~30% larger ceiling (≈ 75px max) */
+    font-size: clamp(44px, 7.8vw, 75px) !important;
+    line-height: 1.06 !important;
+    letter-spacing: -0.5px;
+    text-align: left !important;
+  }
+  #hero.nu-hero .nu-hero__inner p,
+  #hero.nu-hero .nu-hero__actions{
+    justify-self: start !important;
+    text-align: left !important;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 640px){
+  #hero.nu-hero .nu-hero__inner{
+    justify-items: start !important;            /* grid: place items left */
+  }
+  #hero.nu-hero .nu-hero__inner h1{
+    /* ~30% larger over recent mobile size */
+    font-size: clamp(1.95rem, 10vw, 3.4rem) !important;
+    line-height: 1.12 !important;
+    text-align: left !important;
+  }
+  #hero.nu-hero .nu-hero__inner p,
+  #hero.nu-hero .nu-hero__actions{
+    justify-self: start !important;
+    text-align: left !important;
+    margin-left: 12px !important;               /* gentle left anchor on phones */
+  }
+}
   
 </style>
   
