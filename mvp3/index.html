@@ -3265,6 +3265,30 @@ main, section, header, footer { background: transparent; }
     justify-items: start !important;
   }
 }
+
+/* === Mobile rails: reliable swipe + clean snap ========================= */
+@media (max-width: 820px){
+  .rail { overflow-x: visible !important; } /* parent doesn't fight scrolling */
+
+  .rail .rail__track{
+    /* Turn horizontal drags into horizontal scroll */
+    touch-action: pan-x !important;
+
+    /* Make the track itself scroll, not the page */
+    overflow-x: auto !important;
+    overscroll-behavior-x: contain !important;
+
+    /* iOS inertia */
+    -webkit-overflow-scrolling: touch;
+
+    /* Gentle snap + align first card to the same left gutter */
+    scroll-snap-type: x proximity;
+    scroll-padding-left: var(--gutter);
+  }
+
+  /* Ensure each card is a snap target */
+  .rail .rail__item{ scroll-snap-align: start; }
+}
   
 </style>
   
