@@ -2119,6 +2119,113 @@ html, body {
   padding: 26px var(--gutter);
   box-sizing:border-box;
 }
+
+/* === HERO: uniform height + make non-active slides visible during motion === */
+:root{
+  --heroH-desktop: 52vh;
+  --heroH-mobile: 38vh;
+}
+
+/* Same height for all hero layers */
+#hero.nu-hero,
+#hero.nu-hero .nu-hero__slides,
+#hero.nu-hero .nu-hero__slide,
+#hero.nu-hero .nu-hero__bg,
+#hero.nu-hero .nu-hero__inner{
+  min-height: var(--heroH-desktop);
+  height: var(--heroH-desktop);
+}
+@media (max-width:640px){
+  #hero.nu-hero,
+  #hero.nu-hero .nu-hero__slides,
+  #hero.nu-hero .nu-hero__slide,
+  #hero.nu-hero .nu-hero__bg,
+  #hero.nu-hero .nu-hero__inner{
+    min-height: var(--heroH-mobile);
+    height: var(--heroH-mobile);
+  }
+}
+
+/* Contain transforms so offscreen slides never widen the page */
+#hero.nu-hero { position: relative; overflow: hidden; }
+#hero.nu-hero .nu-hero__slides{
+  position: relative; width: 100%;
+  overflow: hidden;
+  contain: layout paint; isolation: isolate;
+}
+@supports (overflow: clip){ #hero.nu-hero .nu-hero__slides{ overflow: clip; } }
+
+/* Base slide model: absolute stack; hidden by opacity (not display) */
+#hero.nu-hero .nu-hero__slide{
+  position: absolute; inset: 0;
+  opacity: 0; pointer-events: none;
+  transform: translateX(0);
+  transition: transform .55s ease;
+  will-change: transform; backface-visibility: hidden;
+  z-index: 0;
+}
+/* Active slide */
+#hero.nu-hero .nu-hero__slide.is-active{
+  opacity: 1; pointer-events: auto;
+  transform: translateX(0);
+  z-index: 1;
+}
+/* Make any entering/exiting slide visible while animating (prevents “black” frames) */
+#hero.nu-hero .nu-hero__slide.enter-from-right,
+#hero.nu-hero .nu-hero__slide.enter-from-left,
+#hero.nu-hero .nu-hero__slide.exit-to-left,
+#hero.nu-hero .nu-hero__slide.exit-to-right{
+  opacity: 1;
+}
+
+/* Image layer fills completely (no letterboxing) */
+#hero.nu-hero .nu-hero__bg{ position:absolute; inset:0; }
+#hero.nu-hero .nu-hero__bg img{
+  display:block; width:100%; height:100% !important;
+  object-fit: cover; object-position: center center !important;
+}
+
+/* Pin text bottom-left so it doesn’t drift */
+#hero.nu-hero .nu-hero__inner{
+  display:grid; align-content:end; justify-items:start;
+  text-align:left; padding: 26px var(--gutter); box-sizing:border-box;
+}
+
+/* === RAILS: restore card sizing + swipe + image aspect === */
+.rail { position: relative; }
+
+.rail .rail__track{
+  display: flex; gap: 12px;
+  overflow-x: auto; overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  touch-action: pan-x !important;          /* enable swipe inside track */
+  overscroll-behavior-x: contain;
+  padding-bottom: 6px;
+}
+
+/* Ensure tiles don’t stretch full-width */
+.rail .rail__item{
+  flex: 0 0 var(--rail-card-w) !important;
+  width: var(--rail-card-w) !important;
+  min-width: var(--rail-card-w) !important;
+  scroll-snap-align: start;
+}
+
+/* Force rail images to correct shape */
+.rail .rail__img{
+  display:block; width:100%;
+  height: var(--rail-card-h) !important;
+  object-fit: cover !important;
+}
+
+/* Keep arrows inside bounds; they don’t affect layout width */
+.rail .rail__btn{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 2; contain: layout paint style; pointer-events: auto;
+}
+.rail .rail__btn--prev{ left: 8px; }
+.rail .rail__btn--next{ right: 8px; }
   
 </style>
   
