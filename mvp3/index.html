@@ -34,7 +34,7 @@
   /* Safety nets that can’t hurt */
   * { box-sizing: border-box; }
   img, video { max-width: 100%; height: auto; }
-</style>
+>
   
 <style>
   /* ===========================
@@ -2069,6 +2069,55 @@ html, body {
 }
 @supports (overflow: clip) {
   #hero.nu-hero .nu-hero__slides{ overflow: clip; }
+}
+
+/* === NU HERO: unify heights + make images fully cover === */
+:root{
+  --heroH-desktop: 52vh;
+  --heroH-mobile: 38vh;   /* tweak if you want taller/shorter on phones */
+}
+
+/* One consistent height across the whole hero stack */
+#hero.nu-hero,
+#hero.nu-hero .nu-hero__slides,
+#hero.nu-hero .nu-hero__slide,
+#hero.nu-hero .nu-hero__bg,
+#hero.nu-hero .nu-hero__inner{
+  min-height: var(--heroH-desktop);
+  height: var(--heroH-desktop);
+}
+
+@media (max-width: 640px){
+  #hero.nu-hero,
+  #hero.nu-hero .nu-hero__slides,
+  #hero.nu-hero .nu-hero__slide,
+  #hero.nu-hero .nu-hero__bg,
+  #hero.nu-hero .nu-hero__inner{
+    min-height: var(--heroH-mobile);
+    height: var(--heroH-mobile);
+  }
+}
+
+/* Background layer fills the slide exactly */
+#hero.nu-hero .nu-hero__bg{ position:absolute; inset:0; }
+
+/* IMAGE: must fill full height and be centered — no letterboxing */
+#hero.nu-hero .nu-hero__bg img{
+  display:block;
+  width:100%;
+  height:100% !important;
+  object-fit: cover;
+  object-position: center center !important;
+}
+
+/* Text panel pinned bottom-left so it doesn't drift */
+#hero.nu-hero .nu-hero__inner{
+  display:grid;
+  align-content:end;       /* bottom */
+  justify-items:start;     /* left */
+  text-align:left;
+  padding: 26px var(--gutter);
+  box-sizing:border-box;
 }
   
 </style>
