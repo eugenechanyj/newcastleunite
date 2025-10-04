@@ -2783,6 +2783,31 @@ main, section, header, footer { background: transparent; }
   /* In case LIVE uses h3 specifically */
   #live h3.section-title .mm-sticker{ font-size:16px !important; }
 }
+
+/* === Mobile header: keep burger on first row, no wrapping === */
+@media (max-width: 820px){
+  .site-header{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    padding: 10px 12px !important;
+    flex-wrap: nowrap !important;     /* prevent second line */
+  }
+  .brand{
+    display: flex; align-items: center; gap: 8px;
+    min-width: 0 !important;          /* allow shrink */
+    flex: 1 1 auto !important;         /* take remaining space */
+  }
+  .brand strong{ font-size: .95rem !important; }   /* slightly smaller title */
+  .brand .tagline{ display: none !important; }     /* hide to avoid wrapping */
+  .nav-toggle{
+    display: inline-block !important;
+    margin-left: auto !important;      /* push to far right */
+    flex: 0 0 auto !important;
+    z-index: 10001 !important;
+  }
+}
   
 </style>
   
