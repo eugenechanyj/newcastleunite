@@ -4203,6 +4203,38 @@ main, section, header, footer { background: transparent; }
   });
 })();
 </script>
+
+<script>
+(function(){
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+  function getStep(track){
+    const cs = getComputedStyle(track);
+    const item = track.querySelector('.rail__item');
+    const itemW = item ? item.getBoundingClientRect().width : 0;
+    const gap = parseFloat(cs.columnGap || cs.gap || '0') || 0;
+    const cardStep = itemW ? (itemW + gap) : 0;
+    return Math.max(cardStep, Math.floor(track.clientWidth * 0.9));
+  }
+
+  function scrollByStep(track, dir){
+    const step = getStep(track) * (dir === 'next' ? 1 : -1);
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    const target = clamp(track.scrollLeft + step, 0, Math.max(0, maxScroll));
+    track.scrollTo({ left: target, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('.rail__btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const id = btn.getAttribute('data-target');
+      const track = id ? document.querySelector(id) : null;
+      if (!track) return;
+      const dir = btn.classList.contains('rail__btn--next') ? 'next' : 'prev';
+      scrollByStep(track, dir);
+    }, { passive: true });
+  });
+})();
+</script>
   
 </body>
 </html>
