@@ -3227,6 +3227,23 @@ main, section, header, footer { background: transparent; }
   #hero.nu-hero .nu-hero__inner p{  margin-left: 0 !important; }
   #hero.nu-hero .nu-hero__actions{  margin-left: 0 !important; }
 }
+
+/* HERO (desktop): left-anchor headline/subtitle/CTA — TEST-GATED */
+@media (min-width: 821px){
+  body.hero-left-test #hero.nu-hero .nu-hero__inner{
+    margin-left: var(--gutter) !important;   /* anchor to left gutter */
+    margin-right: auto !important;
+    justify-items: start !important;
+  }
+  body.hero-left-test #hero.nu-hero .nu-hero__panel{ margin-left: 0 !important; }
+  body.hero-left-test #hero.nu-hero .nu-hero__inner > h1,
+  body.hero-left-test #hero.nu-hero .nu-hero__inner > p,
+  body.hero-left-test #hero.nu-hero .nu-hero__inner > .nu-hero__actions{
+    justify-self: start !important;
+    text-align: left !important;
+    margin-left: 0 !important;
+  }
+}
   
 </style>
   
