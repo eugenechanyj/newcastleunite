@@ -2657,6 +2657,34 @@ main, section, header, footer { background: transparent; }
 }
 .rail .rail__btn--prev{ left: 6px; }
 .rail .rail__btn--next{ right: 6px; }
+
+/* Rails — reset any old dual-anchoring and place arrows correctly */
+.rail { position: relative; }
+.rail .rail__btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,.75);
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+
+  /* RESET any earlier left/right settings that hit both buttons */
+  left: auto !important;
+  right: auto !important;
+}
+.rail .rail__btn--prev{ left: 6px !important; }
+.rail .rail__btn--next{ right: 6px !important; }
+
+/* Track stays under arrows; disable any edge fades that might cover buttons */
+.rail .rail__track{ position: relative; z-index: 1; padding: 0 40px 6px; }
+.rail::before, .rail::after{ display: none !important; }
   
 </style>
   
