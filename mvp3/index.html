@@ -2725,6 +2725,44 @@ main, section, header, footer { background: transparent; }
     opacity: 1 !important;
   }
 }
+
+/* === DESKTOP polish 2: rail pill size, outside text, LIVE Hub match === */
+@media (min-width: 821px){
+
+  /* White pill stays white/black; bump font inside pill by ~15% (→ 16px) */
+  .rail .rail__title .mm-sticker,
+  .rail .rail__title .mm-badge{
+    background:#fff !important;
+    color:#000 !important;
+    border:1px solid #E6E6E6 !important;
+    border-radius:999px;
+    padding:6px 12px;
+    font:800 16px/1.1 Montserrat, system-ui, sans-serif; /* was 14px */
+  }
+
+  /* Outside words smaller — match the pill text size (≈16px) */
+  .rail .rail__title h2,
+  .rail .rail__title h3{
+    font-size: 1rem !important; /* 16px */
+    line-height: 1.1;
+    margin: 0;
+  }
+  .rail .rail__title .rail-last{
+    font-size: 1rem !important; /* match pill size */
+    font-weight: 800;
+  }
+
+  /* LIVE Hub: normalize pill to be identical to rails */
+  #live .rail__title .mm-sticker,
+  #live h3.section-title .mm-sticker{
+    background:#fff !important;
+    color:#000 !important;
+    border:1px solid #E6E6E6 !important;
+    border-radius:999px;
+    padding:6px 12px !important;
+    font:800 16px/1.1 Montserrat, system-ui, sans-serif !important;
+  }
+}
   
 </style>
   
