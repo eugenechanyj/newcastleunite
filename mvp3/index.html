@@ -3269,6 +3269,18 @@ main, section, header, footer { background: transparent; }
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
+
+/* Hero: remove leftover side margins + extra left padding on the panel */
+#hero.nu-hero .nu-hero__slides > .nu-hero__slide .nu-hero__panel{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;   /* align titles with container gutter */
+}
+/* Keep the inner’s gutter padding as the single left anchor */
+#hero.nu-hero .nu-hero__inner{
+  padding-left: var(--gutter) !important;
+  padding-right: var(--gutter) !important;
+}
   
 </style>
   
