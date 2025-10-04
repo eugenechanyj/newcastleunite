@@ -2855,6 +2855,52 @@ main, section, header, footer { background: transparent; }
     z-index:10001 !important;
   }
 }
+
+/* === MOBILE PASS (hero height to dots + enable rail swipe) ============ */
+
+/* A) HERO — make the image taller so the dots sit on it */
+@media (max-width: 640px){
+  :root{
+    --heroH-mobile: 42vh;  /* tweak 40–46vh to taste */
+    --heroDots: 28px;
+  }
+  /* Slide area extends under the dots */
+  #hero.nu-hero .nu-hero__slides,
+  #hero.nu-hero .nu-hero__slide{
+    min-height: calc(var(--heroH-mobile) + var(--heroDots)) !important;
+  }
+  /* Content panel uses the hero height (not including dots) */
+  #hero.nu-hero .nu-hero__inner{
+    min-height: var(--heroH-mobile) !important;
+    padding-bottom: 24px !important;
+  }
+  /* Background image always covers */
+  #hero.nu-hero .nu-hero__bg img{
+    width:100% !important; height:100% !important;
+    object-fit: cover !important; object-position: center !important;
+    display:block !important;
+  }
+  /* Make sure the dots are anchored on the image */
+  #hero.nu-hero .nu-hero__dots{
+    position:absolute !important; left:0; right:0; bottom:12px; z-index:3;
+  }
+}
+
+/* B) RAILS — enable finger swipe without changing sizes */
+@media (max-width: 640px){
+  /* In case an older rule blocked horizontal gestures inside rails */
+  .rail, .rail * { touch-action: auto !important; }
+
+  .rail .rail__track{
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;   /* iOS momentum */
+    touch-action: pan-x !important;      /* allow horizontal swipe */
+    overscroll-behavior-x: contain;      /* don’t drag the page */
+    scroll-snap-type: x proximity;
+    padding: 0 24px 6px;                 /* breathing room at edges */
+  }
+}
   
 </style>
   
