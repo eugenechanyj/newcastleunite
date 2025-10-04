@@ -996,13 +996,6 @@ section.container,
   overflow: hidden;
   min-height: 52vh;
 }
-.nu-hero__slides{ position: relative; }
-.nu-hero__slide{
-  display: none; position: relative;
-  min-height: 52vh;
-}
-.nu-hero__slide.is-active{ display:block; }
-
 .nu-hero__bg{ position:absolute; inset:0; z-index:0; }
 .nu-hero__bg img{
   position:absolute; inset:0; width:100%; height:100%;
@@ -1278,10 +1271,6 @@ section.container,
     font-size: 2.2rem !important;  /* was ~2rem */
   }
 }
-
-/* === NU HERO: smooth RTL slide (no opacity fade) === */
-.nu-hero{ overflow: hidden; }
-.nu-hero__slides{ position: relative; }
 
 /* === Slides stack in place by default; only move when a direction class is applied === */
 .nu-hero__slide{
@@ -2065,6 +2054,18 @@ html, body {
   contain: layout paint;       /* isolate layout & paint from ancestors */
   isolation: isolate;          /* new stacking context */
   clip-path: inset(0);         /* belt-and-suspenders visual clipping */
+}
+@supports (overflow: clip) {
+  #hero.nu-hero .nu-hero__slides{ overflow: clip; }
+}
+
+#hero.nu-hero .nu-hero__slides{
+  position: relative;
+  width: 100%;
+  min-height: var(--heroH-desktop, 52vh);
+  overflow: hidden;
+  contain: layout paint;
+  isolation: isolate;
 }
 @supports (overflow: clip) {
   #hero.nu-hero .nu-hero__slides{ overflow: clip; }
