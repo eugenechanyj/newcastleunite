@@ -2226,6 +2226,108 @@ html, body {
 }
 .rail .rail__btn--prev{ left: 8px; }
 .rail .rail__btn--next{ right: 8px; }
+
+/* === EMERGENCY OVERRIDE v1 — hero & rails (wins over everything) === */
+
+/* HERO: contain & unify */
+:root{ --heroH-desktop: 52vh; --heroH-mobile: 38vh; }
+
+#hero.nu-hero { position: relative !important; overflow: hidden !important; }
+
+#hero.nu-hero .nu-hero__slides{
+  position: relative !important;
+  width: 100% !important;
+  height: var(--heroH-desktop) !important;
+  overflow: hidden !important;
+  contain: layout paint !important;
+  isolation: isolate !important;
+}
+@media (max-width:640px){
+  #hero.nu-hero .nu-hero__slides{ height: var(--heroH-mobile) !important; }
+}
+
+/* Slides: absolute stack; visible when active; no display toggles */
+#hero.nu-hero .nu-hero__slide{
+  position: absolute !important; inset: 0 !important;
+  display: block !important;
+  opacity: 0 !important;           /* hidden by opacity (not display) */
+  pointer-events: none !important;
+  transform: translateX(0) !important;
+  transition: transform .55s ease !important;
+  z-index: 0 !important;
+}
+#hero.nu-hero .nu-hero__slide.is-active{
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateX(0) !important;
+  z-index: 1 !important;
+}
+/* Ensure entering/exiting slides are visible during motion (no black frames) */
+#hero.nu-hero .nu-hero__slide.enter-from-right,
+#hero.nu-hero .nu-hero__slide.enter-from-left,
+#hero.nu-hero .nu-hero__slide.exit-to-left,
+#hero.nu-hero .nu-hero__slide.exit-to-right{
+  opacity: 1 !important;
+}
+
+/* Image must fill */
+#hero.nu-hero .nu-hero__bg{ position:absolute !important; inset:0 !important; }
+#hero.nu-hero .nu-hero__bg img{
+  display:block !important; width:100% !important; height:100% !important;
+  object-fit: cover !important; object-position: center !important;
+}
+
+/* Text pinned bottom-left */
+#hero.nu-hero .nu-hero__inner{
+  position: relative !important;
+  height: 100% !important;
+  display: grid !important;
+  align-content: end !important;
+  justify-items: start !important;
+  text-align: left !important;
+  padding: 26px var(--gutter) !important;
+  box-sizing: border-box !important;
+}
+
+/* === RAILS: restore tile sizing, swipe, and image aspect === */
+.rail { position: relative !important; }
+
+.rail .rail__track{
+  display: flex !important; gap: 12px !important;
+  overflow-x: auto !important; overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  scroll-snap-type: x proximity !important;
+  touch-action: pan-x !important;          /* enable swipe in track */
+  overscroll-behavior-x: contain !important;
+  padding: 0 44px 6px !important;          /* keeps items clear of arrows */
+  box-sizing: border-box !important;
+}
+
+/* Tiles must not stretch */
+.rail .rail__item{
+  flex: 0 0 var(--rail-card-w) !important;
+  width: var(--rail-card-w) !important;
+  min-width: var(--rail-card-w) !important;
+  scroll-snap-align: start !important;
+}
+
+/* Rail images keep intended aspect */
+.rail .rail__img{
+  display:block !important; width:100% !important;
+  height: var(--rail-card-h) !important;
+  object-fit: cover !important;
+}
+
+/* Arrows inside bounds (don’t widen page) */
+.rail .rail__btn{
+  position: absolute !important; top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 2 !important;
+  contain: layout paint style !important;
+  pointer-events: auto !important;
+}
+.rail .rail__btn--prev{ left: 8px !important; }
+.rail .rail__btn--next{ right: 8px !important; }
   
 </style>
   
