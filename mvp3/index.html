@@ -2973,6 +2973,45 @@ main, section, header, footer { background: transparent; }
   .rail .rail__track::-webkit-scrollbar{ display:none; }
   .rail .rail__track{ scrollbar-width: none; }
 }
+
+/* === Rails cosmetics: first-word pill, merch title, note align, +20% cards (desktop) === */
+
+/* 1) First word in a white capsule with black text (all rails) */
+.rail .rail__title .mm-sticker{
+  background:#fff !important;
+  color:#000 !important;
+  border:1px solid var(--border, #E6E6E6) !important;
+  border-radius:999px !important;
+  padding:6px 12px !important;
+  box-shadow:none !important;
+}
+
+/* 2) Merch rail: keep “and More” on one line */
+#gear .rail__title .rail-last{
+  white-space: nowrap !important;
+}
+
+/* 3) Merch rail: small commission note → smaller + flushed right */
+#gear .rail__title{
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  justify-content:space-between !important;
+}
+#gear .rail__title > span:last-child{
+  margin-left:auto !important;
+  font-size:.75rem !important;   /* smaller */
+  opacity:.75 !important;
+  white-space: nowrap !important;
+}
+
+/* 4) Desktop only: make rail cards ~20% bigger (keeps mobile unchanged) */
+@media (min-width: 821px){
+  :root{
+    --rail-card-w: calc(280px * 1.2);   /* was 280px */
+    --rail-card-h: calc(158px * 1.2);   /* was 158px (~16:9) */
+  }
+}
   
 </style>
   
