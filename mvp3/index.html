@@ -2538,6 +2538,83 @@ html, body {
   border: 0;
   display: block;
 }
+
+/* === MVP3 — Holistic minimal reset (theme + rails + mobile hero) === */
+
+/* Theme: top nav & rail sections back to black */
+header.container.site-header,
+.site-header{
+  background:#0B0E11 !important;
+  color:#fff !important;
+}
+.site-header a{ color:#fff !important; }
+
+/* Rails area backgrounds (keep cards white, only the section goes dark) */
+#creators, #club-news, #gear, #live, .rail{
+  background:#0B0E11 !important;
+  color:#fff;
+}
+
+/* Rails: make sure RIGHT arrow shows and sits above fades/tracks */
+.rail .rail__track{ position: relative; z-index: 2; } /* track above fades */
+.rail .rail__btn{
+  position:absolute; top:50%; transform:translateY(-50%);
+  z-index:6; width:36px; height:36px; border-radius:999px;
+  display:grid; place-items:center; background:rgba(0,0,0,.7);
+  color:#fff; border:0; cursor:pointer;
+}
+.rail .rail__btn--prev{ left:6px; }
+.rail .rail__btn--next{
+  right:6px;
+  display:grid !important; visibility:visible !important; opacity:1 !important;
+}
+
+/* Mobile header: restore burger + reduce thickness */
+@media (max-width:820px){
+  .nav-toggle{ display:inline-block !important; z-index:10001 !important; }
+  .site-header{ padding:10px 12px !important; } /* slimmer bar */
+}
+
+/* Mobile hero: stretch image under the dots (fix “shrunk” look) */
+:root{ --heroH-mobile: 40vh; --heroDots: 28px; }
+@media (max-width:640px){
+  #hero.nu-hero.nu-hero--clean .nu-hero__slides{
+    min-height: calc(var(--heroH-mobile) + var(--heroDots)) !important;
+  }
+  #hero.nu-hero.nu-hero--clean .nu-hero__slide{
+    min-height: calc(var(--heroH-mobile) + var(--heroDots)) !important;
+  }
+  #hero.nu-hero.nu-hero--clean .nu-hero__inner{
+    min-height: var(--heroH-mobile) !important;
+  }
+  #hero.nu-hero.nu-hero--clean .nu-hero__bg img{
+    height:100% !important; object-fit:cover !important; object-position:center !important;
+  }
+}
+
+/* Mobile rails: reduce card size so tracks can actually scroll */
+@media (max-width:640px){
+  :root{
+    --rail-card-w: 58vw;                    /* narrower cards on phones */
+    --rail-card-h: calc(58vw * 9 / 16);     /* keep ~16:9 window */
+  }
+  .rail .rail__track > *{
+    flex: 0 0 var(--rail-card-w);
+    width: var(--rail-card-w);
+    min-width: var(--rail-card-w);
+  }
+  .rail .rail__track{
+    overflow-x:auto !important;             /* ensure swipe enabled */
+    -webkit-overflow-scrolling:touch;
+    touch-action: pan-x !important;
+    padding: 0 40px 6px;                    /* space for arrows */
+  }
+  .rail .rail__track > * img,
+  .rail .rail__img{
+    height: var(--rail-card-h) !important;
+    object-fit: cover !important;
+  }
+}
   
 </style>
   
