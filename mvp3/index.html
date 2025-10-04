@@ -2915,6 +2915,46 @@ main, section, header, footer { background: transparent; }
     user-select: none; -webkit-user-select: none; -webkit-user-drag: none;
   }
 }
+
+/* === MOBILE • Hero image should extend under dots ===================== */
+@media (max-width: 640px){
+  :root{
+    --heroH-mobile: 44vh;   /* tweak 40–48vh if you want taller/shorter */
+    --heroDots: 28px;       /* space the dot row consumes */
+  }
+
+  /* Make the section + slide area include the dot row height */
+  #hero.nu-hero,
+  #hero.nu-hero .nu-hero__slides,
+  #hero.nu-hero .nu-hero__slide{
+    min-height: calc(var(--heroH-mobile) + var(--heroDots)) !important;
+  }
+
+  /* Text panel uses the “pure” hero height (not counting dots) */
+  #hero.nu-hero .nu-hero__inner{
+    min-height: var(--heroH-mobile) !important;
+    padding-bottom: 24px !important;
+  }
+
+  /* Ensure the background fully covers the slide */
+  #hero.nu-hero .nu-hero__bg,
+  #hero.nu-hero .nu-hero__bg img{
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+  }
+
+  /* Anchor the dots on the photo */
+  #hero.nu-hero .nu-hero__dots{
+    position: absolute !important;
+    left: 0; right: 0; bottom: 12px;
+    z-index: 3;
+  }
+}
   
 </style>
   
