@@ -3472,6 +3472,24 @@ main, section, header, footer { background: transparent; }
 })();
 </script>
 
+<script>
+(function(){
+  const step = parseInt(
+    getComputedStyle(document.documentElement).getPropertyValue('--rail-card-w')
+  ) || 280;
+
+  document.querySelectorAll('.rail__btn[data-target]').forEach(btn => {
+    const sel = btn.getAttribute('data-target');
+    const track = document.querySelector(sel);
+    if (!track) return;
+
+    btn.addEventListener('click', () => {
+      const dir = btn.classList.contains('rail__btn--prev') ? -1 : 1;
+      track.scrollBy({ left: dir * step * 1.1, behavior: 'smooth' });
+    });
+  });
+})();
+</script>
   
 </body>
 </html>
