@@ -2001,6 +2001,39 @@ html, body {
 @supports (-webkit-touch-callout: none) {
   .rail .rail__track { overscroll-behavior: contain; }
 }
+
+/* === RAIL: arrows contained, track swipe restored === */
+.rail { position: relative; overflow-x: hidden; }
+@supports (overflow: clip) { .rail { overflow-x: clip; } }
+
+.rail .rail__track{
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x !important;     /* allow horizontal swipe here */
+  overscroll-behavior-x: contain;     /* stop chaining to page */
+  padding-inline: 44px;               /* keep items clear of arrows */
+  box-sizing: border-box;
+}
+
+.rail .rail__btn{
+  position: absolute;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: grid; place-items: center;
+  contain: layout paint style;        /* don't affect layout width */
+  pointer-events: auto;
+}
+.rail .rail__btn--prev{ inset-inline-start: 8px; }
+.rail .rail__btn--next{ inset-inline-end: 8px; }
+
+/* rail items can shrink inside flex (prevents blowouts) */
+.rail .rail__item{ min-width: 0; }
   
 </style>
   
@@ -2786,6 +2819,48 @@ html, body {
       }
     }
   }, { passive: false }); // must be false to allow preventDefault
+})();
+</script>
+
+<script>
+(function(){
+  // Block horizontal wheel gestures unless inside a rail track (desktop trackpads)
+  document.addEventListener('wheel', function(e){
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      if (!e.target.closest('.rail .rail__track')) {
+        e.preventDefault();
+      }
+    }
+  }, { passive: false });
+
+  // Touch interceptor: allow horizontal swipe only when it starts inside a rail track
+  let startX = 0, startY = 0, originTrack = null;
+
+  document.addEventListener('touchstart', function(e){
+    if (e.touches.length === 1) {
+      const t = e.touches[0];
+      startX = t.clientX; startY = t.clientY;
+      originTrack = e.target.closest('.rail .rail__track');
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchmove', function(e){
+    if (e.touches.length === 1) {
+      const t = e.touches[0];
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+      if (Math.abs(dx) > Math.abs(dy)) {
+        if (!originTrack) {
+          e.preventDefault(); // block sideways swipe outside rails
+        }
+      }
+    }
+  }, { passive: false });
+
+  // Safety: keep page's horizontal scroll pinned to 0 if anything leaks
+  function snapX(){ if (window.scrollX !== 0) window.scrollTo(0, window.scrollY); }
+  window.addEventListener('scroll', snapX, { passive: true });
+  window.addEventListener('resize', snapX, { passive: true });
 })();
 </script>
   
