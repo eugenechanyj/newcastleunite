@@ -3264,6 +3264,21 @@ main, section, header, footer { background: transparent; }
   padding-left: var(--gutter) !important;
   padding-right: var(--gutter) !important;
 }
+
+/* HERO: align hero text to the same container left as rails */
+#hero.nu-hero .nu-hero__inner.container{
+  /* container already sets max-width + margin:0 auto + side padding */
+  padding-left: 0 !important;      /* prevent double gutter */
+  padding-right: 0 !important;
+  justify-items: start !important; /* keep left-aligned inside the container */
+}
+
+/* Ensure the panel itself doesn’t shift things */
+#hero.nu-hero .nu-hero__panel{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+}
   
 </style>
   
@@ -3314,7 +3329,7 @@ main, section, header, footer { background: transparent; }
       </div>
       <div class="nu-hero__veil"
            style="position:absolute; inset:0; z-index:1; background:rgba(0,0,0,.14) !important;"></div>
-      <div class="nu-hero__inner"
+      <div class="nu-hero__inner container"
            style="position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:26px 16px;
                   display:grid; grid-template-rows:1fr auto; align-content:stretch;
                   min-height:52vh; box-sizing:border-box;
@@ -3345,7 +3360,7 @@ main, section, header, footer { background: transparent; }
       </div>
       <div class="nu-hero__veil"
            style="position:absolute; inset:0; z-index:1; background:rgba(0,0,0,.14) !important;"></div>
-      <div class="nu-hero__inner"
+      <div class="nu-hero__inner container"
            style="position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:26px 16px;
                   display:grid; grid-template-rows:1fr auto; align-content:stretch;
                   min-height:52vh; box-sizing:border-box;
@@ -3376,7 +3391,7 @@ main, section, header, footer { background: transparent; }
       </div>
       <div class="nu-hero__veil"
            style="position:absolute; inset:0; z-index:1; background:rgba(0,0,0,.14) !important;"></div>
-      <div class="nu-hero__inner"
+      <div class="nu-hero__inner container"
            style="position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:26px 16px;
                   display:grid; grid-template-rows:1fr auto; align-content:stretch;
                   min-height:52vh; box-sizing:border-box;
