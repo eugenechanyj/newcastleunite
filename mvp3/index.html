@@ -2685,6 +2685,46 @@ main, section, header, footer { background: transparent; }
 /* Track stays under arrows; disable any edge fades that might cover buttons */
 .rail .rail__track{ position: relative; z-index: 1; padding: 0 40px 6px; }
 .rail::before, .rail::after{ display: none !important; }
+
+/* === DESKTOP polish: nav “Join Us” pill + white rail stickers ========== */
+@media (min-width: 821px){
+
+  /* 1) Top nav: make the “Join Us” link a white pill with black text */
+  /* (We target the header nav link that points to #newsletter. If yours is different,
+     add class="nav-join" to that link and this selector will still catch it.) */
+  .site-header a[href="#newsletter"],
+  .site-header a[href*="newsletter"],
+  .site-header .nav-join{
+    display:inline-block;
+    background:#fff !important;
+    color:#000 !important;
+    border:1px solid #E6E6E6 !important;
+    border-radius:999px;
+    padding:8px 12px;
+    font:800 .95rem/1 Montserrat, system-ui, sans-serif;
+  }
+
+  /* keep other header links white-on-black */
+  .site-header a:not([href*="newsletter"]){
+    color:#fff !important;
+    background:transparent !important;
+    border-color:transparent !important;
+  }
+
+  /* 2) Rail title bubbles: white pill, black text, ~20% larger */
+  .rail .rail__title .mm-sticker,
+  .rail .rail__title .mm-badge{
+    display:inline-block !important;
+    background:#fff !important;
+    color:#000 !important;
+    border:1px solid #E6E6E6 !important;
+    border-radius:999px;
+    padding:6px 12px;
+    font:800 14px/1.1 Montserrat, system-ui, sans-serif; /* 12px → ~14px (~+20%) */
+    box-shadow: none !important;
+    opacity: 1 !important;
+  }
+}
   
 </style>
   
