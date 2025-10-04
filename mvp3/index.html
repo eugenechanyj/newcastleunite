@@ -1412,7 +1412,7 @@ section.container,
   .nu-hero .nu-hero__actions{ gap: 8px; }
 }
 
-#hero.nu-hero .nu-hero__inner{ background: rgba(0,0,0,.35) !important; }
+{ background: rgba(0,0,0,.35) !important; }
 
 /* === NU-HERO QUICK FIXES (place at very bottom of your CSS) === */
 
@@ -1624,14 +1624,6 @@ body { outline: 4px solid hotpink !important; }
   align-self: end !important;
   justify-self: start !important;
   margin: 0 12px !important;
-}
-/* If there’s no panel, pin raw children too */
-#hero.nu-hero .nu-hero__inner > h1,
-#hero.nu-hero .nu-hero__inner > p,
-#hero.nu-hero .nu-hero__inner > .nu-hero__actions{
-  align-self: end !important;
-  justify-self: start !important;
-  margin-left: 12px !important;
 }
 
 /* 3) Drawer peeking: keep it fully off-canvas when closed */
@@ -3228,41 +3220,11 @@ main, section, header, footer { background: transparent; }
   #hero.nu-hero .nu-hero__actions{  margin-left: 0 !important; }
 }
 
-/* === HERO (desktop): left-anchor inner + titles/CTA =================== */
-@media (min-width: 821px){
-  #hero.nu-hero .nu-hero__inner{
-    width: 100% !important;
-    margin: 0 !important;                          /* cancel margin:0 auto */
-    padding-left: var(--gutter) !important;
-    padding-right: var(--gutter) !important;
-    justify-items: start !important;               /* left-align grid items */
-  }
-
-  #hero.nu-hero .nu-hero__panel{ margin-left: 0 !important; }
-  #hero.nu-hero .nu-hero__inner > h1,
-  #hero.nu-hero .nu-hero__inner > p,
-  #hero.nu-hero .nu-hero__inner > .nu-hero__actions{
-    justify-self: start !important;
-    text-align: left !important;
-    margin-left: 0 !important;
-  }
-}
-
-#hero.nu-hero .nu-hero__slides > .nu-hero__slide .nu-hero__panel{
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
 /* Hero: remove leftover side margins + extra left padding on the panel */
 #hero.nu-hero .nu-hero__slides > .nu-hero__slide .nu-hero__panel{
   margin-left: 0 !important;
   margin-right: 0 !important;
   padding-left: 0 !important;   /* align titles with container gutter */
-}
-/* Keep the inner’s gutter padding as the single left anchor */
-#hero.nu-hero .nu-hero__inner{
-  padding-left: var(--gutter) !important;
-  padding-right: var(--gutter) !important;
 }
 
 /* HERO: align hero text to the same container left as rails */
@@ -3276,6 +3238,22 @@ main, section, header, footer { background: transparent; }
   margin-left: 0 !important;
   margin-right: 0 !important;
   padding-left: 0 !important;
+}
+
+/* === HERO (desktop): align titles/CTA left inside container ============ */
+@media (min-width: 821px){
+  #hero.nu-hero :is(
+    .nu-hero__inner > h1,
+    .nu-hero__inner > p,
+    .nu-hero__inner > .nu-hero__actions,
+    .nu-hero__panel  > h1,
+    .nu-hero__panel  > p,
+    .nu-hero__panel  > .nu-hero__actions
+  ){
+    justify-self: start !important;
+    text-align: left !important;
+    margin-left: 0 !important;
+  }
 }
   
 </style>
