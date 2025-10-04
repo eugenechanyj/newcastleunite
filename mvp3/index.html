@@ -3267,10 +3267,8 @@ main, section, header, footer { background: transparent; }
 
 /* HERO: align hero text to the same container left as rails */
 #hero.nu-hero .nu-hero__inner.container{
-  /* container already sets max-width + margin:0 auto + side padding */
-  padding-left: 0 !important;      /* prevent double gutter */
-  padding-right: 0 !important;
-  justify-items: start !important; /* keep left-aligned inside the container */
+  /* let .container keep its own side padding so it aligns with rails */
+  justify-items: start !important;
 }
 
 /* Ensure the panel itself doesn’t shift things */
