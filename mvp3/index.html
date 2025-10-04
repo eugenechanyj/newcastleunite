@@ -2901,6 +2901,20 @@ main, section, header, footer { background: transparent; }
     padding: 0 24px 6px;                 /* breathing room at edges */
   }
 }
+
+/* Mobile rail swipe shim helpers */
+@media (max-width: 820px){
+  .rail .rail__track{
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-x !important;
+    overscroll-behavior-x: contain !important;
+    cursor: grab;
+  }
+  .rail .rail__track:active{ cursor: grabbing; }
+  .rail .rail__track, .rail .rail__track *{
+    user-select: none; -webkit-user-select: none; -webkit-user-drag: none;
+  }
+}
   
 </style>
   
@@ -3768,6 +3782,41 @@ main, section, header, footer { background: transparent; }
     btn.addEventListener('click', () => {
       const dir = btn.classList.contains('rail__btn--prev') ? -1 : 1;
       track.scrollBy({ left: dir * step * 1.1, behavior: 'smooth' });
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  const tracks = document.querySelectorAll('.rail .rail__track');
+  tracks.forEach(track => {
+    let isDown = false, startX = 0, startScroll = 0, pid = null;
+
+    // Use passive:false so we can prevent default if needed
+    track.addEventListener('pointerdown', (e) => {
+      isDown = true;
+      pid = e.pointerId;
+      try { track.setPointerCapture(pid); } catch(_) {}
+      startX = e.clientX;
+      startScroll = track.scrollLeft;
+    }, { passive: true });
+
+    track.addEventListener('pointermove', (e) => {
+      if (!isDown) return;
+      // Drag horizontally
+      const dx = e.clientX - startX;
+      track.scrollLeft = startScroll - dx;
+    }, { passive: true });
+
+    ['pointerup','pointercancel','pointerleave'].forEach(ev => {
+      track.addEventListener(ev, () => {
+        isDown = false;
+        if (pid !== null) {
+          try { track.releasePointerCapture(pid); } catch(_) {}
+          pid = null;
+        }
+      }, { passive: true });
     });
   });
 })();
