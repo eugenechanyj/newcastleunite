@@ -3255,6 +3255,16 @@ main, section, header, footer { background: transparent; }
     margin-left: 0 !important;
   }
 }
+
+/* === HERO (desktop): ensure grid starts at left and fills width ======== */
+@media (min-width: 821px){
+  #hero.nu-hero .nu-hero__inner.container{
+    /* Track spans the container; items anchor left */
+    grid-template-columns: 1fr !important;
+    justify-content: start !important;
+    justify-items: start !important;
+  }
+}
   
 </style>
   
