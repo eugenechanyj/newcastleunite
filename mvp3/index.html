@@ -2968,6 +2968,11 @@ main, section, header, footer { background: transparent; }
   #hero.nu-hero .nu-hero__inner h1{ font-size: clamp(1.25rem, 6.8vw, 2.1rem) !important; line-height: 1.12 !important; }
   #hero.nu-hero .nu-hero__inner p{  font-size: clamp(.9rem, 3.8vw, 1.05rem) !important; line-height: 1.35 !important; }
 }
+
+@media (max-width: 640px){
+  .rail .rail__track::-webkit-scrollbar{ display:none; }
+  .rail .rail__track{ scrollbar-width: none; }
+}
   
 </style>
   
@@ -3842,33 +3847,43 @@ main, section, header, footer { background: transparent; }
 
 <script>
 (function(){
-  const tracks = document.querySelectorAll('.rail .rail__track');
-  tracks.forEach(track => {
-    let isDown = false, startX = 0, startScroll = 0, pid = null;
+  // If it's a coarse pointer (touch), rely on native swipe instead of the shim.
+  const isTouch = window.matchMedia && matchMedia('(pointer: coarse)').matches;
 
-    // Use passive:false so we can prevent default if needed
+  const tracks = document.querySelectorAll('.rail .rail__track');
+
+  // Always ensure CSS side is good for native swipe:
+  tracks.forEach(t => {
+    t.style.webkitOverflowScrolling = 'touch';
+    t.style.overflowX = 'auto';
+    t.style.overflowY = 'hidden';
+  });
+
+  if (isTouch) return; // mobile/tablet → native momentum only
+
+  // Desktop fallback: drag-to-scroll with mouse/trackpad
+  tracks.forEach(track => {
+    let isDown = false, startX = 0, startScroll = 0;
+
     track.addEventListener('pointerdown', (e) => {
       isDown = true;
-      pid = e.pointerId;
-      try { track.setPointerCapture(pid); } catch(_) {}
       startX = e.clientX;
       startScroll = track.scrollLeft;
+      track.setPointerCapture?.(e.pointerId);
+      track.style.cursor = 'grabbing';
     }, { passive: true });
 
     track.addEventListener('pointermove', (e) => {
       if (!isDown) return;
-      // Drag horizontally
       const dx = e.clientX - startX;
       track.scrollLeft = startScroll - dx;
     }, { passive: true });
 
     ['pointerup','pointercancel','pointerleave'].forEach(ev => {
-      track.addEventListener(ev, () => {
+      track.addEventListener(ev, (e) => {
         isDown = false;
-        if (pid !== null) {
-          try { track.releasePointerCapture(pid); } catch(_) {}
-          pid = null;
-        }
+        track.releasePointerCapture?.(e.pointerId);
+        track.style.cursor = '';
       }, { passive: true });
     });
   });
