@@ -3012,6 +3012,41 @@ main, section, header, footer { background: transparent; }
     --rail-card-h: calc(158px * 1.2);   /* was 158px (~16:9) */
   }
 }
+
+/* === MOBILE: uniform rail spacing + ~10–15% larger cards ============== */
+@media (max-width: 640px){
+  /* Consistent vertical rhythm for each rail section */
+  .rail{ margin: 18px 0 !important; }
+  .rail .rail__title{ margin: 6px 0 10px !important; }
+
+  /* Track padding & gap kept consistent (first/last cards not clipped by arrows) */
+  .rail .rail__track{
+    padding: 0 22px 6px !important;
+    gap: 10px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+
+  /* Card size: ~10–15% larger than the earlier phone baseline */
+  :root{
+    /* Tweak this to taste:
+       62vw (~+7%), 64vw (~+10%), 66vw (~+14%), 68vw (~+17%) */
+    --rail-card-w: 64vw;
+    --rail-card-h: calc(64vw * 9 / 16);
+  }
+  .rail .rail__track > *{
+    flex: 0 0 var(--rail-card-w) !important;
+    min-width: var(--rail-card-w) !important;
+    scroll-snap-align: start;
+  }
+  .rail .rail__img{
+    height: var(--rail-card-h) !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+}
   
 </style>
   
