@@ -3323,6 +3323,19 @@ main, section, header, footer { background: transparent; }
 html, body {
   touch-action: auto !important;
 }
+
+/* === FINAL RAIL SWIPE OVERRIDE — must be last ========================= */
+/* Out-specific any global blockers (e.g., `#hero, #hero * { touch-action: pan-y !important; }`) */
+#hero .rail .rail__track,
+.rail .rail__track {
+  touch-action: pan-x !important;          /* allow horizontal finger swipe */
+  overflow-x: auto !important;             /* the track scrolls, not the page */
+  overscroll-behavior-x: contain !important;
+  -webkit-overflow-scrolling: touch;       /* iOS inertial scrolling */
+}
+
+/* If you still have a root gesture clamp, let children override it */
+html, body { touch-action: auto !important; }  /* keeps your overflow-x clamp intact */
   
 </style>
   
