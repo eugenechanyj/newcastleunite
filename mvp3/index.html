@@ -4282,6 +4282,23 @@ html, body { touch-action: auto !important; }  /* keeps your overflow-x clamp in
   });
 })();
 </script>
+
+<script>
+/* Exempt rail tracks from any global touchmove/touchstart handlers that might preventDefault */
+(function () {
+  function shield(e) {
+    // If the touch started/moves inside a rail track, do not let other handlers cancel it
+    if (e.target && e.target.closest && e.target.closest('.rail__track')) {
+      // Stop other capture/bubble listeners from running (incl. old interceptors)
+      e.stopImmediatePropagation();
+      // DO NOT call preventDefault here; native scroll should proceed
+    }
+  }
+  // Capture phase so we run before any document-level preventDefault
+  document.addEventListener('touchstart', shield, { capture: true, passive: true });
+  document.addEventListener('touchmove',  shield, { capture: true, passive: false });
+})();
+</script>
   
 </body>
 </html>
