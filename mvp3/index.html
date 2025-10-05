@@ -3289,6 +3289,40 @@ main, section, header, footer { background: transparent; }
   /* Ensure each card is a snap target */
   .rail .rail__item{ scroll-snap-align: start; }
 }
+
+/* === CRITICAL: Re-enable horizontal swiping ONLY on the rail track === */
+.rail .rail__track {
+  /* 🔑 Allow horizontal finger scrolling on the track itself */
+  touch-action: pan-x !important;
+
+  /* Make the track (not the page) handle the overflow */
+  overflow-x: auto !important;
+
+  /* Stop scroll chaining/bounce to the page */
+  overscroll-behavior-x: contain !important;
+
+  /* + iOS inertial scrolling (feels much smoother) */
+  -webkit-overflow-scrolling: touch;
+
+  /* (optional, if you already use snap you can keep what you have)
+     scroll-snap-type: x proximity;
+     scroll-padding-left: var(--gutter);
+  */
+}
+
+/* === Belt-and-suspenders: ensure Hero isn't over-blocking === */
+#hero,
+#hero * {
+  /* Allow vertical scroll and pinch-zoom;
+     crucially, NOT 'none' */
+  touch-action: pan-y pinch-zoom !important;
+}
+
+/* + IMPORTANT: neutralize any global root clamp that might be blocking pan-x
+   If you previously set touch-action on html/body, let it be 'auto'. */
+html, body {
+  touch-action: auto !important;
+}
   
 </style>
   
