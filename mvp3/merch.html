@@ -1,1 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minute Magpie Merch — Blind Box Series 1 (Coming Soon)</title>
+  <meta name="description" content="Minute Magpie Blind Box Series 1 — a cheeky collectible for NUFC fans. Join the list for early access to pre-orders." />
+  <meta name="theme-color" content="#0B0E11" />
+
+  <style>
+    :root{
+      --black:#0B0E11; --white:#FFFFFF; --blue:#00B6F1; --gold:#F0B83D;
+      --grey:#BBBDBF; --border:#E6E6E6;
+      --shadow:0 6px 18px rgba(0,0,0,.12);
+      --container:1200px; --gutter:16px;
+      --ink:#0a0a0a;
+    }
+    html,body{margin:0;padding:0}
+    body{
+      background:var(--black); color:var(--white);
+      font:400 16px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    a{color:var(--blue);text-decoration:none} a:hover{filter:brightness(.92)}
+    .container{max-width:var(--container);margin:0 auto;padding:0 var(--gutter);box-sizing:border-box}
+
+    .btn{
+      display:inline-block;border-radius:12px;border:1px solid var(--border);
+      padding:10px 14px;font:700 .95rem/1 Montserrat,system-ui,sans-serif;
+      cursor:pointer;transition:transform .04s ease,filter .15s ease
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{background:var(--blue);color:#fff;border-color:transparent}
+    .btn-primary:hover{filter:brightness(.92)}
+    .btn-secondary{background:#fff;color:var(--ink)}
+    .btn-secondary:hover{background:#f2f2f2}
+
+    .section-title{
+      margin:0 0 12px;font:800 clamp(1.2rem,3vw,1.6rem)/1.15 Montserrat,system-ui,sans-serif;
+      letter-spacing:.2px;color:#fff;display:flex;align-items:center;gap:10px
+    }
+    .mm-sticker{
+      background:#fff;color:#000;border:1px solid var(--border);
+      border-radius:14px;padding:6px 10px;box-shadow:var(--shadow);font-weight:800
+    }
+    .mm-badge{
+      display:inline-block;background:var(--blue);color:#fff;border-radius:999px;
+      padding:6px 10px;font:800 12px/1.1 Montserrat,system-ui,sans-serif
+    }
+
+    .hero{
+      position:relative;min-height:46vh;display:flex;align-items:flex-end;
+      background:#0B0E11 center/cover no-repeat
+    }
+    .hero::after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(to top,rgba(0,0,0,.65),rgba(0,0,0,.25))
+    }
+    .hero__inner{position:relative;z-index:1;padding:28px 0 36px}
+    .hero__inner h1{
+      margin:8px 0 6px;font:900 clamp(1.6rem,5vw,3rem)/1.05 Montserrat,system-ui,sans-serif
+    }
+    .hero__inner p{margin:0 0 14px;font:500 1.05rem/1.45 Inter,system-ui,sans-serif;opacity:.95}
+
+    .card{
+      background:#fff;color:var(--ink);border:1px solid var(--border);
+      border-radius:14px;box-shadow:var(--shadow);overflow:hidden
+    }
+    .card-pad{padding:14px}
+    .grid{display:grid;gap:16px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media(max-width:720px){.grid-2{grid-template-columns:1fr}}
+
+    .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .gallery figure{margin:0}
+    .gallery img{
+      width:100%;height:200px;object-fit:cover;border-radius:12px;background:#ddd
+    }
+    .gallery figcaption{
+      font:600 .85rem/1.2 Inter,system-ui;color:#444;margin-top:6px
+    }
+    @media(max-width:720px){
+      .gallery{grid-template-columns:1fr 1fr}
+      .gallery img{height:160px}
+    }
+
+    .form-row{display:flex;gap:10px;flex-wrap:wrap}
+    .input{
+      padding:12px 14px;border-radius:10px;border:1px solid var(--border);
+      width:min(420px,90%);background:#fff;color:var(--ink);
+      font:500 1rem/1 Inter,system-ui,sans-serif
+    }
+    .note{opacity:.9;font-size:.95rem}
+    header,footer{padding:14px 0}
+    footer{opacity:.85;font-size:.9rem;padding:24px 0 40px}
+  </style>
+</head>
+
+<body>
+  <header class="container" style="display:flex;align-items:center;justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:10px">
+      <a href="/mvp3/"><img src="/assets/logo-nu.svg" alt="NewcastleUnite" style="height:28px"></a>
+      <strong style="letter-spacing:.3px">NewcastleUnite</strong>
+    </div>
+    <nav style="display:flex;gap:14px;font-weight:700;font-size:.95rem">
+      <a href="/mvp3/#news">News</a>
+      <a href="/mvp3/#creators">Creators</a>
+      <a href="/mvp3/#gear">Gear</a>
+      <a href="/mvp3/merch.html">Merch</a>
+      <a href="/mvp3/#newsletter" class="btn btn-primary" style="padding:8px 12px">Subscribe</a>
+    </nav>
+  </header>
+
+  <section class="hero" style="background-image:url('/assets/minutemagpie-blindbox-hero.jpg')">
+    <div class="container hero__inner">
+      <div class="mm-badge">Minute Magpie</div>
+      <h1>Blind Box Series 1</h1>
+      <p class="note">A cheeky collectible drop for the Toon faithful — limited, numbered, and very magpie.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn btn-primary" href="#notify">Get notified</a>
+        <a class="btn btn-secondary" href="/mvp3/">Back to site</a>
+      </div>
+    </div>
+  </section>
+
+  <main class="container" style="margin:24px auto">
+    <section class="grid grid-2">
+      <div class="card card-pad">
+        <h2 class="section-title"><span class="mm-sticker">Merch</span> Minute Magpie Blind Box</h2>
+        <p class="note" style="color:#333">
+          Series 1 features two minute magpies + a surprise variant. Clean black & white with a pop of NUFC blue.
+          Numbered boxes, small initial run. Final mockups coming soon.
+        </p>
+        <ul style="margin:10px 0 0 18px;color:#333">
+          <li>Vinyl figure ≈ 7–9 cm</li>
+          <li>“Graffiti wall” mini backdrop</li>
+          <li>1 in X chance of special edition</li>
+        </ul>
+      </div>
+
+      <div class="card card-pad">
+        <h3 class="section-title" style="color:var(--ink)">Specs & Delivery</h3>
+        <ul style="margin:0 0 10px 18px;color:#333">
+          <li>Material: Vinyl (matte finish)</li>
+          <li>Packaging: Blind box, foil wrap</li>
+          <li>ETA: TBD (collect interest first)</li>
+        </ul>
+        <p class="note" style="color:#333">
+          We’ll announce pricing and pre-order window to subscribers first.
+        </p>
+      </div>
+    </section>
+
+    <section style="margin:24px 0">
+      <h2 class="section-title"><span class="mm-sticker">Gallery</span> First Looks</h2>
+      <div class="gallery">
+        <figure>
+          <img src="/assets/minutemagpieblindbox1.jpg" alt="Blind Box concept — front view">
+          <figcaption>Front mock — Series 1</figcaption>
+        </figure>
+        <figure>
+          <img src="/assets/minutemagpie-blindbox-alt1.jpg" alt="Blind Box concept — side angle">
+          <figcaption>Side angle</figcaption>
+        </figure>
+        <figure>
+          <img src="/assets/minutemagpie-blindbox-alt2.jpg" alt="Blind Box concept — back view">
+          <figcaption>Back mock</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="notify" style="margin:24px 0">
+      <div class="card card-pad">
+        <h2 class="section-title"><span class="mm-sticker">Notify</span> me when it drops</h2>
+        <p class="note" style="color:#333">
+          Leave your email and we’ll ping you when pre-orders open.
+        </p>
+        <form id="notify-form" class="form-row" style="margin-top:8px" novalidate>
+          <input type="email" id="notify-email" class="input" placeholder="you@example.com" required>
+          <button class="btn btn-primary" id="notify-btn" type="submit">Notify me</button>
+        </form>
+        <div id="notify-msg" class="note" role="status" aria-live="polite" style="margin-top:10px;display:none"></div>
+      </div>
+    </section>
+
+    <section style="margin:24px 0">
+      <div class="card card-pad">
+        <h2 class="section-title"><span class="mm-sticker">FAQ</span> Quick answers</h2>
+        <details style="margin:8px 0;color:var(--ink)">
+          <summary style="cursor:pointer;font-weight:800">Will there be international shipping?</summary>
+          <div style="padding:8px 0;color:#333">
+            Likely yes. We’re scoping packaging/logistics; final details will be posted before pre-orders.
+          </div>
+        </details>
+        <details style="margin:8px 0;color:var(--ink)">
+          <summary style="cursor:pointer;font-weight:800">How limited is Series 1?</summary>
+          <div style="padding:8px 0;color:#333">
+            Initial run will be intentionally small. If demand is high, we’ll plan a second wave.
+          </div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div>© NewcastleUnite. Unofficial fan site. Not affiliated with NUFC.</div>
+  </footer>
+
+  <script>
+  (function(){
+    const form=document.getElementById('notify-form');
+    const input=document.getElementById('notify-email');
+    const msg=document.getElementById('notify-msg');
+    const btn=document.getElementById('notify-btn');
+    if(!form)return;
+    const emailRe=/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+    form.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      const email=(input.value||'').trim();
+      if(!emailRe.test(email)){
+        msg.style.display='block';msg.style.color='#ff6b6b';
+        msg.textContent='Please enter a valid email address.';return;
+      }
+      try{
+        const key='mm_merch_interest';
+        const arr=JSON.parse(localStorage.getItem(key)||'[]');
+        if(!arr.includes(email))arr.push(email);
+        localStorage.setItem(key,JSON.stringify(arr));
+        if(window.dataLayer&&typeof window.dataLayer.push==='function'){
+          window.dataLayer.push({event:'notify_signup',component:'minute_magpie_merch',email_domain:email.split('@')[1]||'unknown'});
+        }
+        msg.style.display='block';msg.style.color='#00B6F1';
+        msg.textContent='Thanks! You’re on the list — we’ll email you first.';
+        btn.disabled=true;input.value='';
+      }catch(e){
+        msg.style.display='block';msg.style.color='#ff6b6b';
+        msg.textContent='Sorry, something went wrong. Please try again.';
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
 
