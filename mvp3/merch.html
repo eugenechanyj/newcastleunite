@@ -337,6 +337,83 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
     margin-bottom:10px;
   }
 }  
+
+/* =========================
+   MOBILE TWEAKS (≤480px)
+   ========================= */
+@media (max-width: 480px){
+
+  /* Header: ~30% smaller + tighter padding so it fits one line */
+  .site-header{ padding:8px 12px; }
+  .brand{ gap:6px; }
+  .brand strong{ font-size:.8rem; }         /* ~1.05rem → 0.8rem */
+  .brand .tagline{ font-size:.72rem; }      /* smaller so it stays in one line */
+  .site-nav{ font-size:.7rem; gap:10px; }   /* ~0.95rem → 0.7rem */
+  .nav-toggle{ font-size:1rem; padding:5px 9px; }
+
+  /* Hero: taller on mobile, copy anchored to bottom */
+  .hero{
+    min-height: clamp(58vh, 66vw, 72vh); /* ~30% bigger feel */
+  }
+  .hero__inner{
+    padding-top:14px;
+    padding-bottom:16px;  /* keeps copy close to bottom edge */
+  }
+  .hero__copy{
+    margin-top:auto;      /* pushes copy to bottom */
+  }
+  .hero__copy h1{
+    /* you said hero title is OK; leaving size to desktop clamp */
+  }
+  .hero__copy p.note{
+    font-size:.85rem;     /* smaller subtitle */
+    opacity:.85;
+  }
+
+  /* Countdown + CTA row */
+  .hero-row{
+    display:flex;
+    flex-direction: column;      /* stack by default on mobile */
+    align-items: flex-start;
+    gap:8px;
+    margin-top:8px;
+  }
+  /* If you prefer inline on mobile for a specific case,
+     add class 'hero-row--inline' to the HTML div to override: */
+  .hero-row.hero-row--inline{ flex-direction: row; align-items:center; }
+
+  /* Hide label on mobile to reduce busyness */
+  .drop-badge .label{ display:none; }
+
+  /* Capsule timer a bit smaller */
+  .drop-badge{ gap:4px; }
+  .drop-badge .block{
+    padding:3px 5px;
+    min-width:32px;
+    font:700 .8rem/1 Montserrat,system-ui;
+  }
+  .drop-badge .block small{ font-size:.65em; }
+
+  /* Smaller CTA button */
+  .btn{
+    padding:8px 12px;
+    font-size:.85rem;
+    border-radius:10px;
+  }
+
+  /* Rail: slightly smaller headings/cards (if you want extra breathing room) */
+  .section-title{ font-size: .95rem; }
+  .mm-sticker{ font-size:.68rem; padding:4px 8px; }
+
+  .rail__track{ gap:10px; padding-bottom:10px; }
+  .card--rail{
+    min-width:130px;  /* ~40% smaller than desktop */
+    max-width:160px;
+    border-radius:12px;
+  }
+  .card--rail h3{ font-size:.82rem; margin-top:8px; }
+  .card__sub{ font-size:.72rem; margin-bottom:10px; }
+}
   
 </style>
 
