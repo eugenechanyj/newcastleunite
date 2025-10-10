@@ -511,9 +511,10 @@ section details div {
 }
 
 /* Header "Join Us" button — white version with black text */
-.site-header .btn.btn-primary {
+/* CHANGE: Target the .btn-secondary class, which is in the HTML. */
+.site-header .btn.btn-secondary { 
   background: #fff;
-  color: #000;
+  color: #000 !important; /* Ensures black text overrides .site-nav a color */
   border: none;
   font-weight: 700;
   font-size: 0.9rem;
@@ -521,9 +522,10 @@ section details div {
   padding: 8px 12px;
   transition: background 0.2s ease;
 }
-.site-header .btn.btn-primary:hover {
+.site-header .btn.btn-secondary:hover { 
   background: #f2f2f2;
 }
+
   
 </style>
 
