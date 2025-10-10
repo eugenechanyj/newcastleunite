@@ -435,6 +435,21 @@ section details div {
   opacity: 0.85;        /* lighter for contrast */
   padding: 4px 0 6px 10px; /* subtle indent for readability */
 }
+
+/* Join the Flock — softer visuals */
+#notify .input {
+  width: min(340px, 85%);
+  font-size: 0.9rem;
+}
+#notify .btn {
+  font-size: 0.9rem;
+  padding: 9px 14px;
+  border-radius: 10px;
+}
+#notify .note {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
   
 </style>
 
@@ -519,15 +534,22 @@ section details div {
     </div>
   </div>
 
-  <!-- Notify -->
-  <section id="notify" style="margin:24px 0">
-    <h2 class="section-title"><span class="mm-sticker">Notify</span> me for new drops</h2>
-    <form id="notify-form" class="form-row" novalidate>
-      <input type="email" id="notify-email" class="input" placeholder="you@example.com" required>
-      <button class="btn btn-primary" id="notify-btn" type="submit">Notify me</button>
-    </form>
-    <div id="notify-msg" class="note" style="margin-top:10px;display:none"></div>
-  </section>
+  <!-- JOIN THE FLOCK -->
+<section id="notify" style="margin:32px 0; text-align:center;">
+  <h2 class="section-title" style="justify-content:center;">
+    <span class="mm-sticker">Join the Flock</span>
+  </h2>
+  <p class="note" style="max-width:420px; margin:0 auto 14px; opacity:0.9;">
+    Get a heads-up when new Minute Magpie drops hatch. No spam, just Toon love.
+  </p>
+
+  <form id="notify-form" class="form-row" style="justify-content:center;" novalidate>
+    <input type="email" id="notify-email" class="input" placeholder="you@example.com" required>
+    <button class="btn btn-primary" id="notify-btn" type="submit">Join Now</button>
+  </form>
+
+  <div id="notify-msg" class="note" style="margin-top:10px; display:none;"></div>
+</section>
 
   <!-- FAQ -->
   <section style="margin:24px 0">
