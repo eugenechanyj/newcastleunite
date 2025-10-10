@@ -484,6 +484,31 @@ section details div {
   justify-content: center;
   gap: 8px;
 }
+
+/* ===== Responsive hero image swap for mobile (≤640px) ===== */
+@media (max-width: 640px){
+  .hero__img{
+    /* swap to the mobile-optimized image */
+    content: url("/assets/minutemagpiefigurinerangemobile.png");
+
+    /* optional fine-tuning */
+    object-position: center top;      /* show more of figurines */
+    height: auto;                     /* let it scale naturally */
+  }
+
+  /* slightly reduce hero height to fit mobile viewport */
+  .hero{
+    min-height: 42vh;
+  }
+
+  /* tighten hero text spacing */
+  .hero__inner h1{
+    font-size: clamp(1.3rem, 5vw, 2rem);
+  }
+  .hero__inner p{
+    font-size: 0.9rem;
+  }
+}
   
 </style>
 
