@@ -220,6 +220,17 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
   padding-top: 28px;
   padding-bottom: 36px;
 }
+
+/* ===== Drop Countdown Badge ===== */
+.drop-badge{
+  display:inline-flex; align-items:center; gap:8px;
+  background:#111418; border:1px solid #22272d; color:#fff;
+  border-radius:999px; padding:6px 10px;
+  font:800 .85rem/1 Montserrat,system-ui;
+  letter-spacing:.3px; text-transform:uppercase;
+  margin-top:8px;
+}
+.drop-badge .time{ font-weight:900; color:var(--blue); }
   
 </style>
 
@@ -261,6 +272,15 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
     <div class="hero__copy">
       <h1>Blind Box Series 1</h1>
       <p class="note">Minute Magpie's first ever drop - Ten toon tales to collect!</p>
+
+    <!-- Drop status / countdown -->
+    <div id="drop-badge"
+         class="drop-badge"
+         data-deadline="2026-01-01T04:00:00Z"
+         aria-live="polite">
+      Drop opens soon
+    </div>
+      
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <a class="btn btn-primary" href="#notify">Get notified</a>
       </div>
@@ -368,5 +388,34 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
   });
 })();
 </script>
+
+<script>
+(function(){
+  const el = document.getElementById('drop-badge');
+  if(!el) return;
+  const iso = el.getAttribute('data-deadline');
+  if(!iso) return;
+  const end = new Date(iso).getTime();
+  if(isNaN(end)) return;
+
+  function fmt(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    const now = Date.now();
+    const diff = Math.max(0, end - now);
+    if(diff <= 0){
+      el.innerHTML = 'Drop <span class="time">LIVE</span> now';
+      clearInterval(t);
+      return;
+    }
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff / (1000*60*60)) % 24);
+    const m = Math.floor((diff / (1000*60)) % 60);
+    el.innerHTML = `Drop opens in <span class="time">${d}d ${fmt(h)}h ${fmt(m)}m</span>`;
+  }
+  tick();
+  const t = setInterval(tick, 30000); // updates every 30s
+})();
+</script>
+  
 </body>
 </html>
