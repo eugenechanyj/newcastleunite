@@ -73,7 +73,7 @@ a{text-decoration:none}
 /* ===== Buttons ===== */
 .btn{
   display:inline-block;border-radius:12px;padding:11px 15px;
-  font:700 1rem/1 Montserrat,system-ui; /* bumped size */
+  font:700 1rem/1 Montserrat,system-ui; /* size matches main page buttons */
   cursor:pointer;border:1px solid var(--border);
 }
 .btn-primary{background:var(--blue);color:#fff;border:none}
@@ -106,16 +106,15 @@ a{text-decoration:none}
 .hero__inner h1{
   margin:8px 0 6px;
   font:900 clamp(1.6rem,5vw,3rem)/1.1 Montserrat,system-ui;
-  text-align:left;        /* enforce left alignment */
+  text-align:left;
 }
 .hero__inner p{
   margin:0 0 10px;
   font:500 1.05rem/1.45 Inter,system-ui;
   opacity:.9;
-  text-align:left;        /* enforce left alignment */
+  text-align:left;
 }
 .note{opacity:.9;font-size:.95rem}
-
 
 /* Section title + capsule */
 .section-title{
@@ -154,22 +153,34 @@ a{text-decoration:none}
   .rail:hover .rail__btn{ opacity:1 }
 }
 
-/* Product cards inside rails */
+/* Product cards inside rails (font consistency with main site) */
 .card--rail{
   min-width:210px;max-width:240px;scroll-snap-align:start;
   background:#111;border:1px solid var(--border);border-radius:14px;
   box-shadow:var(--shadow);overflow:hidden
 }
 .card--rail img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#222}
+/* Titles and descriptors match capsule/button feel */
+.card--rail h3,
+.card__sub{
+  font-family: Montserrat, system-ui, sans-serif !important;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  margin-left:10px; margin-right:10px; /* consistent padding */
+}
 .card--rail h3{
-  margin:10px 10px 0;
-  font:800 .98rem/1.2 Montserrat; color:#fff; letter-spacing:.2px;
-  text-transform:uppercase;
+  margin-top:10px;
+  font-weight: 800;
+  font-size: .98rem;
+  color:#fff;
+  line-height:1.2;
 }
 .card__sub{
-  margin:6px 10px 12px;
-  font:700 .82rem/1.25 Montserrat; /* match capsule feel */
-  color:#BBBDBF; text-transform:uppercase; letter-spacing:.3px;
+  margin-top:6px; margin-bottom:12px;
+  font-weight: 600;
+  font-size: .82rem;
+  color:#BBBDBF;
+  line-height:1.25;
 }
 
 /* Form */
@@ -194,7 +205,7 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
 <!-- ==== SITE HEADER (matches main page) ==== -->
 <header class="site-header container">
   <div class="brand">
-    <!-- No logo image; text only per your main page -->
+    <!-- Text-only per main page -->
     <strong>NewcastleUnite :</strong>
     <span class="tagline">One Toon, One Tune</span>
   </div>
@@ -345,7 +356,7 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
       if(!arr.includes(email))arr.push(email);
       localStorage.setItem(key,JSON.stringify(arr));
       m.style.display='block';m.style.color='#00B6F1';m.textContent='Thanks! You’re on the list.';b.disabled=true;i.value='';
-    }catch(err){m.style.display='block';m.style.color='#ff6b6b';m.textContent='Something went wrong.';}
+    }catch(err){m.style.display='block';m.style.color:'#ff6b6b';m.textContent='Something went wrong.';}
   });
 })();
 
