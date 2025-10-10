@@ -231,6 +231,34 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
   margin-top:8px;
 }
 .drop-badge .time{ font-weight:900; color:var(--blue); }
+
+/* Hero row layout */
+.hero-row{
+  display:flex; align-items:center; flex-wrap:wrap;
+  gap:10px; margin-top:10px;
+}
+
+/* Capsule-style countdown blocks */
+.drop-badge{
+  display:flex; align-items:center; flex-wrap:wrap;
+  gap:6px; background:transparent; border:none;
+  padding:0; font-weight:700;
+}
+.drop-badge .label{ margin-right:4px; opacity:.85; font-weight:600; }
+.drop-badge .block{
+  background:#0f1216;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:6px;
+  padding:4px 6px;
+  font:700 .9rem/1 Montserrat,system-ui;
+  color:var(--blue);
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:38px;
+}
+.drop-badge .block small{
+  font-size:.7em; opacity:.7; margin-left:2px;
+}
+
   
 </style>
 
@@ -271,21 +299,25 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
   <div class="container hero__inner">
     <div class="hero__copy">
       <h1>Blind Box Series 1</h1>
-      <p class="note">Minute Magpie's first ever drop - Ten toon tales to collect!</p>
-
-    <!-- Drop status / countdown -->
-    <div id="drop-badge"
-         class="drop-badge"
-         data-deadline="2026-01-01T04:00:00Z"
-         aria-live="polite">
-      Drop opens soon
-    </div>
       
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <a class="btn btn-primary" href="#notify">Get notified</a>
-      </div>
+      <p class="note">Move over La-boohoo : Minute Magpie's first ever drop!</p>
+
+<div class="hero-row">
+  <!-- Drop countdown -->
+  <div id="drop-badge"
+       class="drop-badge"
+       data-deadline="2026-01-01T04:00:00Z"
+       aria-live="polite">
+    Drop opens soon
+  </div>
+
+  <!-- Notify button -->
+  <a class="btn btn-primary" href="#notify">Get notified</a>
+</div>
+      
     </div>
   </div>
+  
 </section>
 
 <main class="container">
@@ -399,27 +431,39 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
   if(isNaN(end)) return;
 
   function fmt(n){ return String(n).padStart(2,'0'); }
+
   function tick(){
-  const now = Date.now();
-  const diff = Math.max(0, end - now);
-  if(diff <= 0){
-    el.innerHTML = 'Drop <span class="time">LIVE</span> now';
-    clearInterval(t);
-    return;
+    const now = Date.now();
+    const diff = Math.max(0, end - now);
+
+    if(diff <= 0){
+      el.innerHTML = `
+        <span class="label">Drop</span>
+        <span class="block">LIVE<small>NOW</small></span>
+      `;
+      clearInterval(t);
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);        // days
+    const h = Math.floor((diff / 3600000) % 24);  // hours
+    const m = Math.floor((diff / 60000) % 60);    // minutes
+    const s = Math.floor((diff / 1000) % 60);     // seconds
+
+    el.innerHTML = `
+      <span class="label">Drop opens in</span>
+      <span class="block">${fmt(d)}<small>D</small></span> :
+      <span class="block">${fmt(h)}<small>H</small></span> :
+      <span class="block">${fmt(m)}<small>M</small></span> :
+      <span class="block">${fmt(s)}<small>S</small></span>
+    `;
   }
 
-  const d = Math.floor(diff / (1000*60*60*24));
-  const h = Math.floor((diff / (1000*60*60)) % 24);
-  const m = Math.floor((diff / (1000*60)) % 60);
-  const s = Math.floor((diff / 1000) % 60);
-
-  el.innerHTML = `Drop opens in <span class="time">${d}d ${fmt(h)}h ${fmt(m)}m ${fmt(s)}s</span>`;
-}
-
-  tick();
- const t = setInterval(tick, 1000);
+  tick();                       // initial render
+  const t = setInterval(tick, 1000); // update every second
 })();
 </script>
+
   
 </body>
 </html>
