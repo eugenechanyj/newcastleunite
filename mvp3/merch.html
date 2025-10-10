@@ -204,22 +204,21 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
   .mm-sticker{ font-size: .9rem; padding: 5px 10px; }
 }
 
-/* === HERO LEFT-ANCHOR FIX (scoped override) === */
-/* Push the hero's container to the far left, keep right auto */
+/* === HERO LEFT-ANCHOR FIX (aligned with content rails) === */
 .hero .container {
-  margin-left: 0 !important;
-  margin-right: auto !important;
+  /* Instead of forcing it all the way left, keep same content gutter as rest of page */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
-/* Make sure hero__inner spans the full width of that container,
-   and keep the same vertical spacing you had */
+/* Keep hero__inner full width and balanced */
 .hero__inner {
   width: 100%;
   box-sizing: border-box;
   padding-top: 28px;
   padding-bottom: 36px;
-  padding-left: 16px;   /* matches .container side padding */
-  padding-right: 16px;  /* matches .container side padding */
 }
   
 </style>
