@@ -259,6 +259,84 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
   font-size:.7em; opacity:.7; margin-left:2px;
 }
 
+/* =========================
+   MOBILE TWEAKS (≤480px)
+   ========================= */
+@media (max-width: 480px){
+
+  /* Header: compress so brand + tagline stay on one line */
+  .site-header{ padding:10px 12px; }
+  .brand{ gap:6px; }
+  .brand strong{ font-size:.95rem; }
+  .brand .tagline{ font-size:.8rem; white-space:nowrap; }
+
+  /* Hero: ~30% bigger + copy anchored to bottom */
+  .hero{
+    min-height: clamp(52vh, 60vw, 68vh); /* bigger than desktop ratio on small screens */
+  }
+  .hero__inner{
+    padding-top:16px;
+    padding-bottom:18px;  /* tighter bottom padding so text hugs lower edge */
+  }
+  .hero__copy{
+    margin-top:auto;      /* pushes copy to the bottom of the hero */
+  }
+  .hero__copy h1{
+    font-size: clamp(1.25rem, 6vw, 1.6rem);
+  }
+  .hero__copy p.note{
+    font-size:.9rem;
+    opacity:.85;
+  }
+
+  /* Timer + button: smaller, sit neatly */
+  .hero-row{ gap:8px; }
+  .drop-badge{
+    gap:4px;
+  }
+  .drop-badge .label{
+    font-size:.8rem;
+  }
+  .drop-badge .block{
+    padding:3px 5px;
+    min-width:32px;
+    font:700 .8rem/1 Montserrat,system-ui;
+  }
+  .drop-badge .block small{ font-size:.65em; }
+
+  .btn{
+    padding:9px 12px;
+    font-size:.9rem;
+    border-radius:10px;
+  }
+
+  /* Rail: smaller title + ~40% smaller cards */
+  .section-title{
+    font-size: 1rem; /* down from clamp(1.2rem,...) */
+  }
+  .mm-sticker{
+    font-size:.7rem;
+    padding:4px 8px;
+  }
+
+  .rail__track{
+    gap:10px;
+    padding-bottom:10px;
+  }
+  .card--rail{
+    min-width:130px;  /* ~210 → 130 (~38% smaller) */
+    max-width:160px;
+    border-radius:12px;
+  }
+  .card--rail h3{
+    font-size:.82rem;
+    margin-top:8px;
+  }
+  .card__sub{
+    font-size:.72rem;
+    margin-bottom:10px;
+  }
+}  
   
 </style>
 
