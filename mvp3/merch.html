@@ -18,20 +18,30 @@ body{
   background:var(--black);color:var(--white);
   font:400 16px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
 }
-a{color:var(--blue);text-decoration:none}
+a{text-decoration:none}
+
+/* Container */
 .container{max-width:1200px;margin:0 auto;padding:0 16px;box-sizing:border-box}
 
-/* ===== Header layout (from main page) ===== */
+/* ===== Header (match main page) ===== */
 .site-header{
   display:flex; align-items:center; justify-content:space-between;
   padding:14px 16px;
 }
 .brand{ display:flex; align-items:center; gap:10px; flex-wrap:wrap }
 .brand strong{ letter-spacing:.3px; font-size:1.05rem }
-.brand .tagline{ opacity:.85 }
+.brand .tagline{ opacity:.85; font-weight:400 }
 
 /* Desktop nav */
 .site-nav{ display:flex; gap:14px; align-items:center; font-weight:700; font-size:.95rem }
+.site-nav a{ color:#fff }                     /* default WHITE like main page */
+.site-nav a:hover{ opacity:.85 }
+/* Active page highlight: only Merch on this page */
+.site-nav a[href$="merch.html"]{
+  color: var(--blue);
+  border-bottom: 2px solid var(--blue);
+  padding-bottom: 2px;
+}
 
 /* Burger button: hidden on desktop */
 .nav-toggle{
@@ -51,32 +61,21 @@ a{color:var(--blue);text-decoration:none}
   .site-nav a{ display:block; }
   .site-nav.open{ display:flex; }
   .nav-toggle{ display:inline-block; }
+  :target{ scroll-margin-top: 72px; } /* sticky header assist */
 
-  /* smoother anchor jump with sticky header on mobile */
-  :target{ scroll-margin-top: 72px; }
-
-  /* Show mascot ONLY when drawer is OPEN */
-  #site-nav.open .drawer-footer{
-    display: block !important;
-    margin-top: auto;
-    padding-top: 20px;
-    text-align: center;
-  }
-  #site-nav.open .drawer-footer .drawer-icon{
-    width: 64px;
-    height: auto;
-  }
-} /* <-- closes the 820px block cleanly */
+  #site-nav.open .drawer-footer{ display:block !important; margin-top:auto; padding-top:20px; text-align:center; }
+  #site-nav.open .drawer-footer .drawer-icon{ width:64px; height:auto; }
+}
 
 /* Keep short labels on one line (global) */
-.site-nav a,
-.btn,
-.mm-sticker{ white-space: nowrap; }
+.site-nav a, .btn, .mm-sticker{ white-space: nowrap; }
 
 /* ===== Buttons ===== */
-.btn{display:inline-block;border-radius:12px;padding:10px 14px;
-     font:700 .95rem/1 Montserrat,system-ui;cursor:pointer;
-     border:1px solid var(--border);}
+.btn{
+  display:inline-block;border-radius:12px;padding:11px 15px;
+  font:700 1rem/1 Montserrat,system-ui; /* bumped size */
+  cursor:pointer;border:1px solid var(--border);
+}
 .btn-primary{background:var(--blue);color:#fff;border:none}
 .btn-secondary{background:#fff;color:#000}
 .btn-primary:hover,.btn-secondary:hover{filter:brightness(.9)}
@@ -89,29 +88,42 @@ a{color:var(--blue);text-decoration:none}
 .hero__inner h1{margin:8px 0 6px;font:900 clamp(1.6rem,5vw,3rem)/1.1 Montserrat,system-ui}
 .note{opacity:.9;font-size:.95rem}
 
-/* Section title */
+/* Section title + capsule */
 .section-title{
   margin:0 0 10px;font:800 clamp(1.2rem,3vw,1.5rem)/1.1 Montserrat;
   display:flex;align-items:center;gap:10px
 }
 .mm-sticker{
   background:#fff;color:#000;border-radius:14px;padding:6px 10px;
-  font:800 .8rem/1 Montserrat,system-ui
+  font:800 .8rem/1 Montserrat,system-ui; text-transform:uppercase; letter-spacing:.3px;
 }
 
-/* Rails */
-.rail{margin:26px 0 12px}
+/* ===== Rails ===== */
+.rail{margin:26px 0 16px; position:relative}
 .rail__head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.rail__controls{display:flex;gap:8px}
-.rail__btn{
-  width:36px;height:36px;border-radius:10px;border:1px solid var(--border);
-  background:rgba(255,255,255,.08);color:#fff;font-weight:800;cursor:pointer
-}
 .rail__track{
   margin-top:10px;display:flex;gap:12px;overflow:auto;
-  scroll-snap-type:x mandatory;padding-bottom:6px;-webkit-overflow-scrolling:touch
+  scroll-snap-type:x mandatory;padding:6px 0 14px;-webkit-overflow-scrolling:touch
 }
 .rail__track::-webkit-scrollbar{height:6px}
+
+/* Overlay nav buttons (centered vertically like main page style) */
+.rail__btn{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:38px; height:38px; border-radius:999px;
+  border:1px solid var(--border);
+  backdrop-filter: blur(6px);
+  background:rgba(0,0,0,.35);
+  color:#fff; font-weight:800; cursor:pointer; z-index:5;
+  display:flex; align-items:center; justify-content:center;
+  transition:opacity .15s ease, background .15s ease;
+}
+.rail__btn--prev{ left:-6px }
+.rail__btn--next{ right:-6px }
+@media (min-width: 821px){
+  .rail__btn{ opacity:0 }
+  .rail:hover .rail__btn{ opacity:1 }
+}
 
 /* Product cards inside rails */
 .card--rail{
@@ -120,8 +132,16 @@ a{color:var(--blue);text-decoration:none}
   box-shadow:var(--shadow);overflow:hidden
 }
 .card--rail img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#222}
-.card--rail h3{margin:10px 10px 0;font:800 .95rem/1.2 Montserrat;color:#fff}
-.card__sub{margin:6px 10px 12px;color:#bbb;font:600 .85rem/1.2 Inter}
+.card--rail h3{
+  margin:10px 10px 0;
+  font:800 .98rem/1.2 Montserrat; color:#fff; letter-spacing:.2px;
+  text-transform:uppercase;
+}
+.card__sub{
+  margin:6px 10px 12px;
+  font:700 .82rem/1.25 Montserrat; /* match capsule feel */
+  color:#BBBDBF; text-transform:uppercase; letter-spacing:.3px;
+}
 
 /* Form */
 .form-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
@@ -133,8 +153,7 @@ a{color:var(--blue);text-decoration:none}
 /* Footer */
 footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
 
-/* Helpful small tweaks */
-.section-title{ word-wrap: break-word; overflow-wrap: anywhere; }
+/* Small helpful tweak */
 @media (max-width: 640px){
   .mm-sticker{ font-size: .9rem; padding: 5px 10px; }
 }
@@ -146,9 +165,9 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
 <!-- ==== SITE HEADER (matches main page) ==== -->
 <header class="site-header container">
   <div class="brand">
-    <a href="/mvp3/"><img src="/assets/logo-nu.svg" alt="NewcastleUnite" style="height:28px"></a>
-    <strong>NewcastleUnite</strong>
-    <span class="tagline" aria-hidden="true"></span>
+    <!-- No logo image; text only per your main page -->
+    <strong>NewcastleUnite :</strong>
+    <span class="tagline">One Toon, One Tune</span>
   </div>
 
   <!-- Mobile toggle -->
@@ -162,7 +181,7 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
     <a href="/mvp3/merch.html">Merch</a>
     <a href="/mvp3/#newsletter" class="btn btn-primary" style="padding:8px 12px">Subscribe</a>
 
-    <!-- (Optional) Drawer footer mascot for mobile menu -->
+    <!-- Optional mobile drawer footer -->
     <div class="drawer-footer" style="display:none">
       <img class="drawer-icon" src="/assets/logo-nu.svg" alt="" />
     </div>
@@ -189,11 +208,9 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
   <div class="rail">
     <div class="rail__head">
       <h2 class="section-title"><span class="mm-sticker">Figurines</span> Series 1 Preview</h2>
-      <div class="rail__controls">
-        <button class="rail__btn rail__btn--prev" aria-label="Scroll figurines left">‹</button>
-        <button class="rail__btn rail__btn--next" aria-label="Scroll figurines right">›</button>
-      </div>
     </div>
+    <button class="rail__btn rail__btn--prev" aria-label="Scroll figurines left">‹</button>
+    <button class="rail__btn rail__btn--next" aria-label="Scroll figurines right">›</button>
     <div class="rail__track">
       <article class="card--rail"><img src="/assets/mmfigurine_classic.png" alt="Classic"><h3>Classic</h3><p class="card__sub">Preview</p></article>
       <article class="card--rail"><img src="/assets/mmfigurine_loudhailer.png" alt="Loudhailer"><h3>Loudhailer</h3><p class="card__sub">Preview</p></article>
@@ -212,11 +229,9 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
   <div class="rail">
     <div class="rail__head">
       <h2 class="section-title"><span class="mm-sticker">Socks</span> Howay Feet</h2>
-      <div class="rail__controls">
-        <button class="rail__btn rail__btn--prev">‹</button>
-        <button class="rail__btn rail__btn--next">›</button>
-      </div>
     </div>
+    <button class="rail__btn rail__btn--prev" aria-label="Scroll socks left">‹</button>
+    <button class="rail__btn rail__btn--next" aria-label="Scroll socks right">›</button>
     <div class="rail__track">
       <article class="card--rail"><img src="/assets/placeholder-socks1.jpg" alt="Black Socks"><h3>Black</h3><p class="card__sub">$15</p></article>
       <article class="card--rail"><img src="/assets/placeholder-socks2.jpg" alt="Stripe Socks"><h3>Stripe</h3><p class="card__sub">$15</p></article>
@@ -227,11 +242,9 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
   <div class="rail">
     <div class="rail__head">
       <h2 class="section-title"><span class="mm-sticker">Pins</span> Limited Enamel</h2>
-      <div class="rail__controls">
-        <button class="rail__btn rail__btn--prev">‹</button>
-        <button class="rail__btn rail__btn--next">›</button>
-      </div>
     </div>
+    <button class="rail__btn rail__btn--prev" aria-label="Scroll pins left">‹</button>
+    <button class="rail__btn rail__btn--next" aria-label="Scroll pins right">›</button>
     <div class="rail__track">
       <article class="card--rail"><img src="/assets/placeholder-pin1.jpg" alt="Head Pin"><h3>Head Pin</h3><p class="card__sub">Coming Soon</p></article>
     </div>
@@ -241,11 +254,9 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
   <div class="rail">
     <div class="rail__head">
       <h2 class="section-title"><span class="mm-sticker">Stickers</span> Pitch Slaps</h2>
-      <div class="rail__controls">
-        <button class="rail__btn rail__btn--prev">‹</button>
-        <button class="rail__btn rail__btn--next">›</button>
-      </div>
     </div>
+    <button class="rail__btn rail__btn--prev" aria-label="Scroll stickers left">‹</button>
+    <button class="rail__btn rail__btn--next" aria-label="Scroll stickers right">›</button>
     <div class="rail__track">
       <article class="card--rail"><img src="/assets/placeholder-sticker1.jpg" alt="Logo Sticker"><h3>Logo Pack</h3><p class="card__sub">$5</p></article>
     </div>
@@ -282,7 +293,6 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
     const isOpen = nav.classList.toggle('open');
     btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
-  // close on outside click (mobile)
   document.addEventListener('click', (e)=>{
     if(!nav.classList.contains('open')) return;
     if(e.target.closest('#site-nav') || e.target.closest('.nav-toggle')) return;
@@ -310,13 +320,18 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
   });
 })();
 
-/* Rails scroll */
+/* Rails scroll + overlay buttons */
 (function(){
   document.querySelectorAll('.rail').forEach(r=>{
-    const t=r.querySelector('.rail__track'),p=r.querySelector('.rail__btn--prev'),n=r.querySelector('.rail__btn--next');
-    if(!t)return;const step=260;
-    p&&p.addEventListener('click',()=>t.scrollBy({left:-step,behavior:'smooth'}));
-    n&&n.addEventListener('click',()=>t.scrollBy({left:step,behavior:'smooth'}));
+    const t=r.querySelector('.rail__track'),
+          p=r.querySelector('.rail__btn--prev'),
+          n=r.querySelector('.rail__btn--next');
+    if(!t) return;
+    const step = 260;
+    p && p.addEventListener('click',()=>t.scrollBy({left:-step,behavior:'smooth'}));
+    n && n.addEventListener('click',()=>t.scrollBy({left: step,behavior:'smooth'}));
+
+    // Pointer drag scrolling (desktop)
     let down=false,startX=0,left=0;
     t.addEventListener('pointerdown',e=>{down=true;startX=e.clientX;left=t.scrollLeft;t.setPointerCapture(e.pointerId);});
     t.addEventListener('pointermove',e=>{if(!down)return;t.scrollLeft=left-(e.clientX-startX);});
