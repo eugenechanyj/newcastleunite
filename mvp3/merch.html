@@ -450,6 +450,20 @@ section details div {
   font-size: 0.85rem;
   line-height: 1.5;
 }
+
+/* ===== Rail spacing tighten (~40%) ===== */
+.rail{ margin: 18px 0 10px; }                                /* was ~26px 0 16px */
+.section-title{ margin: 0 0 6px !important; }                /* was ~10px */
+.rail__track{
+  margin-top: 6px !important;                                /* was 10px */
+  padding-top: 2px;                                          /* was 6px */
+  padding-bottom: 8px;                                       /* was 14px */
+  gap: 10px;                                                 /* was 12px (slightly tighter row) */
+}
+
+/* Optional: tighten text inside cards slightly */
+.card--rail h3{ margin-top: 8px; }
+.card__sub{ margin-top: 4px; margin-bottom: 10px; }
   
 </style>
 
@@ -551,13 +565,7 @@ section details div {
   <div id="notify-msg" class="note" style="margin-top:10px; display:none;"></div>
 </section>
 
-  <!-- FAQ -->
-  <section style="margin:24px 0">
-    <h2 class="section-title"><span class="mm-sticker">FAQ</span> Quick answers</h2>
-    <details style="margin:8px 0"><summary>Will there be international shipping?</summary><div style="padding:8px 0">Likely yes — final logistics will be shared before pre-orders.</div></details>
-    <details style="margin:8px 0"><summary>How limited is Series 1?</summary><div style="padding:8px 0">Initial run will be small; a second wave may follow demand.</div></details>
-  </section>
-
+  
 </main>
 
 <footer class="container">© NewcastleUnite. Unofficial fan site — not affiliated with NUFC.</footer>
