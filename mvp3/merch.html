@@ -6,6 +6,11 @@
 <title>Minute Magpie Merch — Blind Box & Collectibles</title>
 <meta name="theme-color" content="#0B0E11">
 
+<!-- Load fonts used by main site styles -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
 <style>
 :root{
   --black:#0B0E11;--white:#fff;--blue:#00B6F1;--grey:#BBBDBF;
@@ -73,7 +78,7 @@ a{text-decoration:none}
 /* ===== Buttons ===== */
 .btn{
   display:inline-block;border-radius:12px;padding:11px 15px;
-  font:700 1rem/1 Montserrat,system-ui; /* size matches main page buttons */
+  font:700 1rem/1 Montserrat,system-ui; /* matches main page size */
   cursor:pointer;border:1px solid var(--border);
 }
 .btn-primary{background:var(--blue);color:#fff;border:none}
@@ -81,6 +86,7 @@ a{text-decoration:none}
 .btn-primary:hover,.btn-secondary:hover{filter:brightness(.9)}
 
 /* ===== Hero ===== */
+/* Full-width hero container; copy is a left-aligned inner wrapper */
 .hero{
   position:relative;
   min-height:clamp(40vh,50vw,60vh);
@@ -99,16 +105,18 @@ a{text-decoration:none}
 .hero__inner{
   position:relative;
   z-index:2;
-  padding:28px 0 36px;
-  text-align:left;        /* align content left */
-  max-width:600px;        /* matches main page balance */
+  padding:28px 0 36px;   /* full-width container */
 }
-.hero__inner h1{
+.hero__copy{
+  max-width:600px;       /* copy width like main page */
+  text-align:left;
+}
+.hero__copy h1{
   margin:8px 0 6px;
   font:900 clamp(1.6rem,5vw,3rem)/1.1 Montserrat,system-ui;
   text-align:left;
 }
-.hero__inner p{
+.hero__copy p{
   margin:0 0 10px;
   font:500 1.05rem/1.45 Inter,system-ui;
   opacity:.9;
@@ -135,7 +143,7 @@ a{text-decoration:none}
 }
 .rail__track::-webkit-scrollbar{height:6px}
 
-/* Overlay nav buttons (centered vertically like main page style) */
+/* Overlay nav buttons (centered vertically) */
 .rail__btn{
   position:absolute; top:50%; transform:translateY(-50%);
   width:38px; height:38px; border-radius:999px;
@@ -153,20 +161,20 @@ a{text-decoration:none}
   .rail:hover .rail__btn{ opacity:1 }
 }
 
-/* Product cards inside rails (font consistency with main site) */
+/* Product cards inside rails — match main site feel */
 .card--rail{
   min-width:210px;max-width:240px;scroll-snap-align:start;
   background:#111;border:1px solid var(--border);border-radius:14px;
   box-shadow:var(--shadow);overflow:hidden
 }
 .card--rail img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#222}
-/* Titles and descriptors match capsule/button feel */
+/* Titles and descriptors: Montserrat, uppercase, tight spacing */
 .card--rail h3,
 .card__sub{
   font-family: Montserrat, system-ui, sans-serif !important;
   text-transform: uppercase;
   letter-spacing: .3px;
-  margin-left:10px; margin-right:10px; /* consistent padding */
+  margin-left:10px; margin-right:10px;
 }
 .card--rail h3{
   margin-top:10px;
@@ -232,12 +240,14 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
 <section class="hero">
   <img src="/assets/minutemagpiefigurinerange.png" alt="Minute Magpie figurine range"
        class="hero__img" width="2000" height="900" loading="eager">
-  <div class="container hero__inner" style="text-align:left;max-width:600px">
-    <h1>Minute Magpie — Blind Box Series 1</h1>
-    <p class="note">Surprise collectible. Designs below are examples of what could be inside.</p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <a class="btn btn-primary" href="#notify">Get notified</a>
-      <a class="btn btn-secondary" href="/mvp3/">Back to site</a>
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <h1>Minute Magpie — Blind Box Series 1</h1>
+      <p class="note">Surprise collectible. Designs below are examples of what could be inside.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn btn-primary" href="#notify">Get notified</a>
+        <a class="btn btn-secondary" href="/mvp3/">Back to site</a>
+      </div>
     </div>
   </div>
 </section>
@@ -356,7 +366,7 @@ footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
       if(!arr.includes(email))arr.push(email);
       localStorage.setItem(key,JSON.stringify(arr));
       m.style.display='block';m.style.color='#00B6F1';m.textContent='Thanks! You’re on the list.';b.disabled=true;i.value='';
-    }catch(err){m.style.display='block';m.style.color:'#ff6b6b';m.textContent='Something went wrong.';}
+    }catch(err){m.style.display='block';m.style.color='#ff6b6b';m.textContent='Something went wrong.';}
   });
 })();
 
