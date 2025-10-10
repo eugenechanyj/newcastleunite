@@ -1,243 +1,241 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Minute Magpie Merch — Blind Box Series 1 (Coming Soon)</title>
-  <meta name="description" content="Minute Magpie Blind Box Series 1 — a cheeky collectible for NUFC fans. Join the list for early access to pre-orders." />
-  <meta name="theme-color" content="#0B0E11" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Minute Magpie Merch — Blind Box & Collectibles</title>
+<meta name="theme-color" content="#0B0E11">
 
-  <style>
-    :root{
-      --black:#0B0E11; --white:#FFFFFF; --blue:#00B6F1; --gold:#F0B83D;
-      --grey:#BBBDBF; --border:#E6E6E6;
-      --shadow:0 6px 18px rgba(0,0,0,.12);
-      --container:1200px; --gutter:16px;
-      --ink:#0a0a0a;
-    }
-    html,body{margin:0;padding:0}
-    body{
-      background:var(--black); color:var(--white);
-      font:400 16px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    }
-    a{color:var(--blue);text-decoration:none} a:hover{filter:brightness(.92)}
-    .container{max-width:var(--container);margin:0 auto;padding:0 var(--gutter);box-sizing:border-box}
+<style>
+:root{
+  --black:#0B0E11;--white:#fff;--blue:#00B6F1;--grey:#BBBDBF;
+  --border:rgba(255,255,255,.12);--shadow:0 6px 18px rgba(0,0,0,.2);
+}
+html,body{margin:0;padding:0}
+body{
+  background:var(--black);color:var(--white);
+  font:400 16px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+a{color:var(--blue);text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 16px;box-sizing:border-box}
 
-    .btn{
-      display:inline-block;border-radius:12px;border:1px solid var(--border);
-      padding:10px 14px;font:700 .95rem/1 Montserrat,system-ui,sans-serif;
-      cursor:pointer;transition:transform .04s ease,filter .15s ease
-    }
-    .btn:active{transform:translateY(1px)}
-    .btn-primary{background:var(--blue);color:#fff;border-color:transparent}
-    .btn-primary:hover{filter:brightness(.92)}
-    .btn-secondary{background:#fff;color:var(--ink)}
-    .btn-secondary:hover{background:#f2f2f2}
+/* Header */
+header{padding:14px 0;display:flex;align-items:center;justify-content:space-between}
+header nav{display:flex;gap:14px;font-weight:700;font-size:.95rem}
 
-    .section-title{
-      margin:0 0 12px;font:800 clamp(1.2rem,3vw,1.6rem)/1.15 Montserrat,system-ui,sans-serif;
-      letter-spacing:.2px;color:#fff;display:flex;align-items:center;gap:10px
-    }
-    .mm-sticker{
-      background:#fff;color:#000;border:1px solid var(--border);
-      border-radius:14px;padding:6px 10px;box-shadow:var(--shadow);font-weight:800
-    }
-    .mm-badge{
-      display:inline-block;background:var(--blue);color:#fff;border-radius:999px;
-      padding:6px 10px;font:800 12px/1.1 Montserrat,system-ui,sans-serif
-    }
+/* Buttons */
+.btn{display:inline-block;border-radius:12px;padding:10px 14px;
+     font:700 .95rem/1 Montserrat,system-ui;cursor:pointer;
+     border:1px solid var(--border);}
+.btn-primary{background:var(--blue);color:#fff;border:none}
+.btn-secondary{background:#fff;color:#000}
+.btn-primary:hover,.btn-secondary:hover{filter:brightness(.9)}
 
-    .hero{
-      position:relative;min-height:46vh;display:flex;align-items:flex-end;
-      background:#0B0E11 center/cover no-repeat
-    }
-    .hero::after{
-      content:"";position:absolute;inset:0;
-      background:linear-gradient(to top,rgba(0,0,0,.65),rgba(0,0,0,.25))
-    }
-    .hero__inner{position:relative;z-index:1;padding:28px 0 36px}
-    .hero__inner h1{
-      margin:8px 0 6px;font:900 clamp(1.6rem,5vw,3rem)/1.05 Montserrat,system-ui,sans-serif
-    }
-    .hero__inner p{margin:0 0 14px;font:500 1.05rem/1.45 Inter,system-ui,sans-serif;opacity:.95}
+/* Hero */
+.hero{position:relative;min-height:clamp(40vh,50vw,60vh);display:flex;align-items:flex-end;overflow:hidden}
+.hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65),rgba(0,0,0,.2))}
+.hero__inner{position:relative;z-index:2;padding:28px 0 36px}
+.hero__inner h1{margin:8px 0 6px;font:900 clamp(1.6rem,5vw,3rem)/1.1 Montserrat,system-ui}
+.note{opacity:.9;font-size:.95rem}
 
-    .card{
-      background:#fff;color:var(--ink);border:1px solid var(--border);
-      border-radius:14px;box-shadow:var(--shadow);overflow:hidden
-    }
-    .card-pad{padding:14px}
-    .grid{display:grid;gap:16px}
-    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-    @media(max-width:720px){.grid-2{grid-template-columns:1fr}}
+/* Section title */
+.section-title{
+  margin:0 0 10px;font:800 clamp(1.2rem,3vw,1.5rem)/1.1 Montserrat;
+  display:flex;align-items:center;gap:10px
+}
+.mm-sticker{
+  background:#fff;color:#000;border-radius:14px;padding:6px 10px;
+  font:800 .8rem/1 Montserrat,system-ui
+}
 
-    .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-    .gallery figure{margin:0}
-    .gallery img{
-      width:100%;height:200px;object-fit:cover;border-radius:12px;background:#ddd
-    }
-    .gallery figcaption{
-      font:600 .85rem/1.2 Inter,system-ui;color:#444;margin-top:6px
-    }
-    @media(max-width:720px){
-      .gallery{grid-template-columns:1fr 1fr}
-      .gallery img{height:160px}
-    }
+/* Rails */
+.rail{margin:26px 0 12px}
+.rail__head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.rail__controls{display:flex;gap:8px}
+.rail__btn{
+  width:36px;height:36px;border-radius:10px;border:1px solid var(--border);
+  background:rgba(255,255,255,.08);color:#fff;font-weight:800;cursor:pointer
+}
+.rail__track{
+  margin-top:10px;display:flex;gap:12px;overflow:auto;
+  scroll-snap-type:x mandatory;padding-bottom:6px;-webkit-overflow-scrolling:touch
+}
+.rail__track::-webkit-scrollbar{height:6px}
 
-    .form-row{display:flex;gap:10px;flex-wrap:wrap}
-    .input{
-      padding:12px 14px;border-radius:10px;border:1px solid var(--border);
-      width:min(420px,90%);background:#fff;color:var(--ink);
-      font:500 1rem/1 Inter,system-ui,sans-serif
-    }
-    .note{opacity:.9;font-size:.95rem}
-    header,footer{padding:14px 0}
-    footer{opacity:.85;font-size:.9rem;padding:24px 0 40px}
-  </style>
+/* Product cards inside rails */
+.card--rail{
+  min-width:210px;max-width:240px;scroll-snap-align:start;
+  background:#111;border:1px solid var(--border);border-radius:14px;
+  box-shadow:var(--shadow);overflow:hidden
+}
+.card--rail img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#222}
+.card--rail h3{margin:10px 10px 0;font:800 .95rem/1.2 Montserrat;color:#fff}
+.card__sub{margin:6px 10px 12px;color:#bbb;font:600 .85rem/1.2 Inter}
+
+/* Form */
+.form-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.input{
+  padding:12px 14px;border-radius:10px;border:1px solid var(--border);
+  width:min(420px,90%);background:#fff;color:#000;font:500 1rem/1 Inter
+}
+
+/* Footer */
+footer{opacity:.8;font-size:.9rem;padding:24px 0 40px}
+</style>
 </head>
 
 <body>
-  <header class="container" style="display:flex;align-items:center;justify-content:space-between">
-    <div style="display:flex;align-items:center;gap:10px">
-      <a href="/mvp3/"><img src="/assets/logo-nu.svg" alt="NewcastleUnite" style="height:28px"></a>
-      <strong style="letter-spacing:.3px">NewcastleUnite</strong>
-    </div>
-    <nav style="display:flex;gap:14px;font-weight:700;font-size:.95rem">
-      <a href="/mvp3/#news">News</a>
-      <a href="/mvp3/#creators">Creators</a>
-      <a href="/mvp3/#gear">Gear</a>
-      <a href="/mvp3/merch.html">Merch</a>
-      <a href="/mvp3/#newsletter" class="btn btn-primary" style="padding:8px 12px">Subscribe</a>
-    </nav>
-  </header>
+<header class="container">
+  <div style="display:flex;align-items:center;gap:10px">
+    <a href="/mvp3/"><img src="/assets/logo-nu.svg" alt="NewcastleUnite" style="height:28px"></a>
+    <strong>NewcastleUnite</strong>
+  </div>
+  <nav>
+    <a href="/mvp3/#news">News</a>
+    <a href="/mvp3/#creators">Creators</a>
+    <a href="/mvp3/#gear">Gear</a>
+    <a href="/mvp3/merch.html">Merch</a>
+    <a href="/mvp3/#newsletter" class="btn btn-primary" style="padding:8px 12px">Subscribe</a>
+  </nav>
+</header>
 
-  <section class="hero" style="background-image:url('/assets/minutemagpie-blindbox-hero.jpg')">
-    <div class="container hero__inner">
-      <div class="mm-badge">Minute Magpie</div>
-      <h1>Blind Box Series 1</h1>
-      <p class="note">A cheeky collectible drop for the Toon faithful — limited, numbered, and very magpie.</p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <a class="btn btn-primary" href="#notify">Get notified</a>
-        <a class="btn btn-secondary" href="/mvp3/">Back to site</a>
+<!-- HERO -->
+<section class="hero">
+  <img src="/assets/merch/minutemagpiefigurinerange.png" alt="Minute Magpie figurine range"
+       class="hero__img" width="2000" height="900" loading="eager">
+  <div class="container hero__inner">
+    <h1>Minute Magpie — Blind Box Series 1</h1>
+    <p class="note">Surprise collectible. Designs below are examples of what could be inside.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a class="btn btn-primary" href="#notify">Get notified</a>
+      <a class="btn btn-secondary" href="/mvp3/">Back to site</a>
+    </div>
+  </div>
+</section>
+
+<main class="container">
+
+  <!-- RAIL 1: Figurines -->
+  <div class="rail">
+    <div class="rail__head">
+      <h2 class="section-title"><span class="mm-sticker">Figurines</span> Series 1 Preview</h2>
+      <div class="rail__controls">
+        <button class="rail__btn rail__btn--prev" aria-label="Scroll figurines left">‹</button>
+        <button class="rail__btn rail__btn--next" aria-label="Scroll figurines right">›</button>
       </div>
     </div>
+    <div class="rail__track">
+      <article class="card--rail"><img src="/assets/merch/mmfigurine_classic.png" alt="Classic"><h3>Classic</h3><p class="card__sub">Preview</p></article>
+      <article class="card--rail"><img src="/assets/merch/mmfigurine_loudhailer.png" alt="Loudhailer"><h3>Loudhailer</h3><p class="card__sub">Preview</p></article>
+      <article class="card--rail"><img src="/assets/merch/mmfigurine_ref.png" alt="Ref"><h3>Ref</h3><p class="card__sub">Preview</p></article>
+      <article class="card--rail"><img src="/assets/merch/mmfigurine_striker.png" alt="Striker"><h3>Striker</h3><p class="card__sub">Preview</p></article>
+      <article class="card--rail"><img src="/assets/merch/mmfigurine_trophy.png" alt="Trophy"><h3>Trophy</h3><p class="card__sub">Preview</p></article>
+      <article class="card--rail"><img src="/assets/merch/mmfigurine_wave.png" alt="Wave"><h3>Wave</h3><p class="card__sub">Preview</p></article>
+      <article class="card--rail"><img src="/assets/merch/mmfigurine_nick.png" alt="Nick"><h3>Nick</h3><p class="card__sub">Preview</p></article>
+      <article class="card--rail"><img src="/assets/merch/mmfigurine_yellowcard.png" alt="Yellow Card"><h3>Yellow Card</h3><p class="card__sub">Preview</p></article>
+      <article class="card--rail"><img src="/assets/merch/mmfigurine_yougotthis.png" alt="You Got This"><h3>You Got This</h3><p class="card__sub">Preview</p></article>
+      <article class="card--rail"><img src="/assets/merch/mmfigurine_chase.png" alt="Chase"><h3>Chase Variant</h3><p class="card__sub">Preview</p></article>
+    </div>
+  </div>
+
+  <!-- RAIL 2: Socks -->
+  <div class="rail">
+    <div class="rail__head">
+      <h2 class="section-title"><span class="mm-sticker">Socks</span> Howay Feet</h2>
+      <div class="rail__controls">
+        <button class="rail__btn rail__btn--prev">‹</button>
+        <button class="rail__btn rail__btn--next">›</button>
+      </div>
+    </div>
+    <div class="rail__track">
+      <article class="card--rail"><img src="/assets/merch/placeholder-socks1.jpg" alt="Black Socks"><h3>Black</h3><p class="card__sub">$15</p></article>
+      <article class="card--rail"><img src="/assets/merch/placeholder-socks2.jpg" alt="Stripe Socks"><h3>Stripe</h3><p class="card__sub">$15</p></article>
+    </div>
+  </div>
+
+  <!-- RAIL 3: Pins -->
+  <div class="rail">
+    <div class="rail__head">
+      <h2 class="section-title"><span class="mm-sticker">Pins</span> Limited Enamel</h2>
+      <div class="rail__controls">
+        <button class="rail__btn rail__btn--prev">‹</button>
+        <button class="rail__btn rail__btn--next">›</button>
+      </div>
+    </div>
+    <div class="rail__track">
+      <article class="card--rail"><img src="/assets/merch/placeholder-pin1.jpg" alt="Head Pin"><h3>Head Pin</h3><p class="card__sub">Coming Soon</p></article>
+    </div>
+  </div>
+
+  <!-- RAIL 4: Stickers -->
+  <div class="rail">
+    <div class="rail__head">
+      <h2 class="section-title"><span class="mm-sticker">Stickers</span> Pitch Slaps</h2>
+      <div class="rail__controls">
+        <button class="rail__btn rail__btn--prev">‹</button>
+        <button class="rail__btn rail__btn--next">›</button>
+      </div>
+    </div>
+    <div class="rail__track">
+      <article class="card--rail"><img src="/assets/merch/placeholder-sticker1.jpg" alt="Logo Sticker"><h3>Logo Pack</h3><p class="card__sub">$5</p></article>
+    </div>
+  </div>
+
+  <!-- Notify -->
+  <section id="notify" style="margin:24px 0">
+    <h2 class="section-title"><span class="mm-sticker">Notify</span> me when it drops</h2>
+    <form id="notify-form" class="form-row" novalidate>
+      <input type="email" id="notify-email" class="input" placeholder="you@example.com" required>
+      <button class="btn btn-primary" id="notify-btn" type="submit">Notify me</button>
+    </form>
+    <div id="notify-msg" class="note" style="margin-top:10px;display:none"></div>
   </section>
 
-  <main class="container" style="margin:24px auto">
-    <section class="grid grid-2">
-      <div class="card card-pad">
-        <h2 class="section-title"><span class="mm-sticker">Merch</span> Minute Magpie Blind Box</h2>
-        <p class="note" style="color:#333">
-          Series 1 features two minute magpies + a surprise variant. Clean black & white with a pop of NUFC blue.
-          Numbered boxes, small initial run. Final mockups coming soon.
-        </p>
-        <ul style="margin:10px 0 0 18px;color:#333">
-          <li>Vinyl figure ≈ 7–9 cm</li>
-          <li>“Graffiti wall” mini backdrop</li>
-          <li>1 in X chance of special edition</li>
-        </ul>
-      </div>
+  <!-- FAQ -->
+  <section style="margin:24px 0">
+    <h2 class="section-title"><span class="mm-sticker">FAQ</span> Quick answers</h2>
+    <details style="margin:8px 0"><summary>Will there be international shipping?</summary><div style="padding:8px 0">Likely yes — final logistics will be shared before pre-orders.</div></details>
+    <details style="margin:8px 0"><summary>How limited is Series 1?</summary><div style="padding:8px 0">Initial run will be small; a second wave may follow demand.</div></details>
+  </section>
 
-      <div class="card card-pad">
-        <h3 class="section-title" style="color:var(--ink)">Specs & Delivery</h3>
-        <ul style="margin:0 0 10px 18px;color:#333">
-          <li>Material: Vinyl (matte finish)</li>
-          <li>Packaging: Blind box, foil wrap</li>
-          <li>ETA: TBD (collect interest first)</li>
-        </ul>
-        <p class="note" style="color:#333">
-          We’ll announce pricing and pre-order window to subscribers first.
-        </p>
-      </div>
-    </section>
+</main>
 
-    <section style="margin:24px 0">
-      <h2 class="section-title"><span class="mm-sticker">Gallery</span> First Looks</h2>
-      <div class="gallery">
-        <figure>
-          <img src="/assets/minutemagpieblindbox1.jpg" alt="Blind Box concept — front view">
-          <figcaption>Front mock — Series 1</figcaption>
-        </figure>
-        <figure>
-          <img src="/assets/minutemagpie-blindbox-alt1.jpg" alt="Blind Box concept — side angle">
-          <figcaption>Side angle</figcaption>
-        </figure>
-        <figure>
-          <img src="/assets/minutemagpie-blindbox-alt2.jpg" alt="Blind Box concept — back view">
-          <figcaption>Back mock</figcaption>
-        </figure>
-      </div>
-    </section>
+<footer class="container">© NewcastleUnite. Unofficial fan site — not affiliated with NUFC.</footer>
 
-    <section id="notify" style="margin:24px 0">
-      <div class="card card-pad">
-        <h2 class="section-title"><span class="mm-sticker">Notify</span> me when it drops</h2>
-        <p class="note" style="color:#333">
-          Leave your email and we’ll ping you when pre-orders open.
-        </p>
-        <form id="notify-form" class="form-row" style="margin-top:8px" novalidate>
-          <input type="email" id="notify-email" class="input" placeholder="you@example.com" required>
-          <button class="btn btn-primary" id="notify-btn" type="submit">Notify me</button>
-        </form>
-        <div id="notify-msg" class="note" role="status" aria-live="polite" style="margin-top:10px;display:none"></div>
-      </div>
-    </section>
+<script>
+/* Notify form (localStorage MVP) */
+(function(){
+  const f=document.getElementById('notify-form'),i=document.getElementById('notify-email'),
+        m=document.getElementById('notify-msg'),b=document.getElementById('notify-btn');
+  if(!f)return;
+  const re=/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+  f.addEventListener('submit',e=>{
+    e.preventDefault();
+    const email=(i.value||'').trim();
+    if(!re.test(email)){m.style.display='block';m.style.color='#ff6b6b';m.textContent='Enter a valid email.';return;}
+    try{
+      const key='mm_merch_interest',arr=JSON.parse(localStorage.getItem(key)||'[]');
+      if(!arr.includes(email))arr.push(email);
+      localStorage.setItem(key,JSON.stringify(arr));
+      m.style.display='block';m.style.color='#00B6F1';m.textContent='Thanks! You’re on the list.';b.disabled=true;i.value='';
+    }catch(err){m.style.display='block';m.style.color='#ff6b6b';m.textContent='Something went wrong.';}
+  });
+})();
 
-    <section style="margin:24px 0">
-      <div class="card card-pad">
-        <h2 class="section-title"><span class="mm-sticker">FAQ</span> Quick answers</h2>
-        <details style="margin:8px 0;color:var(--ink)">
-          <summary style="cursor:pointer;font-weight:800">Will there be international shipping?</summary>
-          <div style="padding:8px 0;color:#333">
-            Likely yes. We’re scoping packaging/logistics; final details will be posted before pre-orders.
-          </div>
-        </details>
-        <details style="margin:8px 0;color:var(--ink)">
-          <summary style="cursor:pointer;font-weight:800">How limited is Series 1?</summary>
-          <div style="padding:8px 0;color:#333">
-            Initial run will be intentionally small. If demand is high, we’ll plan a second wave.
-          </div>
-        </details>
-      </div>
-    </section>
-  </main>
-
-  <footer class="container">
-    <div>© NewcastleUnite. Unofficial fan site. Not affiliated with NUFC.</div>
-  </footer>
-
-  <script>
-  (function(){
-    const form=document.getElementById('notify-form');
-    const input=document.getElementById('notify-email');
-    const msg=document.getElementById('notify-msg');
-    const btn=document.getElementById('notify-btn');
-    if(!form)return;
-    const emailRe=/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-    form.addEventListener('submit',function(ev){
-      ev.preventDefault();
-      const email=(input.value||'').trim();
-      if(!emailRe.test(email)){
-        msg.style.display='block';msg.style.color='#ff6b6b';
-        msg.textContent='Please enter a valid email address.';return;
-      }
-      try{
-        const key='mm_merch_interest';
-        const arr=JSON.parse(localStorage.getItem(key)||'[]');
-        if(!arr.includes(email))arr.push(email);
-        localStorage.setItem(key,JSON.stringify(arr));
-        if(window.dataLayer&&typeof window.dataLayer.push==='function'){
-          window.dataLayer.push({event:'notify_signup',component:'minute_magpie_merch',email_domain:email.split('@')[1]||'unknown'});
-        }
-        msg.style.display='block';msg.style.color='#00B6F1';
-        msg.textContent='Thanks! You’re on the list — we’ll email you first.';
-        btn.disabled=true;input.value='';
-      }catch(e){
-        msg.style.display='block';msg.style.color='#ff6b6b';
-        msg.textContent='Sorry, something went wrong. Please try again.';
-      }
-    });
-  })();
-  </script>
+/* Rails scroll */
+(function(){
+  document.querySelectorAll('.rail').forEach(r=>{
+    const t=r.querySelector('.rail__track'),p=r.querySelector('.rail__btn--prev'),n=r.querySelector('.rail__btn--next');
+    if(!t)return;const step=260;
+    p&&p.addEventListener('click',()=>t.scrollBy({left:-step,behavior:'smooth'}));
+    n&&n.addEventListener('click',()=>t.scrollBy({left:step,behavior:'smooth'}));
+    let down=false,startX=0,left=0;
+    t.addEventListener('pointerdown',e=>{down=true;startX=e.clientX;left=t.scrollLeft;t.setPointerCapture(e.pointerId);});
+    t.addEventListener('pointermove',e=>{if(!down)return;t.scrollLeft=left-(e.clientX-startX);});
+    ['pointerup','pointercancel','mouseleave'].forEach(ev=>t.addEventListener(ev,()=>down=false));
+  });
+})();
+</script>
 </body>
 </html>
-
